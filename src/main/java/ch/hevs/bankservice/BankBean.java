@@ -10,7 +10,6 @@ import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
 import ch.hevs.businessobject.Account;
-import ch.hevs.businessobject.Client;
 
 @Stateful
 public class BankBean implements Bank {
@@ -44,11 +43,11 @@ public class BankBean implements Bank {
 //		destRealAccount.credit(amount);
 	}
 
-	public List<Client> getClients() {
-		return em.createQuery("FROM Client").getResultList();
-	}
-	
-	public Client getClient(long clientid) {
-		return (Client) em.createQuery("FROM Client c where c.id=:id").setParameter("id", clientid).getSingleResult();
-	}
+//	public List<Client> getClients() {
+//		return em.createQuery("FROM Client").getResultList();
+//	}
+//	
+//	public Client getClient(long clientid) {
+//		return (Client) em.createQuery("FROM Client c where c.id=:id").setParameter("id", clientid).getSingleResult();
+//	}
 }

@@ -10,7 +10,6 @@ import javax.naming.NamingException;
 
 import ch.hevs.bankservice.Bank;
 import ch.hevs.businessobject.Account;
-import ch.hevs.businessobject.Client;
 
 /**
  * TransferBean.java
@@ -19,7 +18,7 @@ import ch.hevs.businessobject.Client;
 
 public class TransferBean
 {
-    private List<Client> clients;
+//    private List<Client> clients;
     private List<String> clientNames;
     private List<String> sourceAccountDescriptions;
     private List<String> destinationAccountDescriptions;
@@ -39,18 +38,18 @@ public class TransferBean
 		bank = (Bank) ctx.lookup("java:global/TP12-WEB-EJB-PC-EPC-E-0.0.1-SNAPSHOT/BankBean!ch.hevs.bankservice.Bank");    	
 			
     	// get clients
-		List<Client> clientList = bank.getClients();
-		this.clientNames = new ArrayList<String>();
-		for (Client client : clientList) {
-			this.clientNames.add(client.getLastname());
-		}
-		
-		// initialize account descriptions
-		this.sourceAccountDescriptions = new ArrayList<String>();
-		this.destinationAccountDescriptions = new ArrayList<String>();
-		List<Account> accounts = bank.getAccountListFromClientLastname(clientList.get(0).getLastname());
-		this.sourceAccountDescriptions.add(accounts.get(0).getDescription());
-		this.destinationAccountDescriptions.add(accounts.get(0).getDescription());
+//		List<Client> clientList = bank.getClients();
+//		this.clientNames = new ArrayList<String>();
+//		for (Client client : clientList) {
+//			this.clientNames.add(client.getLastname());
+//		}
+//		
+//		// initialize account descriptions
+//		this.sourceAccountDescriptions = new ArrayList<String>();
+//		this.destinationAccountDescriptions = new ArrayList<String>();
+//		List<Account> accounts = bank.getAccountListFromClientLastname(clientList.get(0).getLastname());
+//		this.sourceAccountDescriptions.add(accounts.get(0).getDescription());
+//		this.destinationAccountDescriptions.add(accounts.get(0).getDescription());
     }
     
     // transactionAmount
@@ -118,7 +117,7 @@ public class TransferBean
 	    List<Account> accounts = bank.getAccountListFromClientLastname(this.sourceClientName);
 	    this.sourceAccountDescriptions = new ArrayList<String>();
 		for (Account account : accounts) {
-			this.sourceAccountDescriptions.add(account.getDescription());
+//			this.sourceAccountDescriptions.add(account.getDescription());
 		}
     }
 	public void updateDestinationAccounts(ValueChangeEvent event) {
@@ -127,13 +126,13 @@ public class TransferBean
 	    List<Account> accounts = bank.getAccountListFromClientLastname(this.destinationClientName);
 	    this.destinationAccountDescriptions = new ArrayList<String>();
 		for (Account account : accounts) {
-			this.destinationAccountDescriptions.add(account.getDescription());
+//			this.destinationAccountDescriptions.add(account.getDescription());
 		}
     }
 
-    public List<Client> getClients() {
-		return clients;
-    }
+//    public List<Client> getClients() {
+//		return clients;
+//    }
     
     public List<String> getClientNames() {
     	return clientNames;

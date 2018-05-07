@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import ch.hevs.businessobject.Client;
 import ch.hevs.businessobject.Account;
 
 @Local
@@ -16,7 +15,7 @@ public interface Bank {
 
 	void transfer(Account compteSrc, Account compteDest, int montant) throws Exception;
 
-	List<Client> getClients();
-
-	Client getClient(long clientid);
+//	List<Client> getClients();
+//
+//	Client getClient(long clientid);
 }

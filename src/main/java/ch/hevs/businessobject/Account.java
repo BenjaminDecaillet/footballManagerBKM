@@ -17,64 +17,69 @@ public class Account {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
-	@Column(name="numero")
-	private String number;
+	private long id;
 	@Column(name="solde")
 	private long saldo;	
-	private String description;
-	
-	// relations
-	@ManyToOne
-	@JoinColumn(name = "FK_CLIENT")
-	private Client owner;
 
-	// id 
-	public Long getId() {
+	@ManyToOne
+	@JoinColumn(name = "FK_Owner")
+	private Person owner;
+
+	/**
+	 * Gets the id of the account
+	 * @return long with the id value
+	 */
+	public long getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	/**
+	 * Sets the id of the account
+	 * @param id long value of the id
+	 */
+	public void setId(long id) {
 		this.id = id;
 	}
-	
-	// number
-	public String getNumber() {
-		return number;
-	}
-	public void setNumber(String number) {
-		this.number = number;
-	}
-	
-	// saldo	
+	/**
+	 * Gets the saldo of the account
+	 * @return long value representing the saldo
+	 */
 	public long getSaldo() {
 		return saldo;
 	}
+	/**
+	 * Sets the saldo of the account
+	 * @param saldo long value representing the saldo
+	 */
 	public void setSaldo(long saldo) {
 		this.saldo = saldo;
 	}
-	
-	// description
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
-	// owner (from Client)
-	public Client getOwner() {
+	/**
+	 * Gets the account's owner
+	 * @return the owner of the account
+	 */
+	public Person getOwner() {
 		return owner;
 	}
-	public void setOwner(Client owner) {
+	/**
+	 * Sets the account's owner
+	 * @param owner the owner to set
+	 */
+	public void setOwner(Person owner) {
 		this.owner = owner;
 	}
-	
-	// methods
+	/**
+	 * Debit an account of specified amount
+	 * @param amount int amount to debit
+	 */
 	public void debit(int amount) {
 		long newAmount = getSaldo() - amount;
 		setSaldo(newAmount);
 	}
-	
+
+	/**
+	 * Credit an account of specified amoun
+	 * @param amount int amount to credit
+	 */
 	public void credit(int amount) {
 		setSaldo(getSaldo() + amount);
 	}
@@ -82,14 +87,16 @@ public class Account {
 	// constructors
 	public Account() {
 	}
-	public Account(String number, long saldo, Client owner,
-			String description) {
-		this.number = number;
+	/**
+	 * Create Account with saldo and owner
+	 * @param saldo long with saldo value
+	 * @param owner owner of the account
+	 */
+	public Account(long saldo, Person owner) {
 		this.saldo = saldo;
 		this.owner = owner;
-		this.description = description;
 	}
-	
+
 	@PostPersist
 	public void acknowledgePersist() {
 		System.out.println("account persisted!!!");

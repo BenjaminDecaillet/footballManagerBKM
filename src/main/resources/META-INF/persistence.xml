@@ -8,8 +8,15 @@
 	<persistence-unit name="bankPU">
 		<jta-data-source>java:/labsDS</jta-data-source>
 		
-		<class>ch.hevs.businessobject.Client</class>
 		<class>ch.hevs.businessobject.Account</class>
+		<class>ch.hevs.businessobject.Club</class>
+		<class>ch.hevs.businessobject.Contract</class>
+		<class>ch.hevs.businessobject.Person</class>
+		<class>ch.hevs.businessobject.Player</class>
+		<class>ch.hevs.businessobject.President</class>
+		<class>ch.hevs.businessobject.Trainer</class>
+		<class>ch.hevs.businessobject.Characteristics</class>
+		
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="true" /> 
