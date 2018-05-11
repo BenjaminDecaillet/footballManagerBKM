@@ -22,23 +22,23 @@ import ch.hevs.footballmanager.Football;
  *	TransferBean.java
  */
 public class TransferBean {
-	
+
 	private List<Player> players;
-    private List<String> playerNames;
-    private String sourcePersonName;
-    private String destinationPersonName;
-    private String transactionResult;
-    private int transactionAmount;
-    private Football foot;
-	
+	private List<String> playerNames;
+	private Person sourcePerson;
+	private Person destinationPerson;
+	private String transactionResult;
+	private int transactionAmount;
+	private Football foot;
+
 	@PostConstruct
-    public void initialize() throws NamingException {
-    	
-    	// use JNDI to inject reference to bank EJB
-    	InitialContext ctx = new InitialContext();
+	public void initialize() throws NamingException {
+
+		// use JNDI to inject reference to bank EJB
+		InitialContext ctx = new InitialContext();
 		foot = (Football) ctx.lookup("java:global/FootballManagerBKM-SNAPSHOT/Footballbean!ch.hevs.footballmanager.Football");    	
-			
-    	// get clients
+
+		// get clients
 		List<Player> playerList = foot.getPlayers();
 		this.playerNames = new ArrayList<String>();
 		for (Player player : playerList) {
@@ -46,6 +46,80 @@ public class TransferBean {
 		}
 		
 		foot.populate();
-    }
+	}
+	
+	/**
+	 * @return the sourcePersonName
+	 */
+	public Person getSourcePersonName() {
+		return sourcePerson;
+	}
+	/**
+	 * @param sourcePersonName the sourcePersonName to set
+	 */
+	public void setSourcePerson(Person sourcePerson) {
+		this.sourcePerson = sourcePerson;
+	}
+	/**
+	 * @return the destinationPersonName
+	 */
+	public Person getDestinationPerson() {
+		return destinationPerson;
+	}
+	/**
+	 * @param destinationPersonName the destinationPersonName to set
+	 */
+	public void setDestinationPersonName(Person destinationPerson) {
+		this.destinationPerson = destinationPerson;
+	}
+	/**
+	 * @return the transactionResult
+	 */
+	public String getTransactionResult() {
+		return transactionResult;
+	}
+	/**
+	 * @param transactionResult the transactionResult to set
+	 */
+	public void setTransactionResult(String transactionResult) {
+		this.transactionResult = transactionResult;
+	}
+	/**
+	 * @return the transactionAmount
+	 */
+	public int getTransactionAmount() {
+		return transactionAmount;
+	}
+	/**
+	 * @param transactionAmount the transactionAmount to set
+	 */
+	public void setTransactionAmount(int transactionAmount) {
+		this.transactionAmount = transactionAmount;
+	}
+
+
+
+	public String performTransfer() {
+
+		try {
+			if (sourcePerson.equals(destinationPerson)) {
+
+				this.transactionResult="Error: persons are identical!";
+			} 
+			else {
+
+				Account compteSrc = foot.getAccountByPlayerId(sourcePerson);
+				Account compteDest = foot.getAccountByPlayerId(destinationPerson);
+
+				// Transfer
+//				foot.transfer(compteSrc, compteDest, transactionAmount);
+				this.transactionResult="Success!";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "showTransferResult"; //  the String value returned represents the outcome used by the navigation handler to determine what page to display next
+	}
 
 }
