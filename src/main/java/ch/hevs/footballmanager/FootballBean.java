@@ -23,7 +23,7 @@ public class FootballBean implements Football{
 	private EntityManager em;
 
 	@Override
-	public League getLeagueById(Long id) {
+	public League getLeagueById(long id) {
 		// TODO Auto-generated method stub
 		return (League) em.createQuery("FROM Ligue l WHERE l.id=:id").setParameter("id", id).getSingleResult();
 	}
@@ -41,13 +41,13 @@ public class FootballBean implements Football{
 	}
 
 	@Override
-	public Account getAccountById(Long id) {
+	public Account getAccountById(long id) {
 		// TODO Auto-generated method stub
 		return (Account) em.createQuery("FROM Compte c WHERE c.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
-	public Club getClubById(Long id) {
+	public Club getClubById(long id) {
 		// TODO Auto-generated method stub
 		return (Club) em.createQuery("FROM Club cl WHERE cl.id=:id").setParameter("id", id).getSingleResult();
 	}
@@ -83,19 +83,19 @@ public class FootballBean implements Football{
 	}
 
 	@Override
-	public Player getPlayerById(Long id) {
+	public Player getPlayerById(long id) {
 		// TODO Auto-generated method stub
 		return (Player) em.createQuery("FROM Joueur j WHERE j.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
-	public Trainer getTrainerById(Long id) {
+	public Trainer getTrainerById(long id) {
 		// TODO Auto-generated method stub
 		return (Trainer) em.createQuery("FROM Entraineur e WHERE e.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
-	public President getPresidentById(Long id) {
+	public President getPresidentById(long id) {
 		// TODO Auto-generated method stub
 		return (President) em.createQuery("FROM Président p WHERE p.id=:id").setParameter("id", id).getSingleResult();
 	}

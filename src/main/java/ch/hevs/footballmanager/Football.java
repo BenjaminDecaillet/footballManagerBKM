@@ -22,16 +22,16 @@ public interface Football {
 	List<Trainer> getTrainers();
 	
 	//Gets spécifiques aux leagues
-	League getLeagueById(Long id);
+	League getLeagueById(long id);
 	League getLeagueByName(String name);
 	League getLeagueByNationality(String nationality);
 	
 	//Gets spécifiques aux accounts
-	Account getAccountById(Long id);
+	Account getAccountById(long id);
 	Account getAccountByPlayerId(Person player);
 	
 	//Gets spécifiques aux clubs
-	Club getClubById(Long id);
+	Club getClubById(long id);
 	Club getClubByName(String name);
 	List<Player> getTitularPlayersFromClub(Club club);
 	
@@ -41,13 +41,13 @@ public interface Football {
 	List<Person> getPersonsByNationality(String nationality);
 	
 	//Get spécifique aux players
-	Player getPlayerById(Long id);
+	Player getPlayerById(long id);
 	
 	//Get spécifique aux trainers
-	Trainer getTrainerById(Long id);
+	Trainer getTrainerById(long id);
 
 	//Get spécifique aux presidents
-	President getPresidentById(Long id);
+	President getPresidentById(long id);
 	
 
 }
