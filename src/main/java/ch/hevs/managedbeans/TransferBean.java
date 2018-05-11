@@ -34,19 +34,9 @@ public class TransferBean {
 
 	@PostConstruct
 	public void initialize() throws NamingException {
-
 		// use JNDI to inject reference to bank EJB
 		InitialContext ctx = new InitialContext();
-		foot = (Football) ctx.lookup("java:global/FootballManagerBKM-SNAPSHOT/Footballbean!ch.hevs.footballmanager.Football");    	
-
-		// get clients
-		List<Player> playerList = foot.getPlayers();
-		this.playerNames = new ArrayList<String>();
-		for (Player player : playerList) {
-			this.playerNames.add(player.getLastname());
-		}
-		
-		foot.populate();
+		foot = (Football) ctx.lookup("java:global/FootballManagerBKM-0.0.1-SNAPSHOT/FootballBean!ch.hevs.footballmanager.Football");
 	}
 	
 	/**
@@ -110,7 +100,9 @@ public class TransferBean {
 		this.transactionAmount = transactionAmount;
 	}
 
-
+	public void populate(){
+		foot.populate();
+	}
 
 	/**
 	 * Performs a transfer between two account
