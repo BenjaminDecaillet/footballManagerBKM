@@ -3,6 +3,7 @@ package ch.hevs.businessobject;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -13,18 +14,15 @@ import javax.persistence.Table;
 @Table(name="Joueur")
 public class Player extends Person{
 
-	/**
-	 * Attribute titular
-	 */
 	@Column(name="titulaire")
 	private Boolean titular;
 
-	/**
-	 * Represent the characteristics of a player
-	 */
+	//Relations
 	@OneToOne(cascade = CascadeType.ALL)
 	private Characteristics characteristics;
-	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Contract contract;
+
 	public Player() {
 	}
 	/**
@@ -62,6 +60,18 @@ public class Player extends Person{
 	 */
 	public void setCharacteristics(Characteristics characteristics) {
 		this.characteristics = characteristics;
+	}
+	/**
+	 * @return the contract
+	 */
+	public Contract getContract() {
+		return contract;
+	}
+	/**
+	 * @param contract the contract to set
+	 */
+	public void setContract(Contract contract) {
+		this.contract = contract;
 	}
 
 

@@ -8,6 +8,5 @@ import javax.persistence.Table;
 public class President extends Person{
 
 	public President(){
-		
 	}
 }

@@ -24,6 +24,7 @@ public class Account {
 	@ManyToOne
 	@JoinColumn(name = "FK_Owner")
 	private Person owner;
+	
 
 	/**
 	 * Gets the id of the account
