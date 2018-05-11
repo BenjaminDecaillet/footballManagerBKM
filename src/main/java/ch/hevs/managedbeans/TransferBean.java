@@ -45,6 +45,7 @@ public class TransferBean {
 			this.playerNames.add(player.getLastname());
 		}
 		
+		foot.populate();
     }
 
 }

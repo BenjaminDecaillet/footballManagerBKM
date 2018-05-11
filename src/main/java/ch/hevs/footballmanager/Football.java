@@ -14,6 +14,9 @@ import javax.ejb.Local;
 @Local
 public interface Football {
 	
+	//Populate Database
+	void populate();
+	
 	//Gets Globaux
 	List<Player> getPlayers();
 	List<Account> getAccounts();
