@@ -23,7 +23,7 @@ public class FootballBean implements Football{
 	private EntityManager em;
 
 	@Override
-	public League getLeagueById(int id) {
+	public League getLeagueById(Long id) {
 		// TODO Auto-generated method stub
 		return (League) em.createQuery("FROM Ligue l WHERE l.id=:id").setParameter("id", id).getSingleResult();
 	}
@@ -41,13 +41,13 @@ public class FootballBean implements Football{
 	}
 
 	@Override
-	public Account getAccountById(int id) {
+	public Account getAccountById(Long id) {
 		// TODO Auto-generated method stub
 		return (Account) em.createQuery("FROM Compte c WHERE c.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
-	public Club getClubById(int id) {
+	public Club getClubById(Long id) {
 		// TODO Auto-generated method stub
 		return (Club) em.createQuery("FROM Club cl WHERE cl.id=:id").setParameter("id", id).getSingleResult();
 	}
@@ -83,19 +83,19 @@ public class FootballBean implements Football{
 	}
 
 	@Override
-	public Player getPlayerById(int id) {
+	public Player getPlayerById(Long id) {
 		// TODO Auto-generated method stub
 		return (Player) em.createQuery("FROM Joueur j WHERE j.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
-	public Trainer getTrainerById(int id) {
+	public Trainer getTrainerById(Long id) {
 		// TODO Auto-generated method stub
 		return (Trainer) em.createQuery("FROM Entraineur e WHERE e.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
-	public President getPresidentById(int id) {
+	public President getPresidentById(Long id) {
 		// TODO Auto-generated method stub
 		return (President) em.createQuery("FROM Président p WHERE p.id=:id").setParameter("id", id).getSingleResult();
 	}
@@ -128,6 +128,12 @@ public class FootballBean implements Football{
 	public List<Trainer> getTrainers() {
 		// TODO Auto-generated method stub
 		return (List<Trainer>) em.createQuery("FROM Entraineur").getResultList();
+	}
+
+	@Override
+	public Account getAccountByPlayerId(Person player) {
+		// TODO Auto-generated method stub
+		return (Account) em.createQuery("FROM Compte c WHERE c.owner=:player").setParameter("player", player).getSingleResult();
 	}
 	
 	
