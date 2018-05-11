@@ -27,7 +27,6 @@ public class League {
 	
 	//Relations
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="league")
-	@JoinColumn(name = "club_fk")
 	private List<Club> clubs;
 	
 	public League(){

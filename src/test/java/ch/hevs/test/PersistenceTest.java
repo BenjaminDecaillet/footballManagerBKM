@@ -30,16 +30,16 @@ public class PersistenceTest {
 			tx.begin();
 
 			Contract cont1 = new Contract();
-			cont1.setBeginningDate(new Date());
-			cont1.setEndDate(new Date());
+			cont1.setBeginningDate(new Date(2000,01,12));
+			cont1.setEndDate(new Date(2000,12,12));
 			cont1.setSalary(100000);
 			em.persist(cont1);
 
 			Contract cont2 = new Contract();
-			cont2.setBeginningDate(new Date());
-			cont2.setEndDate(new Date());
+			cont2.setBeginningDate(new Date(2010,01,01));
+			cont2.setEndDate(new Date(2018,01,12));
 			cont2.setSalary(500000);
-//			em.persist(cont2);
+			em.persist(cont2);
 
 			Player p1 = new Player();
 			p1.setFirstname("Mike");
@@ -48,45 +48,49 @@ public class PersistenceTest {
 			p1.setTitular(true);
 			p1.setContract(cont1);
 			p1.setCharacteristics(new Characteristics(18, 11, 5));
-//			em.persist(p1);
+			em.persist(p1);
 
 			Trainer p2 = new Trainer();
 			p2.setFirstname("Kevin");
 			p2.setLastname("Berret");
 			p2.setNationality("Swiss");
 			p2.setContract(cont2);
-//			em.persist(p2);
+			em.persist(p2);
 
 			President p3 = new President();
 			p3.setFirstname("Benjamin");
 			p3.setLastname("Décaillet");
 			p3.setNationality("Swiss");
-//			em.persist(p3);
+			em.persist(p3);
 
+			Account a3 = new Account();
+			a3.setSaldo(30000000);
+			
 			Club club1 = new Club();
 			club1.setName("FC Bâle");
 			club1.setNationality("Swiss");
 			club1.setPresident(p3);
 			club1.setTrainer(p2);
-//			em.persist(club1);
+			club1.setAccount(a3);
+			em.persist(club1);
 
 			Account a1 = new Account();
 			a1.setOwner(p3);
 			a1.setSaldo(15000000);
-//			em.persist(a1);
+			em.persist(a1);
 
 			Account a2 = new Account();
 			a2.setOwner(p1);
 			a2.setSaldo(5000000);
-//			em.persist(a2);
+			em.persist(a2);
 
 			League l1 = new League();
 			l1.setName("Professional");
 			l1.setNationality("Swiss");
 			l1.addClub(club1);
-			
-			
 			em.persist(l1);
+			
+			
 			tx.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
