@@ -25,110 +25,109 @@ public class FootballBean implements Football{
 	@Override
 	public League getLeagueById(int id) {
 		// TODO Auto-generated method stub
-		Query query = (Query) em.createQuery("FROM League l WHERE l.id=:id").setParameter("id", id).getSingleResult();
-		return (League) query.getSingleResult();
+		return (League) em.createQuery("FROM Ligue l WHERE l.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
 	public League getLeagueByName(String name) {
 		// TODO Auto-generated method stub
-		return null;
+		return (League) em.createQuery("FROM Ligue l WHERE l.nom=:name").setParameter("name", name).getSingleResult();
 	}
 
 	@Override
 	public League getLeagueByNationality(String nationality) {
 		// TODO Auto-generated method stub
-		return null;
+		return (League) em.createQuery("FROM Ligue l WHERE l.nationalité=:nationality").setParameter("nationality", nationality).getSingleResult();
 	}
 
 	@Override
 	public Account getAccountById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return (Account) em.createQuery("FROM Compte c WHERE c.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
 	public Club getClubById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return (Club) em.createQuery("FROM Club cl WHERE cl.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
 	public Club getClubByName(String name) {
 		// TODO Auto-generated method stub
-		return null;
+		return (Club) em.createQuery("FROM Club cl WHERE cl.nom=:name").setParameter("name", name).getSingleResult();
 	}
 
 	@Override
 	public List<Player> getTitularPlayersFromClub(Club club) {
 		// TODO Auto-generated method stub
-		return null;
+		return (List<Player>) em.createQuery("SELECT cl.players FROM Club cl WHERE cl.id=:id").setParameter("id", club.getId()).getResultList();
 	}
 
 	@Override
 	public List<Person> getPersonsByLastname(String lastname) {
 		// TODO Auto-generated method stub
-		return null;
+		return (List<Person>) em.createQuery("FROM Personne p WHERE p.nom=:lastname").setParameter("lastname", lastname).getResultList();
 	}
 
 	@Override
 	public List<Person> getPersonsByFirstname(String firstname) {
 		// TODO Auto-generated method stub
-		return null;
+		return (List<Person>) em.createQuery("FROM Personne p WHERE p.prénom=:firstname").setParameter("firstname", firstname).getResultList();
 	}
 
 	@Override
 	public List<Person> getPersonsByNationality(String nationality) {
 		// TODO Auto-generated method stub
-		return null;
+		return (List<Person>) em.createQuery("FROM Personne p WHERE p.nationalité=:nationality").setParameter("nationality", nationality).getResultList();
 	}
 
 	@Override
 	public Player getPlayerById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return (Player) em.createQuery("FROM Joueur j WHERE j.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
 	public Trainer getTrainerById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return (Trainer) em.createQuery("FROM Entraineur e WHERE e.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
 	public President getPresidentById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return (President) em.createQuery("FROM Président p WHERE p.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
 	public List<Player> getPlayers() {
 		// TODO Auto-generated method stub
-		return null;
+		return (List<Player>) em.createQuery("FROM Joueur").getResultList();
 	}
 
 	@Override
 	public List<Account> getAccounts() {
 		// TODO Auto-generated method stub
-		return null;
+		return (List<Account>) em.createQuery("FROM Compte").getResultList();
 	}
 
 	@Override
 	public List<Club> getClubs() {
 		// TODO Auto-generated method stub
-		return null;
+		return (List<Club>) em.createQuery("FROM Club").getResultList();
 	}
 
 	@Override
 	public List<League> getLeagues() {
 		// TODO Auto-generated method stub
-		return null;
+		return (List<League>) em.createQuery("FROM Ligue").getResultList();
 	}
 
 	@Override
 	public List<Trainer> getTrainers() {
 		// TODO Auto-generated method stub
-		return null;
+		return (List<Trainer>) em.createQuery("FROM Entraineur").getResultList();
 	}
 	
 	
