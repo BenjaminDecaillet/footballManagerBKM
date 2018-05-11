@@ -3,7 +3,7 @@ package ch.hevs.businessobject;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,6 +22,8 @@ public class Player extends Person{
 	private Characteristics characteristics;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Contract contract;
+	@ManyToOne
+	private Club club;
 
 	public Player() {
 	}
@@ -73,6 +75,20 @@ public class Player extends Person{
 	public void setContract(Contract contract) {
 		this.contract = contract;
 	}
-
+	
+	/**
+	 * Gets the club of a player
+	 * @return the club object representing the club of a player
+	 */
+	public Club getClub() {
+		return club;
+	}
+	/**
+	 * Set the club of a player
+	 * @param club the club object representing the club of a player
+	 */
+	public void setClub(Club club) {
+		this.club = club;
+	}
 
 }

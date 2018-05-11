@@ -38,8 +38,7 @@ public class Club {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "president_fk", nullable = false)
 	private Person president;
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "player_fk")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="club")
 	private List<Player> players;
 	
 	public Club(){

@@ -41,15 +41,6 @@ public class PersistenceTest {
 			cont2.setSalary(500000);
 			em.persist(cont2);
 
-			Player p1 = new Player();
-			p1.setFirstname("Mike");
-			p1.setLastname("Wigger");
-			p1.setNationality("Swiss");
-			p1.setTitular(true);
-			p1.setContract(cont1);
-			p1.setCharacteristics(new Characteristics(18, 11, 5));
-			em.persist(p1);
-
 			Trainer p2 = new Trainer();
 			p2.setFirstname("Kevin");
 			p2.setLastname("Berret");
@@ -66,14 +57,32 @@ public class PersistenceTest {
 			Account a3 = new Account();
 			a3.setSaldo(30000000);
 			
+			League l1 = new League();
+			l1.setName("Professional");
+			l1.setNationality("Swiss");
+			
 			Club club1 = new Club();
 			club1.setName("FC Bâle");
 			club1.setNationality("Swiss");
 			club1.setPresident(p3);
 			club1.setTrainer(p2);
 			club1.setAccount(a3);
+			club1.setLeague(l1);
 			em.persist(club1);
+			
+			l1.addClub(club1);
+			em.persist(l1);
 
+			Player p1 = new Player();
+			p1.setFirstname("Mike");
+			p1.setLastname("Wigger");
+			p1.setNationality("Swiss");
+			p1.setTitular(true);
+			p1.setContract(cont1);
+			p1.setCharacteristics(new Characteristics(18, 11, 5));
+			p1.setClub(club1);
+			em.persist(p1);
+			
 			Account a1 = new Account();
 			a1.setOwner(p3);
 			a1.setSaldo(15000000);
@@ -84,13 +93,6 @@ public class PersistenceTest {
 			a2.setSaldo(5000000);
 			em.persist(a2);
 
-			League l1 = new League();
-			l1.setName("Professional");
-			l1.setNationality("Swiss");
-			l1.addClub(club1);
-			em.persist(l1);
-			
-			
 			tx.commit();
 		} catch (Exception e) {
 			e.printStackTrace();

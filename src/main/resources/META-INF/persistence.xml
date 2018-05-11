@@ -16,6 +16,7 @@
 		<class>ch.hevs.businessobject.President</class>
 		<class>ch.hevs.businessobject.Trainer</class>
 		<class>ch.hevs.businessobject.Characteristics</class>
+		<class>ch.hevs.businessobject.League</class>
 		
 		<properties>
 			<property name="hibernate.connection.url" value="jdbc:hsqldb:hsql://localhost/DB" />
