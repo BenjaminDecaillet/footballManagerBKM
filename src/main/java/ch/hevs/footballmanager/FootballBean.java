@@ -206,5 +206,19 @@ public class FootballBean implements Football{
 		a2.setSaldo(5000000);
 		em.persist(a2);
 	}
+	
+	public void transfer(Account srcAccount, Account destAccount, int amount) {
+		
+//		em.persist(srcAccount);
+//		em.persist(destAccount);
+//		srcAccount.debit(amount);
+//		destAccount.credit(amount);
+		
+		//Meilleure solution
+		Account srcRealAccount = em.merge(srcAccount);
+		Account destRealAccount = em.merge(destAccount);
+		srcRealAccount.debit(amount);
+		destRealAccount.credit(amount);
+	}
 
 }

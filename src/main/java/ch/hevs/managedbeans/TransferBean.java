@@ -26,6 +26,7 @@ public class TransferBean {
 	private List<Player> players;
 	private List<String> playerNames;
 	private Person sourcePerson;
+	private Club sourceClub;
 	private Person destinationPerson;
 	private String transactionResult;
 	private int transactionAmount;
@@ -49,19 +50,31 @@ public class TransferBean {
 	}
 	
 	/**
-	 * @return the sourcePersonName
+	 * @return the sourceClub
 	 */
-	public Person getSourcePersonName() {
+	public Club getSourceClub() {
+		return sourceClub;
+	}
+	/**
+	 * @param sourceClub the sourceClub to set
+	 */
+	public void setSourceClub(Club sourceClub) {
+		this.sourceClub = sourceClub;
+	}
+	/**
+	 * @return the sourcePerson
+	 */
+	public Person getSourcePerson() {
 		return sourcePerson;
 	}
 	/**
-	 * @param sourcePersonName the sourcePersonName to set
+	 * @param sourcePersonName the sourcePerson to set
 	 */
 	public void setSourcePerson(Person sourcePerson) {
 		this.sourcePerson = sourcePerson;
 	}
 	/**
-	 * @return the destinationPersonName
+	 * @return the destinationPerson
 	 */
 	public Person getDestinationPerson() {
 		return destinationPerson;
@@ -69,7 +82,7 @@ public class TransferBean {
 	/**
 	 * @param destinationPersonName the destinationPersonName to set
 	 */
-	public void setDestinationPersonName(Person destinationPerson) {
+	public void setDestinationPerson(Person destinationPerson) {
 		this.destinationPerson = destinationPerson;
 	}
 	/**
@@ -99,27 +112,29 @@ public class TransferBean {
 
 
 
+	/**
+	 * Performs a transfer between two account
+	 * @return String representing the outcome used by the navigation handler to determine what page to display next
+	 */
 	public String performTransfer() {
 
 		try {
-			if (sourcePerson.equals(destinationPerson)) {
-
-				this.transactionResult="Error: persons are identical!";
-			} 
-			else {
-
-				Account compteSrc = foot.getAccountByPlayerId(sourcePerson);
+			Account compteSrc;
+				if(sourceClub != null)
+					compteSrc = foot.getAccountById(sourceClub.getAccount().getId());
+				else
+					compteSrc = foot.getAccountByPlayerId(sourcePerson);
+				
 				Account compteDest = foot.getAccountByPlayerId(destinationPerson);
 
 				// Transfer
-//				foot.transfer(compteSrc, compteDest, transactionAmount);
+				foot.transfer(compteSrc, compteDest, transactionAmount);
 				this.transactionResult="Success!";
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return "showTransferResult"; //  the String value returned represents the outcome used by the navigation handler to determine what page to display next
+		return "showTransferResult";
 	}
 
 }

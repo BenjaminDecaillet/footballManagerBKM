@@ -52,5 +52,6 @@ public interface Football {
 	//Get spécifique aux presidents
 	President getPresidentById(long id);
 	
+	void transfer(Account compteSrc, Account compteDest, int montant) throws Exception;
 
 }
