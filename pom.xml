@@ -4,9 +4,9 @@
 	<groupId>FootballManagerBKM</groupId>
 	<artifactId>FootballManagerBKM</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	
+
 	<dependencies>
-	
+
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
 			<artifactId>eclipselink</artifactId>
@@ -28,7 +28,7 @@
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.faces</groupId>
 			<artifactId>javax.faces-api</artifactId>
@@ -130,6 +130,12 @@
 			<artifactId>dom4j</artifactId>
 			<version>1.6.1</version>
 			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
 		</dependency>
 	</dependencies>
 	<properties>
