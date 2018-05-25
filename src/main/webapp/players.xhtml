@@ -5,7 +5,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
 	<ui:define name="content">
@@ -13,12 +14,34 @@
 			<h1>Players</h1>
 		</div>
 		<div class="row">
-			<ui:repeat value="#{footballBean.players}" var="player" varStatus="status">
+			<ui:repeat value="#{footballBean.players}" var="player"
+				varStatus="status">
 				<p>#{player.firstname} #{player.lastname} - #{player.club.name}</p>
 			</ui:repeat>
 		</div>
-		<div class="row">
-		</div>
+
+		<h:form>
+			<div class="row">
+				<div class="input-field col s6">
+					<h:inputText value="#{playerBean.firstname}" styleClass="validate"
+						id="firstname" a:placeholder="First name"></h:inputText>
+					<label for="firstname" class="active">First Name</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<h:inputText value="#{playerBean.lastname}" styleClass="validate"
+						id="lastname" a:placeholder="Last name"></h:inputText>
+					<label for="lastname" class="active">Last Name</label>
+				</div>
+			</div>
+			<div class="row">
+				<h:commandButton value="Create player"
+					action="#{playerBean.createPlayer(playerBean)}"
+					styleClass="btn waves-effect waves-light" />
+			</div>
+		</h:form>
+
 	</ui:define>
 </ui:composition>
 </html>

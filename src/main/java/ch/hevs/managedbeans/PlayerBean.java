@@ -1,13 +1,15 @@
 package ch.hevs.managedbeans;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.Stateless;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import ch.hevs.footballmanager.Football;
 
-@Stateless
+@ManagedBean
+@RequestScoped
 public class PlayerBean {
 	
 	private Football foot;
