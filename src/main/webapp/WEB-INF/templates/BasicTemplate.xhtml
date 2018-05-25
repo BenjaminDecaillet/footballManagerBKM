@@ -1,33 +1,54 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-<head>
-  <title><ui:insert name="title">Default title</ui:insert></title>
-</head>
-
-<body>
-<ui:debug hotkey="x" rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}"/>
-
-<div id="header">
-    <ui:insert name="header">
-    	<ui:include src="header.xhtml"/>
-    </ui:insert>
-</div>
-
-
-<div id="content">
-  <ui:insert name="content">
-    	<ui:include src="content.xhtml"/>  
-  </ui:insert>
-</div>
-
-<div id="footer">
-  <ui:insert name="footer">
-		<ui:include src="footer.xhtml"/>
-  </ui:insert>
-</div>
-
-</body>
-
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<h:head>
+		<!--Import Google Icon Font-->
+      	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+      	
+		<!-- Compiled and minified CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css" />
+		
+		<!--  style css -->
+		<h:outputStylesheet library="css" name="style.css"  />
+		
+		<title><ui:insert name="title">Football Manager</ui:insert></title>
+		<!--Let browser know website is optimized for mobile-->
+      	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      	
+      	<!--   -->
+	</h:head>
+	
+	<h:body>
+		<ui:debug hotkey="x"
+			rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}" />
+	
+		
+		<ui:insert name="header">
+			<ui:include src="header.xhtml" />
+		</ui:insert>
+	
+		<main>
+			<div id="content" class="container">
+				<ui:insert name="content">
+					<ui:include src="content.xhtml" />
+				</ui:insert>
+			</div>
+		</main>
+		
+		<ui:insert name="footer">
+			<ui:include src="footer.xhtml" />
+		</ui:insert>
+	
+		<!-- Compiled and minified JavaScript -->
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+		
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+			    var elems = document.querySelectorAll('.tooltipped');
+			    var instances = M.Tooltip.init(elems, options);
+			  });
+		</script>
+	</h:body>
 </html>
