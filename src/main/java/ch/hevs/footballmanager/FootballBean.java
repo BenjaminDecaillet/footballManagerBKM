@@ -17,7 +17,7 @@ import ch.hevs.businessobject.Person;
 import ch.hevs.businessobject.Player;
 import ch.hevs.businessobject.President;
 import ch.hevs.businessobject.Trainer;
-import ch.hevs.managedbeans.PlayerBean;
+import ch.hevs.managedbeans.PersonBean;
 
 @Stateless
 public class FootballBean implements Football{
@@ -210,10 +210,6 @@ public class FootballBean implements Football{
 	@Override
 	public void transfer(Account srcAccount, Account destAccount, int amount) {
 		// TODO Auto-generated method stub
-//		em.persist(srcAccount);
-//		em.persist(destAccount);
-//		srcAccount.debit(amount);
-//		destAccount.credit(amount);
 		
 		//Meilleure solution
 		Account srcRealAccount = em.merge(srcAccount);
@@ -222,21 +218,124 @@ public class FootballBean implements Football{
 		destRealAccount.credit(amount);
 	}
 	
+	
+	/*
+	 * 
+	 * PLAYER's methods
+	 * 
+	 */
 	@Override
-	public void newPlayer(PlayerBean newPlayerObj){
+	public Player setPropertiesForCreationOrUpdatePlayer(PersonBean newOrUpdatedPlayerObj){
 		// TODO Auto-generated method stub
-		
 		Player player = new Player();
 		
-		player.setFirstname(newPlayerObj.getFirstname());
-		player.setLastname(newPlayerObj.getLastname());
-		player.setNationality(newPlayerObj.getNationality());
-		player.setTitular(newPlayerObj.getTitular());
-		player.setCharacteristics(newPlayerObj.getCharacteristics());
-		player.setContract(newPlayerObj.getContract());
-		player.setClub(newPlayerObj.getClub());
+		player.setFirstname(newOrUpdatedPlayerObj.getFirstname());
+		player.setLastname(newOrUpdatedPlayerObj.getLastname());
+		player.setNationality(newOrUpdatedPlayerObj.getNationality());
+		player.setTitular(newOrUpdatedPlayerObj.getTitular());
+		player.setCharacteristics(newOrUpdatedPlayerObj.getCharacteristics());
+		player.setContract(newOrUpdatedPlayerObj.getContract());
+		player.setClub(newOrUpdatedPlayerObj.getClub());
 		
-		em.persist(player);
+		return player;
+	}
+	
+	@Override
+	public void newPlayer(PersonBean newPlayerObj){
+		// TODO Auto-generated method stub		
+		em.persist(setPropertiesForCreationOrUpdatePlayer(newPlayerObj));
+	}
+	
+	@Override
+	public void updatePlayer(PersonBean updatedPlayerObj) {
+		// TODO Auto-generated method stub
+		em.merge(setPropertiesForCreationOrUpdatePlayer(updatedPlayerObj));
+	}
+	
+	@Override
+	public void removePlayer(PersonBean removedPlayerObj) {
+		// TODO Auto-generated method stub
+		Player player = getPlayerById(removedPlayerObj.getId());
+		
+		em.remove(player);
+	}
+	
+	
+	
+	/*
+	 * 
+	 * TRAINER's methods
+	 * 
+	 */
+	@Override
+	public Trainer setPropertiesForCreationOrUpdateTrainer(PersonBean newOrUpdatedTrainerObj) {
+		// TODO Auto-generated method stub
+		Trainer trainer = new Trainer();
+		
+		trainer.setFirstname(newOrUpdatedTrainerObj.getFirstname());
+		trainer.setLastname(newOrUpdatedTrainerObj.getLastname());
+		trainer.setNationality(newOrUpdatedTrainerObj.getNationality());
+		trainer.setContract(newOrUpdatedTrainerObj.getContract());
+		
+		return trainer;
+	}
+	
+	@Override
+	public void newTrainer(PersonBean newTrainerObj) {
+		// TODO Auto-generated method stub
+		em.persist(setPropertiesForCreationOrUpdateTrainer(newTrainerObj));
+	}
+	
+	@Override
+	public void updateTrainer(PersonBean updatedTrainerObj) {
+		// TODO Auto-generated method stub
+		em.merge(setPropertiesForCreationOrUpdateTrainer(updatedTrainerObj));
+	}
+	
+	@Override
+	public void removeTrainer(PersonBean removedTrainerObj) {
+		// TODO Auto-generated method stub
+		Trainer trainer = getTrainerById(removedTrainerObj.getId());
+		
+		em.remove(trainer);
 	}
 
+	
+	
+	/*
+	 * 
+	 * PRESIDENT's methods
+	 * 
+	 */	
+	@Override
+	public President setPropertiesForCreationOrUpdatePresident(PersonBean newOrUpdatedPresidentObj) {
+		// TODO Auto-generated method stub
+		President president = new President();
+		
+		president.setFirstname(newOrUpdatedPresidentObj.getFirstname());
+		president.setLastname(newOrUpdatedPresidentObj.getLastname());
+		president.setNationality(newOrUpdatedPresidentObj.getNationality());
+		
+		return president;
+	}
+	
+	@Override
+	public void newPresident(PersonBean newPresidentObj) {
+		// TODO Auto-generated method stub
+		em.persist(setPropertiesForCreationOrUpdatePresident(newPresidentObj));	
+	}
+
+	@Override
+	public void updatePresident(PersonBean updatedPresidentObj) {
+		// TODO Auto-generated method stub
+		em.merge(setPropertiesForCreationOrUpdatePresident(updatedPresidentObj));
+	}
+
+	@Override
+	public void removePresident(PersonBean removedPresidentObj) {
+		// TODO Auto-generated method stub
+		President president = getPresidentById(removedPresidentObj.getId());
+		
+		em.remove(president);
+	}
 }

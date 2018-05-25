@@ -12,10 +12,13 @@ import ch.hevs.businessobject.Contract;
 import ch.hevs.footballmanager.Football;
 
 @ManagedBean
-public class PlayerBean {
+public class PersonBean {
 	
+	//Interface
 	private Football foot;
 	
+	//Properties of all types of person (Player, Trainer and President)
+	private long id;
 	private String firstname;
 	private String lastname;
 	private String nationality;
@@ -31,13 +34,49 @@ public class PlayerBean {
 		foot = (Football) ctx.lookup("java:global/FootballManagerBKM-0.0.1-SNAPSHOT/FootballBean!ch.hevs.footballmanager.Football");
 	}
 	
+	/*
+	 * CRUD METHODS
+	 */
 	
-	public void createPlayer(PlayerBean newPlayer){
+	//CREATION
+	public void createPlayer(PersonBean newPlayer){
 		foot.newPlayer(newPlayer);
+	}
+	public void createTrainer(PersonBean newTrainer){
+		foot.newTrainer(newTrainer);
+	}
+	public void createPresident(PersonBean newPresident){
+		foot.newPresident(newPresident);
+	}
+	
+	//UPDATE
+	public void updatePlayer(PersonBean updatedPlayer){
+		foot.updatePlayer(updatedPlayer);
+	}
+	public void updateTrainer(PersonBean updatedTrainer){
+		foot.updateTrainer(updatedTrainer);
+	}
+	public void updatePresident(PersonBean updatedPresident){
+		foot.updatePresident(updatedPresident);
+	}
+	
+	//DELETE
+	public void deletePlayer(PersonBean deletedPlayer){
+		foot.removePlayer(deletedPlayer);
+	}
+	public void deleteTrainer(PersonBean deletedTrainer){
+		foot.removeTrainer(deletedTrainer);
+	}
+	public void deletePresident(PersonBean deletedPresident){
+		foot.removePresident(deletedPresident);
 	}
 	
 	
-	//Getter and setter	
+	/*
+	 * 
+	 * GETTERS & SETTERS
+	 * 
+	 */
 	public String getFirstname() {
 		return firstname;
 	}
@@ -79,5 +118,13 @@ public class PlayerBean {
 	}
 	public void setClub(Club club) {
 		this.club = club;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 }

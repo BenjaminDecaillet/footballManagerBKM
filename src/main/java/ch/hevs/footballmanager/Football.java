@@ -7,7 +7,7 @@ import ch.hevs.businessobject.Person;
 import ch.hevs.businessobject.Player;
 import ch.hevs.businessobject.President;
 import ch.hevs.businessobject.Trainer;
-import ch.hevs.managedbeans.PlayerBean;
+import ch.hevs.managedbeans.PersonBean;
 
 import java.util.List;
 import javax.ejb.Local;
@@ -58,7 +58,24 @@ public interface Football {
 	void transfer(Account compteSrc, Account compteDest, int montant) throws Exception;
 	
 	
-	//Persist new object in DB
-	void newPlayer(PlayerBean newPlayerObj);
+	//Persist new objects in DB
+	void newPlayer(PersonBean newPlayerObj);
+	void newTrainer(PersonBean newTrainerObj);
+	void newPresident(PersonBean newPresidentObj);
+	
+	//Merge updated objects
+	void updatePlayer(PersonBean updatedPlayerObj);
+	void updateTrainer(PersonBean updatedTrainerObj);
+	void updatePresident(PersonBean updatedPresidentObj);
+	
+	//Remove objects
+	void removePlayer(PersonBean removedPlayerObj);
+	void removeTrainer(PersonBean removedTrainerObj);
+	void removePresident(PersonBean removedPresidentObj);
 
+	//Utilities methods
+	Player setPropertiesForCreationOrUpdatePlayer(PersonBean newOrUpdatedPlayerObj);
+	Trainer setPropertiesForCreationOrUpdateTrainer(PersonBean newOrUpdatedTrainerObj);
+	President setPropertiesForCreationOrUpdatePresident(PersonBean newOrUpdatedPresidentObj);
+	
 }
