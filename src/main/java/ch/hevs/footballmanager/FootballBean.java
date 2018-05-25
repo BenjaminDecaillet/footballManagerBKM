@@ -3,8 +3,7 @@ package ch.hevs.footballmanager;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Query;
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
@@ -19,34 +18,34 @@ import ch.hevs.businessobject.Player;
 import ch.hevs.businessobject.President;
 import ch.hevs.businessobject.Trainer;
 
-@Stateful
+@Stateless
 public class FootballBean implements Football{
 	
-	@PersistenceContext(name = "FootPU",type=PersistenceContextType.EXTENDED)
+	@PersistenceContext(name = "FootPU")
 	private EntityManager em;
 
 	@Override
 	public League getLeagueById(long id) {
 		// TODO Auto-generated method stub
-		return (League) em.createQuery("FROM Ligue l WHERE l.id=:id").setParameter("id", id).getSingleResult();
+		return (League) em.createQuery("FROM League l WHERE l.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
 	public League getLeagueByName(String name) {
 		// TODO Auto-generated method stub
-		return (League) em.createQuery("FROM Ligue l WHERE l.nom=:name").setParameter("name", name).getSingleResult();
+		return (League) em.createQuery("FROM League l WHERE l.name=:name").setParameter("name", name).getSingleResult();
 	}
 
 	@Override
 	public League getLeagueByNationality(String nationality) {
 		// TODO Auto-generated method stub
-		return (League) em.createQuery("FROM Ligue l WHERE l.nationalité=:nationality").setParameter("nationality", nationality).getSingleResult();
+		return (League) em.createQuery("FROM League l WHERE l.nationality=:nationality").setParameter("nationality", nationality).getSingleResult();
 	}
 
 	@Override
 	public Account getAccountById(long id) {
 		// TODO Auto-generated method stub
-		return (Account) em.createQuery("FROM Compte c WHERE c.id=:id").setParameter("id", id).getSingleResult();
+		return (Account) em.createQuery("FROM Account c WHERE c.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
@@ -58,7 +57,7 @@ public class FootballBean implements Football{
 	@Override
 	public Club getClubByName(String name) {
 		// TODO Auto-generated method stub
-		return (Club) em.createQuery("FROM Club cl WHERE cl.nom=:name").setParameter("name", name).getSingleResult();
+		return (Club) em.createQuery("FROM Club cl WHERE cl.name=:name").setParameter("name", name).getSingleResult();
 	}
 
 	@Override
@@ -70,49 +69,49 @@ public class FootballBean implements Football{
 	@Override
 	public List<Person> getPersonsByLastname(String lastname) {
 		// TODO Auto-generated method stub
-		return (List<Person>) em.createQuery("FROM Personne p WHERE p.nom=:lastname").setParameter("lastname", lastname).getResultList();
+		return (List<Person>) em.createQuery("FROM Person p WHERE p.lastname=:lastname").setParameter("lastname", lastname).getResultList();
 	}
 
 	@Override
 	public List<Person> getPersonsByFirstname(String firstname) {
 		// TODO Auto-generated method stub
-		return (List<Person>) em.createQuery("FROM Personne p WHERE p.prénom=:firstname").setParameter("firstname", firstname).getResultList();
+		return (List<Person>) em.createQuery("FROM Person p WHERE p.firstname=:firstname").setParameter("firstname", firstname).getResultList();
 	}
 
 	@Override
 	public List<Person> getPersonsByNationality(String nationality) {
 		// TODO Auto-generated method stub
-		return (List<Person>) em.createQuery("FROM Personne p WHERE p.nationalité=:nationality").setParameter("nationality", nationality).getResultList();
+		return (List<Person>) em.createQuery("FROM Person p WHERE p.nationality=:nationality").setParameter("nationality", nationality).getResultList();
 	}
 
 	@Override
 	public Player getPlayerById(long id) {
 		// TODO Auto-generated method stub
-		return (Player) em.createQuery("FROM Joueur j WHERE j.id=:id").setParameter("id", id).getSingleResult();
+		return (Player) em.createQuery("FROM Player j WHERE j.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
 	public Trainer getTrainerById(long id) {
 		// TODO Auto-generated method stub
-		return (Trainer) em.createQuery("FROM Entraineur e WHERE e.id=:id").setParameter("id", id).getSingleResult();
+		return (Trainer) em.createQuery("FROM Trainer e WHERE e.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
 	public President getPresidentById(long id) {
 		// TODO Auto-generated method stub
-		return (President) em.createQuery("FROM Président p WHERE p.id=:id").setParameter("id", id).getSingleResult();
+		return (President) em.createQuery("FROM President p WHERE p.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
 	public List<Player> getPlayers() {
 		// TODO Auto-generated method stub
-		return (List<Player>) em.createQuery("FROM Joueur").getResultList();
+		return (List<Player>) em.createQuery("FROM Player").getResultList();
 	}
 
 	@Override
 	public List<Account> getAccounts() {
 		// TODO Auto-generated method stub
-		return (List<Account>) em.createQuery("FROM Compte").getResultList();
+		return (List<Account>) em.createQuery("FROM Account").getResultList();
 	}
 
 	@Override
@@ -124,19 +123,19 @@ public class FootballBean implements Football{
 	@Override
 	public List<League> getLeagues() {
 		// TODO Auto-generated method stub
-		return (List<League>) em.createQuery("FROM Ligue").getResultList();
+		return (List<League>) em.createQuery("FROM League").getResultList();
 	}
 
 	@Override
 	public List<Trainer> getTrainers() {
 		// TODO Auto-generated method stub
-		return (List<Trainer>) em.createQuery("FROM Entraineur").getResultList();
+		return (List<Trainer>) em.createQuery("FROM Trainer").getResultList();
 	}
 
 	@Override
 	public Account getAccountByPlayerId(Person player) {
 		// TODO Auto-generated method stub
-		return (Account) em.createQuery("FROM Compte c WHERE c.owner=:player").setParameter("player", player).getSingleResult();
+		return (Account) em.createQuery("FROM Account c WHERE c.owner=:player").setParameter("player", player).getSingleResult();
 	}
 
 	@Override
@@ -207,8 +206,9 @@ public class FootballBean implements Football{
 		em.persist(a2);
 	}
 	
+	@Override
 	public void transfer(Account srcAccount, Account destAccount, int amount) {
-		
+		// TODO Auto-generated method stub
 //		em.persist(srcAccount);
 //		em.persist(destAccount);
 //		srcAccount.debit(amount);
@@ -219,6 +219,12 @@ public class FootballBean implements Football{
 		Account destRealAccount = em.merge(destAccount);
 		srcRealAccount.debit(amount);
 		destRealAccount.credit(amount);
+	}
+	
+	@Override
+	public void newPlayer(Player player){
+		// TODO Auto-generated method stub
+		em.persist(player);
 	}
 
 }

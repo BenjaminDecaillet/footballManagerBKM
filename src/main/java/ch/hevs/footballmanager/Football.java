@@ -10,6 +10,7 @@ import ch.hevs.businessobject.Trainer;
 
 import java.util.List;
 import javax.ejb.Local;
+import javax.ejb.Remote;
 
 @Local
 public interface Football {
@@ -52,6 +53,11 @@ public interface Football {
 	//Get spécifique aux presidents
 	President getPresidentById(long id);
 	
+	//Transfer method
 	void transfer(Account compteSrc, Account compteDest, int montant) throws Exception;
+	
+	
+	//Persist new object in DB
+	void newPlayer(Player player);
 
 }
