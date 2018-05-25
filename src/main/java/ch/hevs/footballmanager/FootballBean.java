@@ -253,11 +253,9 @@ public class FootballBean implements Football{
 	}
 	
 	@Override
-	public void removePlayer(PersonBean removedPlayerObj) {
+	public void removePlayer(Player player) {
 		// TODO Auto-generated method stub
-		Player player = getPlayerById(removedPlayerObj.getId());
-		
-		em.remove(player);
+		em.remove(em.contains(player) ? player : em.merge(player));
 	}
 	
 	
@@ -293,11 +291,9 @@ public class FootballBean implements Football{
 	}
 	
 	@Override
-	public void removeTrainer(PersonBean removedTrainerObj) {
+	public void removeTrainer(Trainer trainer) {
 		// TODO Auto-generated method stub
-		Trainer trainer = getTrainerById(removedTrainerObj.getId());
-		
-		em.remove(trainer);
+		em.remove(em.contains(trainer) ? trainer : em.merge(trainer));
 	}
 
 	
@@ -332,16 +328,8 @@ public class FootballBean implements Football{
 	}
 
 	@Override
-	public void removePresident(PersonBean removedPresidentObj) {
+	public void removePresident(President president) {
 		// TODO Auto-generated method stub
-		President president = getPresidentById(removedPresidentObj.getId());
-		
-		em.remove(president);
-	}
-
-	@Override
-	public void remPlayer(Player player) {
-		// TODO Auto-generated method stub
-		em.remove(em.contains(player) ? player : em.merge(player));
+		em.remove(em.contains(president) ? president : em.merge(president));
 	}
 }
