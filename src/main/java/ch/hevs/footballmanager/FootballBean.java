@@ -17,6 +17,7 @@ import ch.hevs.businessobject.Person;
 import ch.hevs.businessobject.Player;
 import ch.hevs.businessobject.President;
 import ch.hevs.businessobject.Trainer;
+import ch.hevs.managedbeans.PlayerBean;
 
 @Stateless
 public class FootballBean implements Football{
@@ -222,8 +223,14 @@ public class FootballBean implements Football{
 	}
 	
 	@Override
-	public void newPlayer(Player player){
+	public void newPlayer(PlayerBean newPlayerObj){
 		// TODO Auto-generated method stub
+		
+		Player player = new Player();
+		
+		player.setFirstname(newPlayerObj.getFirstname());
+		player.setLastname(newPlayerObj.getLastname());
+		
 		em.persist(player);
 	}
 
