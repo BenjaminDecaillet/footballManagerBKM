@@ -6,6 +6,9 @@ import javax.faces.bean.RequestScoped;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import ch.hevs.businessobject.Characteristics;
+import ch.hevs.businessobject.Club;
+import ch.hevs.businessobject.Contract;
 import ch.hevs.footballmanager.Football;
 
 @ManagedBean
@@ -16,6 +19,11 @@ public class PlayerBean {
 	
 	private String firstname;
 	private String lastname;
+	private String nationality;
+	private Boolean titular;
+	private Characteristics characteristics;
+	private Contract contract;
+	private Club club;
 	
 	@PostConstruct
 	public void initialize() throws NamingException {
@@ -42,5 +50,35 @@ public class PlayerBean {
 	}
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
+	}
+	public String getNationality() {
+		return nationality;
+	}
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
+	public Boolean getTitular() {
+		return titular;
+	}
+	public void setTitular(Boolean titular) {
+		this.titular = titular;
+	}
+	public Characteristics getCharacteristics() {
+		return characteristics;
+	}
+	public void setCharacteristics(Characteristics characteristics) {
+		this.characteristics = characteristics;
+	}
+	public Contract getContract() {
+		return contract;
+	}
+	public void setContract(Contract contract) {
+		this.contract = contract;
+	}
+	public Club getClub() {
+		return club;
+	}
+	public void setClub(Club club) {
+		this.club = club;
 	}
 }

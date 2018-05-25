@@ -230,6 +230,11 @@ public class FootballBean implements Football{
 		
 		player.setFirstname(newPlayerObj.getFirstname());
 		player.setLastname(newPlayerObj.getLastname());
+		player.setNationality(newPlayerObj.getNationality());
+		player.setTitular(newPlayerObj.getTitular());
+		player.setCharacteristics(newPlayerObj.getCharacteristics());
+		player.setContract(newPlayerObj.getContract());
+		player.setClub(newPlayerObj.getClub());
 		
 		em.persist(player);
 	}
