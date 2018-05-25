@@ -338,4 +338,10 @@ public class FootballBean implements Football{
 		
 		em.remove(president);
 	}
+
+	@Override
+	public void remPlayer(Player player) {
+		// TODO Auto-generated method stub
+		em.remove(em.contains(player) ? player : em.merge(player));
+	}
 }

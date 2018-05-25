@@ -9,9 +9,11 @@ import javax.naming.NamingException;
 import ch.hevs.businessobject.Characteristics;
 import ch.hevs.businessobject.Club;
 import ch.hevs.businessobject.Contract;
+import ch.hevs.businessobject.Player;
 import ch.hevs.footballmanager.Football;
 
 @ManagedBean
+@RequestScoped
 public class PersonBean {
 	
 	//Interface
@@ -69,6 +71,10 @@ public class PersonBean {
 	}
 	public void deletePresident(PersonBean deletedPresident){
 		foot.removePresident(deletedPresident);
+	}
+	
+	public void delPlayer(Player player){
+		foot.remPlayer(player);
 	}
 	
 	

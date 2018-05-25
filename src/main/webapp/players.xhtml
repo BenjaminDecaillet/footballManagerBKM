@@ -15,7 +15,11 @@
 		</div>
 		<div class="row">
 			<ui:repeat value="#{footballBean.players}" var="player">
-				<p>#{player.firstname} #{player.lastname} - #{player.club.name}</p>
+				<p>#{player.firstname} #{player.lastname} - #{player.club.name}
+				<h:form>
+					<h:commandLink value="Delete" action="#{personBean.delPlayer(player)}"/>
+				</h:form>
+				</p>
 			</ui:repeat>
 		</div>
 
@@ -28,14 +32,14 @@
 		<h:form>
 			<div class="row">
 				<div class="input-field col s6">
-					<h:inputText value="#{playerBean.firstname}" styleClass="validate"
+					<h:inputText value="#{personBean.firstname}" styleClass="validate"
 						id="firstname" a:placeholder="First name"></h:inputText>
 					<label for="firstname" class="active">First Name</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s6">
-					<h:inputText value="#{playerBean.lastname}" styleClass="validate"
+					<h:inputText value="#{personBean.lastname}" styleClass="validate"
 						id="lastname" a:placeholder="Last name"></h:inputText>
 					<label for="lastname" class="active">Last Name</label>
 				</div>
@@ -51,7 +55,7 @@
 			</div>
 			<div class="row">
 				<h:commandButton value="Create player"
-					action="#{playerBean.createPlayer(playerBean)}"
+					action="#{personBean.createPlayer(personBean)}"
 					styleClass="btn waves-effect waves-light" />
 			</div>
 		</h:form>

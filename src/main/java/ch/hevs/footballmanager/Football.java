@@ -77,5 +77,7 @@ public interface Football {
 	Player setPropertiesForCreationOrUpdatePlayer(PersonBean newOrUpdatedPlayerObj);
 	Trainer setPropertiesForCreationOrUpdateTrainer(PersonBean newOrUpdatedTrainerObj);
 	President setPropertiesForCreationOrUpdatePresident(PersonBean newOrUpdatedPresidentObj);
+
+	void remPlayer(Player player);
 	
 }
