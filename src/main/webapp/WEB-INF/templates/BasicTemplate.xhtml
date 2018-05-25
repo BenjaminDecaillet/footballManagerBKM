@@ -47,11 +47,17 @@
 		
 		<script>
 			document.addEventListener('DOMContentLoaded', function() {
-			    var elems = document.querySelectorAll('.tooltipped');
-			    var instances = M.Tooltip.init(elems, options);
+			    var tooltips = document.querySelectorAll('.tooltipped');
+			    var instancesTooltips = M.Tooltip.init(tooltips, {});
 			    
-			    var elems = document.querySelectorAll('select');
-			    var instances = M.FormSelect.init(elems, options);
+			    /*var selects = document.querySelectorAll('select');
+			    var instancesSelects = M.FormSelect.init(selects, {});*/
+			    
+			    var modals = document.querySelectorAll('.modal');
+			    var instancesModals = M.Modal.init(modals, {});
+			    
+			    var datePickers = document.querySelectorAll('.datepicker');
+			    var instancesDatePickers = M.Datepicker.init(datePickers, {'container':'body', 'format':'yyyy-mm-dd'});
 			  });
 		</script>
 	</h:body>

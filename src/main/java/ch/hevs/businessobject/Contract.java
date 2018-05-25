@@ -1,5 +1,6 @@
 package ch.hevs.businessobject;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -17,9 +18,9 @@ public class Contract {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;
 	@Column(name="dateDébut")
-	private Date beginningDate;
+	private LocalDate beginningDate;
 	@Column(name="dateFin")
-	private Date endDate;
+	private LocalDate endDate;
 	@Column(name="salaire")
 	private double salary;
 	
@@ -32,7 +33,7 @@ public class Contract {
 	 * @param endDate Date of the contract's end
 	 * @param salary Salary specified for the contract
 	 */
-	public Contract(Date beginningDate, Date endDate, double salary) {
+	public Contract(LocalDate beginningDate, LocalDate endDate, double salary) {
 		super();
 		this.beginningDate = beginningDate;
 		this.endDate = endDate;
@@ -59,7 +60,7 @@ public class Contract {
 	 * Gets the contract's beginning date
 	 * @return Date representing the contract's beginning
 	 */
-	public Date getBeginningDate() {
+	public LocalDate getBeginningDate() {
 		return beginningDate;
 	}
 
@@ -67,7 +68,7 @@ public class Contract {
 	 * Sets the contract's beginning date
 	 * @param beginningDate Date of the contract's beginning
 	 */
-	public void setBeginningDate(Date beginningDate) {
+	public void setBeginningDate(LocalDate beginningDate) {
 		this.beginningDate = beginningDate;
 	}
 
@@ -75,7 +76,7 @@ public class Contract {
 	 * Gets the contract's end date
 	 * @return Date representing the contract's end date
 	 */
-	public Date getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
@@ -83,7 +84,7 @@ public class Contract {
 	 * Sets the contract's end date
 	 * @param endDate Date of the contract's end date
 	 */
-	public void setEndDate(Date endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 

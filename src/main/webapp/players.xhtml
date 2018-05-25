@@ -15,10 +15,12 @@
 		</div>
 		<div class="row">
 			<ui:repeat value="#{footballBean.players}" var="player">
-				<p>#{player.firstname} #{player.lastname} - #{player.club.name}
-				<h:form>
-					<h:commandLink value="Delete" action="#{personBean.delPlayer(player)}"/>
-				</h:form>
+				<p>
+					#{player.firstname} #{player.lastname} - #{player.club.name}
+					<h:form>
+						<h:commandLink value="Delete"
+							action="#{personBean.delPlayer(player)}" />
+					</h:form>
 				</p>
 			</ui:repeat>
 		</div>
@@ -27,38 +29,118 @@
 			<ui:repeat value="#{footballBean.clubs}" var="club">
 				<p>#{club.name} (#{club.nationality})</p>
 			</ui:repeat>
-		</div>
+		</div>		
 
-		<h:form>
-			<div class="row">
-				<div class="input-field col s6">
-					<h:inputText value="#{personBean.firstname}" styleClass="validate"
-						id="firstname" a:placeholder="First name"></h:inputText>
-					<label for="firstname" class="active">First Name</label>
+		<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+		
+			<!-- Modal Trigger -->
+			<a
+				class="btn-floating btn-large waves-effect waves-light btn modal-trigger tooltipped"
+				data-position="top" data-tooltip="Create a player"
+				href="#modalPlayerCreate"><i class='material-icons'>add</i></a>
+		</div>
+		<!-- Modal Structure -->
+		<div id="modalPlayerCreate" class="modal modal-fixed-footer">
+			<h:form>
+				<div class="modal-content">
+					<h4>Create a player</h4>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.firstname}"
+								styleClass="validate" id="firstname" a:placeholder="First name" a:required="true"></h:inputText>
+							<label for="firstname" class="active">First Name</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.lastname}" styleClass="validate"
+								id="lastname" a:placeholder="Last name" a:required="true"></h:inputText>
+							<label for="lastname" class="active">Last Name</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.nationality}" styleClass="validate"
+								id="nationality" a:placeholder="Nationality" a:required="true"></h:inputText>
+							<label for="nationality" class="active">Nationality</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<label>
+								<h:selectBooleanCheckbox value="#{personBean.titular}"/>
+								<span>Titular</span>
+							</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<!--  https://stackoverflow.com/a/6850681 -->
+							<!--  https://stackoverflow.com/a/9069660 -->
+							<h:selectOneMenu id="clubSelect" value="#{personBean.club}" converter="clubConverter" styleClass="browser-default">
+								<f:selectItems value="#{footballBean.clubs}" var="club" itemValue="#{club}" itemLabel="#{club.name}"/>
+							</h:selectOneMenu>
+						</div>
+					</div>
+					<h3>Characteristics</h3>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.characteristics.power}" styleClass="validate"
+								id="power" a:placeholder="Power" a:required="true"></h:inputText>
+							<label for="power" class="active">Power</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.characteristics.endurance}" styleClass="validate"
+								id="endurance" a:placeholder="Endurance" a:required="true"></h:inputText>
+							<label for="endurance" class="active">Endurance</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.characteristics.speed}" styleClass="validate"
+								id="speed" a:placeholder="Speed" a:required="true"></h:inputText>
+							<label for="speed" class="active">Speed</label>
+						</div>
+					</div>
+					<h3>Contrat</h3>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.contract.beginningDate}" styleClass="datepicker"
+								id="beginningDate" a:placeholder="Beginning date" a:required="true">
+								<f:convertDateTime pattern="yyyy-MM-dd"/> 
+							</h:inputText>
+							<label for="beginningDate" class="active">Beginning date</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.contract.endDate}" styleClass="datepicker"
+								id="endDate" a:placeholder="End date" a:required="true">
+								<f:convertDateTime pattern="yyyy-MM-dd"/> 	
+							</h:inputText>
+							<label for="endDate" class="active">End date</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.contract.salary}" styleClass="validate"
+								id="salary" a:placeholder="Salary" a:required="true"></h:inputText>
+							<label for="salary" class="active">Salary</label>
+						</div>
+					</div>
+					
+					
 				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s6">
-					<h:inputText value="#{personBean.lastname}" styleClass="validate"
-						id="lastname" a:placeholder="Last name"></h:inputText>
-					<label for="lastname" class="active">Last Name</label>
+				<div class="modal-footer">
+					<a href="#!" class="modal-close waves-effect waves-green btn-flat">Quit</a>
+					<h:commandButton value="Create player"
+						action="#{personBean.createPlayer(personBean)}"
+						styleClass="btn waves-effect waves-light" />
 				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s16">
-					<h:selectOneMenu styleClass="dropdown-trigger">
-						<c:forEach var="club" items="#{footbalBean.clubs}">
-							<f:selectItem itemValue="0" itemLabel="club.name"></f:selectItem>
-						</c:forEach>
-					</h:selectOneMenu>
-				</div>
-			</div>
-			<div class="row">
-				<h:commandButton value="Create player"
-					action="#{personBean.createPlayer(personBean)}"
-					styleClass="btn waves-effect waves-light" />
-			</div>
-		</h:form>
+			</h:form>
+		</div>
 	</ui:define>
 </ui:composition>
 </html>

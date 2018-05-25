@@ -1,5 +1,7 @@
 package ch.hevs.footballmanager;
 
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -143,14 +145,14 @@ public class FootballBean implements Football{
 	public void populate() {
 		// TODO Auto-generated method stub
 		Contract cont1 = new Contract();
-		cont1.setBeginningDate(new Date(2000,01,12));
-		cont1.setEndDate(new Date(2000,12,12));
+		cont1.setBeginningDate(LocalDate.of(2018, 01, 01));
+		cont1.setEndDate(LocalDate.of(2019, 03, 31));
 		cont1.setSalary(100000);
 		em.persist(cont1);
 
 		Contract cont2 = new Contract();
-		cont2.setBeginningDate(new Date(2010,01,01));
-		cont2.setEndDate(new Date(2018,01,12));
+		cont2.setBeginningDate(LocalDate.of(2010, 01, 01));
+		cont2.setEndDate(LocalDate.of(2018, 12, 01));
 		cont2.setSalary(500000);
 		em.persist(cont2);
 

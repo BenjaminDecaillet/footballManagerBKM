@@ -181,4 +181,11 @@ public class Club {
 		}
 		return "player "+player.getFirstname()+" "+player.getLastname()+" has been removed from the club.";
 	}
+	
+	@Override
+	public boolean equals(Object object) {
+		return (object instanceof Club) && (((Long)id) != null) 
+	             ? ((Long)id).equals(((Club) object).id) 
+	             : (object == this);
+	}
 }

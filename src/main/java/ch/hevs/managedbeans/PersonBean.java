@@ -3,6 +3,7 @@ package ch.hevs.managedbeans;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
@@ -13,7 +14,7 @@ import ch.hevs.businessobject.Player;
 import ch.hevs.footballmanager.Football;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class PersonBean {
 	
 	//Interface
@@ -25,8 +26,8 @@ public class PersonBean {
 	private String lastname;
 	private String nationality;
 	private Boolean titular;
-	private Characteristics characteristics;
-	private Contract contract;
+	private Characteristics characteristics = new Characteristics();
+	private Contract contract = new Contract();
 	private Club club;
 	
 	@PostConstruct

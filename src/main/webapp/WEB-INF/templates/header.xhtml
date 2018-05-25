@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html 	xmlns="http://www.w3.org/1999/xhtml"
-		xmlns:h="http://java.sun.com/jsf/html">
-	<body>
-		<header>
-			<nav class="nav-extended">
-				<div class="nav-wrapper">
-					<h:link value="Football Manager" styleClass="brand-logo" outcome="index"/>
-					<ul id="nav-mobile" class="right hide-on-med-and-down">
-						<li><h:link value="Players" outcome="players"/></li>
-						<li><a href="collapsible.html">JavaScript</a></li>
-					</ul>
-				</div>
-				<div class="nav-content">
-					<h:form>
-						<h:commandLink value="" action="#{transferBean.populate}" styleClass="btn-floating btn-large halfway-fab waves-effect waves-light teal" ><i class='material-icons'>add</i></h:commandLink>
-					</h:form>					
-				</div>
-			</nav>
-		</header>
-	</body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<body>
+	<header> 
+		<nav>
+			<div class="nav-wrapper">
+				<h:link value="Football Manager" styleClass="brand-logo"
+					outcome="index" style="padding-left:15px;" />
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><h:link value="Players" outcome="players" /></li>
+					<li><a href="collapsible.html">JavaScript</a></li>
+					<li>
+						<h:form>
+							<h:commandLink value="Populate DB" action="#{transferBean.populate}"/>
+						</h:form>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+</body>
 </html>
