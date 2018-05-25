@@ -69,15 +69,13 @@ public interface Football {
 	void updatePresident(PersonBean updatedPresidentObj);
 	
 	//Remove objects
-	void removePlayer(PersonBean removedPlayerObj);
-	void removeTrainer(PersonBean removedTrainerObj);
-	void removePresident(PersonBean removedPresidentObj);
+	void removePlayer(Player player);
+	void removeTrainer(Trainer trainer);
+	void removePresident(President president);
 
 	//Utilities methods
 	Player setPropertiesForCreationOrUpdatePlayer(PersonBean newOrUpdatedPlayerObj);
 	Trainer setPropertiesForCreationOrUpdateTrainer(PersonBean newOrUpdatedTrainerObj);
 	President setPropertiesForCreationOrUpdatePresident(PersonBean newOrUpdatedPresidentObj);
-
-	void remPlayer(Player player);
 	
 }

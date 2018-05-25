@@ -11,6 +11,8 @@ import ch.hevs.businessobject.Characteristics;
 import ch.hevs.businessobject.Club;
 import ch.hevs.businessobject.Contract;
 import ch.hevs.businessobject.Player;
+import ch.hevs.businessobject.President;
+import ch.hevs.businessobject.Trainer;
 import ch.hevs.footballmanager.Football;
 
 @ManagedBean
@@ -64,18 +66,14 @@ public class PersonBean {
 	}
 	
 	//DELETE
-	public void deletePlayer(PersonBean deletedPlayer){
+	public void deletePlayer(Player deletedPlayer){
 		foot.removePlayer(deletedPlayer);
 	}
-	public void deleteTrainer(PersonBean deletedTrainer){
+	public void deleteTrainer(Trainer deletedTrainer){
 		foot.removeTrainer(deletedTrainer);
 	}
-	public void deletePresident(PersonBean deletedPresident){
+	public void deletePresident(President deletedPresident){
 		foot.removePresident(deletedPresident);
-	}
-	
-	public void delPlayer(Player player){
-		foot.remPlayer(player);
 	}
 	
 	
