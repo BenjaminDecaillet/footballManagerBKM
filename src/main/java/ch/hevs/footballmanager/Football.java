@@ -7,6 +7,7 @@ import ch.hevs.businessobject.Person;
 import ch.hevs.businessobject.Player;
 import ch.hevs.businessobject.President;
 import ch.hevs.businessobject.Trainer;
+import ch.hevs.managedbeans.PlayerBean;
 
 import java.util.List;
 import javax.ejb.Local;
@@ -58,6 +59,6 @@ public interface Football {
 	
 	
 	//Persist new object in DB
-	void newPlayer(Player player);
+	void newPlayer(PlayerBean newPlayerObj);
 
 }
