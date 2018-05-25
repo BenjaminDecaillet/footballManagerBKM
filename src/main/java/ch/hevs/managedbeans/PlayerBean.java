@@ -9,7 +9,6 @@ import javax.naming.NamingException;
 import ch.hevs.footballmanager.Football;
 
 @ManagedBean
-@RequestScoped
 public class PlayerBean {
 	
 	private Football foot;
