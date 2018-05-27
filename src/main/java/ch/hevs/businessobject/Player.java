@@ -22,7 +22,7 @@ public class Player extends Person{
 	private Characteristics characteristics;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Contract contract;
-	@ManyToOne
+	@ManyToOne (cascade={CascadeType.MERGE, CascadeType.PERSIST})
 	private Club club;
 
 	public Player() {
