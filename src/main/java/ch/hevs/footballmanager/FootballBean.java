@@ -245,13 +245,13 @@ public class FootballBean implements Football{
 	@Override
 	public void newPlayer(Player newPlayerObj){
 		// TODO Auto-generated method stub		
-		em.merge(setPropertiesForCreationOrUpdatePlayer(newPlayerObj));
+		em.merge(newPlayerObj);
 	}
 	
 	@Override
 	public void updatePlayer(Player updatedPlayerObj) {
 		// TODO Auto-generated method stub
-		em.merge(setPropertiesForCreationOrUpdatePlayer(updatedPlayerObj));
+		em.merge(updatedPlayerObj);
 	}
 	
 	@Override
