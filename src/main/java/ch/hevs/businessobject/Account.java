@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
 
@@ -21,9 +23,11 @@ public class Account {
 	@Column(name="solde")
 	private long saldo;	
 
-	@ManyToOne
-	@JoinColumn(name = "FK_Owner")
+	@OneToOne(mappedBy="account", cascade=CascadeType.ALL)
 	private Person owner;
+	
+	@OneToOne(mappedBy="accountClub", cascade=CascadeType.ALL)
+	private Club clubAccount;
 	
 
 	/**
@@ -65,7 +69,7 @@ public class Account {
 	 * Sets the account's owner
 	 * @param owner the owner to set
 	 */
-	public void setOwner(Person owner) {
+	public void setOwner(Player owner) {
 		this.owner = owner;
 	}
 	/**
@@ -97,7 +101,17 @@ public class Account {
 		this.saldo = saldo;
 		this.owner = owner;
 	}
+	public Account(long saldo, Club clubAccount) {
+		this.saldo = saldo;
+		this.clubAccount = clubAccount;
+	}
 
+	public Club getClubAccount() {
+		return clubAccount;
+	}
+	public void setClubAccount(Club clubAccount) {
+		this.clubAccount = clubAccount;
+	}
 	@PostPersist
 	public void acknowledgePersist() {
 		System.out.println("account persisted!!!");

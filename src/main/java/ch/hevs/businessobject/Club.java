@@ -32,7 +32,7 @@ public class Club {
 	private League league;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "account_fk", nullable = false)
-	private Account account;
+	private Account accountClub;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Person trainer;
 	@OneToOne(cascade = CascadeType.ALL)
@@ -110,15 +110,15 @@ public class Club {
 	/**
 	 * @return the account
 	 */
-	public Account getAccount() {
-		return account;
+	public Account getAccountClub() {
+		return accountClub;
 	}
 
 	/**
 	 * @param account the account to set
 	 */
-	public void setAccount(Account account) {
-		this.account = account;
+	public void setAccountClub(Account accountClub) {
+		this.accountClub = accountClub;
 	}
 
 	/**

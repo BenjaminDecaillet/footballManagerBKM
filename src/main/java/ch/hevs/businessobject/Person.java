@@ -1,5 +1,6 @@
 package ch.hevs.businessobject;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,7 +26,16 @@ public class Person {
 	private String lastname;
 	@Column(name="nationalité")
 	private String nationality;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="fk_owner",nullable=true)
+	private Account account;
 	
+	public Account getAccount() {
+		return account;
+	}
+	public void setAccount(Account account) {
+		this.account = account;
+	}
 	public Person() {
 	}
 	/**

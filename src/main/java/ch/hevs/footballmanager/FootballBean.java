@@ -181,7 +181,7 @@ public class FootballBean implements Football{
 		club1.setNationality("Swiss");
 		club1.setPresident(p3);
 		club1.setTrainer(p2);
-		club1.setAccount(a3);
+		club1.setAccountClub(a3);
 		club1.setLeague(l1);
 		em.persist(club1);
 		
@@ -196,10 +196,11 @@ public class FootballBean implements Football{
 		p1.setContract(cont1);
 		p1.setCharacteristics(new Characteristics(18, 11, 5));
 		p1.setClub(club1);
+		p1.setAccount(new Account(7777777,p1));
 		em.persist(p1);
 		
 		Account a1 = new Account();
-		a1.setOwner(p3);
+		a1.setClubAccount(club1);
 		a1.setSaldo(15000000);
 		em.persist(a1);
 
