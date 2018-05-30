@@ -48,21 +48,21 @@
 					<h4>Create a player</h4>
 					<div class="row">
 						<div class="input-field col s6">
-							<h:inputText value="#{personBean.firstname}"
+							<h:inputText value="#{player.firstname}"
 								styleClass="validate" id="firstname" a:placeholder="First name" a:required="true"></h:inputText>
 							<label for="firstname" class="active">First Name</label>
 						</div>
 					</div>
 					<div class="row">
 						<div class="input-field col s6">
-							<h:inputText value="#{personBean.lastname}" styleClass="validate"
+							<h:inputText value="#{player.lastname}" styleClass="validate"
 								id="lastname" a:placeholder="Last name" a:required="true"></h:inputText>
 							<label for="lastname" class="active">Last Name</label>
 						</div>
 					</div>
 					<div class="row">
 						<div class="input-field col s6">
-							<h:inputText value="#{personBean.nationality}" styleClass="validate"
+							<h:inputText value="#{player.nationality}" styleClass="validate"
 								id="nationality" a:placeholder="Nationality" a:required="true"></h:inputText>
 							<label for="nationality" class="active">Nationality</label>
 						</div>
@@ -70,7 +70,7 @@
 					<div class="row">
 						<div class="input-field col s6">
 							<label>
-								<h:selectBooleanCheckbox value="#{personBean.titular}"/>
+								<h:selectBooleanCheckbox value="#{player.titular}"/>
 								<span>Titular</span>
 							</label>
 						</div>
@@ -79,7 +79,7 @@
 						<div class="input-field col s6">
 							<!--  https://stackoverflow.com/a/6850681 -->
 							<!--  https://stackoverflow.com/a/9069660 -->
-							<h:selectOneMenu id="clubSelect" value="#{personBean.club}" converter="clubConverter" styleClass="browser-default">
+							<h:selectOneMenu id="clubSelect" value="#{player.club}" converter="clubConverter" styleClass="browser-default">
 								<f:selectItems value="#{footballBean.clubs}" var="club" itemValue="#{club}" itemLabel="#{club.name}"/>
 							</h:selectOneMenu>
 						</div>
@@ -87,21 +87,21 @@
 					<h3>Characteristics</h3>
 					<div class="row">
 						<div class="input-field col s6">
-							<h:inputText value="#{personBean.characteristics.power}" styleClass="validate"
+							<h:inputText value="#{player.characteristics.power}" styleClass="validate"
 								id="power" a:placeholder="Power" a:required="true"></h:inputText>
 							<label for="power" class="active">Power</label>
 						</div>
 					</div>
 					<div class="row">
 						<div class="input-field col s6">
-							<h:inputText value="#{personBean.characteristics.endurance}" styleClass="validate"
+							<h:inputText value="#{player.characteristics.endurance}" styleClass="validate"
 								id="endurance" a:placeholder="Endurance" a:required="true"></h:inputText>
 							<label for="endurance" class="active">Endurance</label>
 						</div>
 					</div>
 					<div class="row">
 						<div class="input-field col s6">
-							<h:inputText value="#{personBean.characteristics.speed}" styleClass="validate"
+							<h:inputText value="#{player.characteristics.speed}" styleClass="validate"
 								id="speed" a:placeholder="Speed" a:required="true"></h:inputText>
 							<label for="speed" class="active">Speed</label>
 						</div>
@@ -109,21 +109,21 @@
 					<h3>Contrat</h3>
 					<div class="row">
 						<div class="input-field col s6">
-							<h:inputText value="#{personBean.contract.beginningDate}" styleClass="datepicker"
+							<h:inputText value="#{player.contract.beginningDate}" styleClass="datepicker"
 								id="beginningDate" a:placeholder="Beginning date" converter="localDateTimeConverter" />
 							<label for="beginningDate" class="active">Beginning date</label>
 						</div>
 					</div>
 					<div class="row">
 						<div class="input-field col s6">
-							<h:inputText value="#{personBean.contract.endDate}" styleClass="datepicker"
+							<h:inputText value="#{player.contract.endDate}" styleClass="datepicker"
 								id="endDate" a:placeholder="End date" converter="localDateTimeConverter" />
 							<label for="endDate" class="active">End date</label>
 						</div>
 					</div>
 					<div class="row">
 						<div class="input-field col s6">
-							<h:inputText value="#{personBean.contract.salary}" styleClass="validate"
+							<h:inputText value="#{player.contract.salary}" styleClass="validate"
 								id="salary" a:placeholder="Salary"></h:inputText>
 							<label for="salary" class="active">Salary</label>
 						</div>
@@ -132,7 +132,7 @@
 				<div class="modal-footer">
 					<a href="#!" class="modal-close waves-effect waves-green btn-flat">Quit</a>
 					<h:commandButton value="Create player"
-						action="#{personBean.createPlayer(personBean)}"
+						action="#{personBean.createPlayer(player)}"
 						styleClass="btn waves-effect waves-light" />
 				</div>
 			</h:form>
