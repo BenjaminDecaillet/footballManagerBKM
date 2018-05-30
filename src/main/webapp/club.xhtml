@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<f:metadata>
+	<f:viewParam name="id" value="#{personBean.id}" required="true" />
+	<f:event listener="#{clubBean.getClub}" type="preRenderView" />
+</f:metadata>
+
+
+<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+	<ui:define name="content">
+		<h:form>
+			<div class="row">
+				<h1>View Club details</h1>
+				<blockquote>
+					#{club.name} - #{club.nationality}
+					<h:outputText value="#{personBean.player.contract.beginningDate}"
+						converter="localDateTimeConverter" />
+					-
+					<h:outputText value="#{personBean.player.contract.endDate}"
+						converter="localDateTimeConverter" />
+					(
+					<h:outputText value="#{personBean.player.contract.salary}" />
+					)
+				</blockquote>
+			</div>
+			<div class="row">
+				<div class="row">
+					<div class="input-field col s6">
+						<h:inputText value="#{clubBean.club.name}"
+							styleClass="validate" id="name" a:placeholder="Name"
+							a:required="true"></h:inputText>
+						<label for="firstname" class="active">Name</label>
+					</div>
+					<div class="input-field col s6">
+						<h:inputText value="#{clubBean.club.nationality}"
+							styleClass="validate" id="nationality" a:placeholder="Nationality"
+							a:required="true"></h:inputText>
+						<label for="lastname" class="active">Nationality</label>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
