@@ -25,7 +25,7 @@ public class PersonBean {
 	
 	//Properties of all types of person (Player, Trainer and President)
 	private long id;
-	private Player player;
+	private Player player = new Player();
 	private String firstname;
 	private String lastname;
 	private String nationality;

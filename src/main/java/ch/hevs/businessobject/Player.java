@@ -26,6 +26,8 @@ public class Player extends Person{
 	private Club club;
 
 	public Player() {
+		contract = new Contract();
+		characteristics = new Characteristics();
 	}
 	/**
 	 * Create a player with the specified value for titular

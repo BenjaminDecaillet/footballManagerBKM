@@ -226,21 +226,6 @@ public class FootballBean implements Football{
 	 * PLAYER's methods
 	 * 
 	 */
-	@Override
-	public Player setPropertiesForCreationOrUpdatePlayer(Player newOrUpdatedPlayerObj){
-		// TODO Auto-generated method stub
-		Player player = new Player();
-		
-		player.setFirstname(newOrUpdatedPlayerObj.getFirstname());
-		player.setLastname(newOrUpdatedPlayerObj.getLastname());
-		player.setNationality(newOrUpdatedPlayerObj.getNationality());
-		player.setTitular(newOrUpdatedPlayerObj.getTitular());
-		player.setCharacteristics(newOrUpdatedPlayerObj.getCharacteristics());
-		player.setContract(newOrUpdatedPlayerObj.getContract());
-		player.setClub(newOrUpdatedPlayerObj.getClub());
-		
-		return player;
-	}
 	
 	@Override
 	public void newPlayer(Player newPlayerObj){
