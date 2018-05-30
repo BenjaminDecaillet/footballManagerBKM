@@ -10,6 +10,7 @@ import javax.naming.NamingException;
 import ch.hevs.businessobject.Characteristics;
 import ch.hevs.businessobject.Club;
 import ch.hevs.businessobject.Contract;
+import ch.hevs.businessobject.Person;
 import ch.hevs.businessobject.Player;
 import ch.hevs.businessobject.President;
 import ch.hevs.businessobject.Trainer;
@@ -24,6 +25,7 @@ public class PersonBean {
 	
 	//Properties of all types of person (Player, Trainer and President)
 	private long id;
+	private Player player;
 	private String firstname;
 	private String lastname;
 	private String nationality;
@@ -39,12 +41,16 @@ public class PersonBean {
 		foot = (Football) ctx.lookup("java:global/FootballManagerBKM-0.0.1-SNAPSHOT/FootballBean!ch.hevs.footballmanager.Football");
 	}
 	
+	public void getPerson(){		
+		this.player = foot.getPlayerById(id);
+	}
+	
 	/*
 	 * CRUD METHODS
 	 */
 	
 	//CREATION
-	public void createPlayer(PersonBean newPlayer){
+	public void createPlayer(Player newPlayer){
 		foot.newPlayer(newPlayer);
 	}
 	public void createTrainer(PersonBean newTrainer){
@@ -55,7 +61,7 @@ public class PersonBean {
 	}
 	
 	//UPDATE
-	public void updatePlayer(PersonBean updatedPlayer){
+	public void updatePlayer(Player updatedPlayer){
 		foot.updatePlayer(updatedPlayer);
 	}
 	public void updateTrainer(PersonBean updatedTrainer){
@@ -131,5 +137,13 @@ public class PersonBean {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 }

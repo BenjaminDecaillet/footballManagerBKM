@@ -227,7 +227,7 @@ public class FootballBean implements Football{
 	 * 
 	 */
 	@Override
-	public Player setPropertiesForCreationOrUpdatePlayer(PersonBean newOrUpdatedPlayerObj){
+	public Player setPropertiesForCreationOrUpdatePlayer(Player newOrUpdatedPlayerObj){
 		// TODO Auto-generated method stub
 		Player player = new Player();
 		
@@ -243,13 +243,13 @@ public class FootballBean implements Football{
 	}
 	
 	@Override
-	public void newPlayer(PersonBean newPlayerObj){
+	public void newPlayer(Player newPlayerObj){
 		// TODO Auto-generated method stub		
 		em.merge(setPropertiesForCreationOrUpdatePlayer(newPlayerObj));
 	}
 	
 	@Override
-	public void updatePlayer(PersonBean updatedPlayerObj) {
+	public void updatePlayer(Player updatedPlayerObj) {
 		// TODO Auto-generated method stub
 		em.merge(setPropertiesForCreationOrUpdatePlayer(updatedPlayerObj));
 	}

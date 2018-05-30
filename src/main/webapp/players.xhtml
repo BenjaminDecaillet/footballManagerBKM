@@ -18,8 +18,10 @@
 				<p>
 					#{player.firstname} #{player.lastname} - #{player.club.name}
 					<h:form>
-						<h:commandLink value="Delete"
-							action="#{personBean.deletePlayer(player)}" />
+						<h:link outcome="player" value="Edit" >
+							<f:param name="id" value="#{player.id}" />
+						</h:link>
+						- <h:commandLink value="Delete" action="#{personBean.deletePlayer(player)}" />							
 					</h:form>
 				</p>
 			</ui:repeat>
@@ -108,18 +110,14 @@
 					<div class="row">
 						<div class="input-field col s6">
 							<h:inputText value="#{personBean.contract.beginningDate}" styleClass="datepicker"
-								id="beginningDate" a:placeholder="Beginning date">
-								<f:convertDateTime pattern="yyyy-MM-dd"/> 
-							</h:inputText>
+								id="beginningDate" a:placeholder="Beginning date" converter="localDateTimeConverter" />
 							<label for="beginningDate" class="active">Beginning date</label>
 						</div>
 					</div>
 					<div class="row">
 						<div class="input-field col s6">
 							<h:inputText value="#{personBean.contract.endDate}" styleClass="datepicker"
-								id="endDate" a:placeholder="End date">
-								<f:convertDateTime pattern="yyyy-MM-dd"/> 	
-							</h:inputText>
+								id="endDate" a:placeholder="End date" converter="localDateTimeConverter" />
 							<label for="endDate" class="active">End date</label>
 						</div>
 					</div>
@@ -129,9 +127,7 @@
 								id="salary" a:placeholder="Salary"></h:inputText>
 							<label for="salary" class="active">Salary</label>
 						</div>
-					</div>
-					
-					
+					</div>					
 				</div>
 				<div class="modal-footer">
 					<a href="#!" class="modal-close waves-effect waves-green btn-flat">Quit</a>

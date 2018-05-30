@@ -59,12 +59,12 @@ public interface Football {
 	
 	
 	//Persist new objects in DB
-	void newPlayer(PersonBean newPlayerObj);
+	void newPlayer(Player newPlayerObj);
 	void newTrainer(PersonBean newTrainerObj);
 	void newPresident(PersonBean newPresidentObj);
 	
 	//Merge updated objects
-	void updatePlayer(PersonBean updatedPlayerObj);
+	void updatePlayer(Player updatedPlayerObj);
 	void updateTrainer(PersonBean updatedTrainerObj);
 	void updatePresident(PersonBean updatedPresidentObj);
 	
@@ -74,7 +74,7 @@ public interface Football {
 	void removePresident(President president);
 
 	//Utilities methods
-	Player setPropertiesForCreationOrUpdatePlayer(PersonBean newOrUpdatedPlayerObj);
+	Player setPropertiesForCreationOrUpdatePlayer(Player newOrUpdatedPlayerObj);
 	Trainer setPropertiesForCreationOrUpdateTrainer(PersonBean newOrUpdatedTrainerObj);
 	President setPropertiesForCreationOrUpdatePresident(PersonBean newOrUpdatedPresidentObj);
 	
