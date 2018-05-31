@@ -1,8 +1,7 @@
 package ch.hevs.businessobject;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -10,7 +9,7 @@ import javax.persistence.Table;
 public class Trainer extends Person{
 
 	//Relations
-	@OneToOne(cascade = CascadeType.ALL)
+	@Embedded
 	private Contract contract;
 	
 	public Trainer(){		

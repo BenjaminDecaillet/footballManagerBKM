@@ -1,22 +1,12 @@
 package ch.hevs.businessobject;
 
 import java.time.LocalDate;
-import java.util.Date;
-
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Embeddable;
 
-@Entity
-@Table(name="Contrat")
+@Embeddable
 public class Contract {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private long id;
 	@Column(name="dateDébut")
 	private LocalDate beginningDate;
 	@Column(name="dateFin")
@@ -38,22 +28,6 @@ public class Contract {
 		this.beginningDate = beginningDate;
 		this.endDate = endDate;
 		this.salary = salary;
-	}
-
-	/**
-	 * Gets the contract's id
-	 * @return long value of the contract's id
-	 */
-	public long getId() {
-		return id;
-	}
-
-	/**
-	 * Sets the contract's id
-	 * @param id long with the id value
-	 */
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	/**

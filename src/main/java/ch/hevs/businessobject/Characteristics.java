@@ -1,23 +1,15 @@
 package ch.hevs.businessobject;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Embeddable;
 
 /**
  * Characteristics class to store the attributes of a player
  * power, speed and endurance with value from 1 to 20 are the attributes of the class
  */
-@Entity
-@Table(name="Caractéristiques")
+@Embeddable
 public class Characteristics {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private long id;
 	@Column(name="force")
 	private int power;
 	@Column(name="vitesse")
@@ -79,20 +71,4 @@ public class Characteristics {
 	public void setEndurance(int endurance) {
 		this.endurance = endurance;
 	}
-	
-	/**
-	 * get the id of the characteristics
-	 */
-	public long getId() {
-		return id;
-	}
-	/**
-	 * set the id of the characteristics
-	 * @param id long with the value of the Id
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
-	
-	
 }

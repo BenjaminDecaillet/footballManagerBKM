@@ -2,10 +2,9 @@ package ch.hevs.businessobject;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -19,9 +18,9 @@ public class Player extends Person{
 	private Boolean titular;
 
 	//Relations
-	@OneToOne(cascade = CascadeType.ALL)
+	@Embedded
 	private Characteristics characteristics;
-	@OneToOne(cascade = CascadeType.ALL)
+	@Embedded
 	private Contract contract;
 	@ManyToOne (cascade={CascadeType.MERGE, CascadeType.PERSIST})
 	private Club club;
