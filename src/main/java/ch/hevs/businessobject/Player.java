@@ -30,6 +30,7 @@ public class Player extends Person{
 	public Player() {
 		contract = new Contract();
 		characteristics = new Characteristics();
+		setAccount(new Account());
 	}
 	/**
 	 * Create a player with the specified value for titular

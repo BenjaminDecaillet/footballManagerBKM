@@ -143,24 +143,11 @@ public class FootballBean implements Football{
 
 	@Override
 	public void populate() {
-		// TODO Auto-generated method stub
-		Contract cont1 = new Contract();
-		cont1.setBeginningDate(LocalDate.of(2018, 01, 01));
-		cont1.setEndDate(LocalDate.of(2019, 03, 31));
-		cont1.setSalary(100000);
-		em.persist(cont1);
-
-		Contract cont2 = new Contract();
-		cont2.setBeginningDate(LocalDate.of(2010, 01, 01));
-		cont2.setEndDate(LocalDate.of(2018, 12, 01));
-		cont2.setSalary(500000);
-		em.persist(cont2);
-
 		Trainer p2 = new Trainer();
 		p2.setFirstname("Kevin");
 		p2.setLastname("Berret");
 		p2.setNationality("Swiss");
-		p2.setContract(cont2);
+		p2.setContract(new Contract(LocalDate.of(2010, 01, 01), LocalDate.of(2018, 12, 01), 500000));
 		em.persist(p2);
 
 		President p3 = new President();
@@ -168,9 +155,6 @@ public class FootballBean implements Football{
 		p3.setLastname("Décaillet");
 		p3.setNationality("Swiss");
 		em.persist(p3);
-
-		Account a3 = new Account();
-		a3.setSaldo(30000000);
 		
 		League l1 = new League();
 		l1.setName("Professional");
@@ -181,7 +165,7 @@ public class FootballBean implements Football{
 		club1.setNationality("Swiss");
 		club1.setPresident(p3);
 		club1.setTrainer(p2);
-		club1.setAccountClub(a3);
+		club1.setAccountClub(new Account(30000000, club1));
 		club1.setLeague(l1);
 		em.persist(club1);
 		
@@ -193,21 +177,11 @@ public class FootballBean implements Football{
 		p1.setLastname("Wigger");
 		p1.setNationality("Swiss");
 		p1.setTitular(true);
-		p1.setContract(cont1);
+		p1.setContract(new Contract(LocalDate.of(2018, 01, 01), LocalDate.of(2019, 03, 31), 100000));
 		p1.setCharacteristics(new Characteristics(18, 11, 5));
 		p1.setClub(club1);
 		p1.setAccount(new Account(7777777,p1));
 		em.persist(p1);
-		
-		Account a1 = new Account();
-		a1.setClubAccount(club1);
-		a1.setSaldo(15000000);
-		em.persist(a1);
-
-		Account a2 = new Account();
-		a2.setOwner(p1);
-		a2.setSaldo(5000000);
-		em.persist(a2);
 	}
 	
 	@Override
@@ -230,7 +204,7 @@ public class FootballBean implements Football{
 	
 	@Override
 	public void newPlayer(Player newPlayerObj){
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub	
 		em.merge(newPlayerObj);
 	}
 	
@@ -245,8 +219,6 @@ public class FootballBean implements Football{
 		// TODO Auto-generated method stub
 		em.remove(em.contains(player) ? player : em.merge(player));
 	}
-	
-	
 	
 	/*
 	 * 
@@ -284,8 +256,6 @@ public class FootballBean implements Football{
 		em.remove(em.contains(trainer) ? trainer : em.merge(trainer));
 	}
 
-	
-	
 	/*
 	 * 
 	 * PRESIDENT's methods

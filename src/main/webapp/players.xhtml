@@ -25,16 +25,9 @@
 					</h:form>
 				</p>
 			</ui:repeat>
-		</div>
-
-		<div class="row">
-			<ui:repeat value="#{footballBean.clubs}" var="club">
-				<p>#{club.name} (#{club.nationality})</p>
-			</ui:repeat>
 		</div>		
 
-		<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-		
+		<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">		
 			<!-- Modal Trigger -->
 			<a
 				class="btn-floating btn-large waves-effect waves-light btn modal-trigger tooltipped"
@@ -106,7 +99,7 @@
 							<label for="speed" class="active">Speed</label>
 						</div>
 					</div>
-					<h3>Contrat</h3>
+					<h3>Contract</h3>
 					<div class="row">
 						<div class="input-field col s6">
 							<h:inputText value="#{personBean.player.contract.beginningDate}" styleClass="datepicker"
@@ -127,7 +120,15 @@
 								id="salary" a:placeholder="Salary"></h:inputText>
 							<label for="salary" class="active">Salary</label>
 						</div>
-					</div>					
+					</div>
+					<h3>Account</h3>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.player.account.saldo}" styleClass="validate"
+								id="saldo" a:placeholder="saldo"></h:inputText>
+							<label for="saldo" class="active">Saldo</label>
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<a href="#!" class="modal-close waves-effect waves-green btn-flat">Quit</a>

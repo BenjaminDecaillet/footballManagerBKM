@@ -7,12 +7,11 @@
 	<header> 
 		<nav>
 			<div class="nav-wrapper">
-				<h:link value="Football Manager" styleClass="brand-logo"
-					outcome="index" style="padding-left:15px;" />
+				<h:outputLink value="index.xhtml" styleClass="brand-logo"
+					style="padding-left:15px;">Football Manager</h:outputLink>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><h:link value="Players" outcome="players" /></li>
-					<li><h:link value="Clubs" outcome="clubs" /></li>
-					<li><a href="collapsible.html">JavaScript</a></li>
+					<li><h:outputLink value="players.xhtml">Players</h:outputLink></li>
+					<li><h:outputLink value="clubs.xhtml" >Clubs</h:outputLink></li>
 					<li>
 						<h:form>
 							<h:commandLink value="Populate DB" action="#{transferBean.populate}"/>

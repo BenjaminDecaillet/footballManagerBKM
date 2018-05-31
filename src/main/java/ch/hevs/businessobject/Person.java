@@ -27,7 +27,7 @@ public class Person {
 	@Column(name="nationalité")
 	private String nationality;
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="fk_owner",nullable=true)
+	@JoinColumn(name="account_id",nullable=true)
 	private Account account;
 	
 	public Account getAccount() {
