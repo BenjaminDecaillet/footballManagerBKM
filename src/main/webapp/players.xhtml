@@ -15,15 +15,19 @@
 		</div>
 		<div class="row">
 			<ui:repeat value="#{footballBean.players}" var="player">
-				<p>
-					#{player.firstname} #{player.lastname} - #{player.club.name}
-					<h:form>
-						<h:link outcome="player" value="Edit" >
-							<f:param name="id" value="#{player.id}" />
-						</h:link>
-						- <h:commandLink value="Delete" action="#{personBean.deletePlayer(player)}" />							
-					</h:form>
-				</p>
+				<div class="row">
+					<div class="col s3">
+						#{player.firstname} #{player.lastname} - #{player.club.name}
+					</div>
+					<div class="col s9">
+						<h:form>
+							<h:link outcome="player" value="Edit" >
+								<f:param name="id" value="#{player.id}" />
+							</h:link>
+							- <h:commandLink value="Delete" action="#{personBean.deletePlayer(player)}" />							
+						</h:form>
+					</div>
+				</div>
 			</ui:repeat>
 		</div>		
 

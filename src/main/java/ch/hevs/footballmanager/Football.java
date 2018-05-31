@@ -50,6 +50,7 @@ public interface Football {
 	
 	//Get spécifique aux trainers
 	Trainer getTrainerById(long id);
+	List<Trainer> getTrainersWithoutJob();
 
 	//Get spécifique aux presidents
 	President getPresidentById(long id);
@@ -57,24 +58,21 @@ public interface Football {
 	//Transfer method
 	void transfer(Account compteSrc, Account compteDest, int montant) throws Exception;
 	
-	
 	//Persist new objects in DB
 	void newPlayer(Player newPlayerObj);
-	void newTrainer(PersonBean newTrainerObj);
+	void newTrainer(Trainer newTrainerObj);
 	void newPresident(PersonBean newPresidentObj);
+	void newClub(Club newClubObj);
 	
 	//Merge updated objects
 	void updatePlayer(Player updatedPlayerObj);
-	void updateTrainer(PersonBean updatedTrainerObj);
+	void updateTrainer(Trainer updatedTrainerObj);
 	void updatePresident(PersonBean updatedPresidentObj);
+	void updateClub(Club updatedClubObj);
 	
 	//Remove objects
 	void removePlayer(Player player);
 	void removeTrainer(Trainer trainer);
 	void removePresident(President president);
-
-	//Utilities methods
-	Trainer setPropertiesForCreationOrUpdateTrainer(PersonBean newOrUpdatedTrainerObj);
-	President setPropertiesForCreationOrUpdatePresident(PersonBean newOrUpdatedPresidentObj);
-	
+	void removeClub(Club club);	
 }

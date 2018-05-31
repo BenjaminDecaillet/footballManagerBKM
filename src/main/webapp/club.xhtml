@@ -9,8 +9,8 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <f:metadata>
-	<f:viewParam name="id" value="#{personBean.id}" required="true" />
-	<f:event listener="#{clubBean.getClub}" type="preRenderView" />
+	<f:viewParam name="id" value="#{clubBean.id}" required="true" />
+	<f:event listener="#{clubBean.getClubFromDb}" type="preRenderView" />
 </f:metadata>
 
 
@@ -18,34 +18,98 @@
 	<ui:define name="content">
 		<h:form>
 			<div class="row">
-				<h1>View Club details</h1>
-				<blockquote>
-					#{club.name} - #{club.nationality}
-					<h:outputText value="#{personBean.player.contract.beginningDate}"
-						converter="localDateTimeConverter" />
-					-
-					<h:outputText value="#{personBean.player.contract.endDate}"
-						converter="localDateTimeConverter" />
-					(
-					<h:outputText value="#{personBean.player.contract.salary}" />
-					)
-				</blockquote>
+				<h1>Edit club details</h1>
 			</div>
 			<div class="row">
 				<div class="row">
 					<div class="input-field col s6">
 						<h:inputText value="#{clubBean.club.name}"
-							styleClass="validate" id="name" a:placeholder="Name"
-							a:required="true"></h:inputText>
-						<label for="firstname" class="active">Name</label>
-					</div>
-					<div class="input-field col s6">
-						<h:inputText value="#{clubBean.club.nationality}"
-							styleClass="validate" id="nationality" a:placeholder="Nationality"
-							a:required="true"></h:inputText>
-						<label for="lastname" class="active">Nationality</label>
+							styleClass="validate" id="clubName" a:placeholder="Name" a:required="true"></h:inputText>
+						<label for="clubName" class="active">Name</label>
 					</div>
 				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<h:inputText value="#{clubBean.club.nationality}" styleClass="validate"
+							id="clubNationality" a:placeholder="Nationality" a:required="true"></h:inputText>
+						<label for="clubNationality" class="active">Nationality</label>
+					</div>
+				</div>					
+				<div class="row">
+					<div class="input-field col s6">
+						<!--  https://stackoverflow.com/a/6850681 -->
+						<!--  https://stackoverflow.com/a/9069660 -->
+						<h:selectOneMenu id="leagueSelect" value="#{clubBean.club.league}" converter="leagueConverter" styleClass="browser-default">
+							<f:selectItems value="#{footballBean.leagues}" var="league" itemValue="#{league}" itemLabel="#{league.name} (#{league.nationality})"/>
+						</h:selectOneMenu>
+					</div>
+				</div>
+				<h3>President</h3>
+				<h4>Personal Informations</h4>
+				<div class="row">
+					<div class="input-field col s6">
+						<h:inputText value="#{clubBean.club.president.firstname}"
+							styleClass="validate" id="presidentFirstname" a:placeholder="First name" a:required="true"></h:inputText>
+						<label for="presidentFirstname" class="active">First Name</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<h:inputText value="#{clubBean.club.president.lastname}" styleClass="validate"
+							id="presidentLastname" a:placeholder="Last name" a:required="true"></h:inputText>
+						<label for="presidentLastname" class="active">Last Name</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<h:inputText value="#{clubBean.club.president.nationality}" styleClass="validate"
+							id="presidentNationality" a:placeholder="Nationality" a:required="true"></h:inputText>
+						<label for="presidentNationality" class="active">Nationality</label>
+					</div>
+				</div>
+				<h3>Trainer</h3>
+				<div class="row">
+					<div class="input-field col s6">
+						<h:selectOneMenu id="trainerSelect" value="#{clubBean.club.trainer}" converter="trainerConverter" styleClass="browser-default">
+							<f:selectItems value="#{footballBean.trainers}" var="trainer" itemValue="#{trainer}" itemLabel="#{trainer.firstname} #{trainer.lastname}"/>
+						</h:selectOneMenu>
+					</div>
+				</div>
+				<h4>Trainer's contract</h4>
+				<div class="row">
+					<div class="input-field col s6">
+						<h:inputText value="#{clubBean.club.trainer.contract.beginningDate}" styleClass="datepicker"
+							id="trainerContractBeginningDate" a:placeholder="Beginning date" converter="localDateTimeConverter" />
+						<label for="trainerContractBeginningDate" class="active">Beginning date</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<h:inputText value="#{clubBean.club.trainer.contract.endDate}" styleClass="datepicker"
+							id="trainerContractEndDate" a:placeholder="End date" converter="localDateTimeConverter" />
+						<label for="trainerContractEndDate" class="active">End date</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<h:inputText value="#{clubBean.club.trainer.contract.salary}" styleClass="validate"
+							id="trainerSalary" a:placeholder="Salary"></h:inputText>
+						<label for="trainerSalary" class="active">Salary</label>
+					</div>
+				</div>
+				<h3>Club's account</h3>
+				<div class="row">
+					<div class="input-field col s6">
+						<h:inputText value="#{clubBean.club.accountClub.saldo}" styleClass="validate"
+							id="clubSaldo" a:placeholder="saldo"></h:inputText>
+						<label for="clubSaldo" class="active">Saldo</label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<h:commandButton value="Update club"
+					action="#{clubBean.updateClub(clubBean.club)}"
+					styleClass="btn waves-effect waves-light" />
 			</div>
 		</h:form>
 	</ui:define>

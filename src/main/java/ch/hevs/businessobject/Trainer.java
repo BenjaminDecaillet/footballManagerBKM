@@ -12,7 +12,9 @@ public class Trainer extends Person{
 	@Embedded
 	private Contract contract;
 	
-	public Trainer(){		
+	public Trainer(){
+		contract = new Contract();
+		setAccount(new Account());
 	}
 
 	/**
@@ -29,5 +31,10 @@ public class Trainer extends Person{
 		this.contract = contract;
 	}
 	
-	
+	@Override
+	public boolean equals(Object object) {
+		return (object instanceof Trainer) && (((Long)id) != null) 
+	             ? ((Long)id).equals(((Trainer) object).id) 
+	             : (object == this);
+	}
 }

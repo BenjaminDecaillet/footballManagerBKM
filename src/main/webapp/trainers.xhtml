@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+	<ui:define name="content">
+		<div class="row">
+			<h1>Trainers</h1>
+		</div>
+		<div class="row">
+			<ui:repeat value="#{footballBean.trainers}" var="trainer">
+				<div class="row">
+					<div class="col s3">
+						#{trainer.firstname} #{trainer.lastname}
+					</div>
+					<div class="col s9">
+						<h:form>
+							<h:link outcome="trainer" value="Edit" >
+								<f:param name="id" value="#{trainer.id}" />
+							</h:link>
+							- <h:commandLink value="Delete" action="#{personBean.deleteTrainer(trainer)}" />							
+						</h:form>
+					</div>
+				</div>
+			</ui:repeat>
+		</div>		
+
+		<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">		
+			<!-- Modal Trigger -->
+			<a
+				class="btn-floating btn-large waves-effect waves-light btn modal-trigger tooltipped"
+				data-position="top" data-tooltip="Create a player"
+				href="#modalTrainerCreate"><i class='material-icons'>add</i></a>
+		</div>
+		<!-- Modal Structure -->
+		<div id="modalTrainerCreate" class="modal modal-fixed-footer">
+			<h:form>
+				<div class="modal-content">
+					<h4>Create a trainer</h4>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.trainer.firstname}"
+								styleClass="validate" id="firstname" a:placeholder="First name" a:required="true"></h:inputText>
+							<label for="firstname" class="active">First Name</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.trainer.lastname}" styleClass="validate"
+								id="lastname" a:placeholder="Last name" a:required="true"></h:inputText>
+							<label for="lastname" class="active">Last Name</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.trainer.nationality}" styleClass="validate"
+								id="nationality" a:placeholder="Nationality" a:required="true"></h:inputText>
+							<label for="nationality" class="active">Nationality</label>
+						</div>
+					</div>					
+					<h3>Account</h3>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.trainer.account.saldo}" styleClass="validate"
+								id="saldo" a:placeholder="saldo"></h:inputText>
+							<label for="saldo" class="active">Saldo</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<a href="#!" class="modal-close waves-effect waves-green btn-flat">Quit</a>
+					<h:commandButton value="Create player"
+						action="#{personBean.createTrainer(personBean.trainer)}"
+						styleClass="btn waves-effect waves-light" />
+				</div>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

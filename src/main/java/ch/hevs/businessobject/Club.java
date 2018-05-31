@@ -43,10 +43,13 @@ public class Club {
 	
 	public Club(){
 		players = new ArrayList<Player>();
+		president = new President();
+		accountClub = new Account();
+		trainer = new Trainer();
 	}
 
 	public Club(String name, String nationality) {
-		players = new ArrayList<Player>();
+		this();
 		this.name = name;
 		this.nationality = nationality;
 	}

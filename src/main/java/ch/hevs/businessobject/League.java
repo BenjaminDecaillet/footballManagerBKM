@@ -106,4 +106,10 @@ public class League {
 		this.clubs.add(club);
 	}
 	
+	@Override
+	public boolean equals(Object object) {
+		return (object instanceof League) && (((Long)id) != null) 
+	             ? ((Long)id).equals(((League) object).id) 
+	             : (object == this);
+	}
 }
