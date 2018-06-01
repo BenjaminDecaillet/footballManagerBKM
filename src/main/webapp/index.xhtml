@@ -5,11 +5,16 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core">
+    
+<f:metadata>
+	<f:viewParam name="id" value="#{loginBean.id}" required="true" />
+	<f:event listener="#{loginBean.getPerson}" type="preRenderView" />
+</f:metadata>
 
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
     <ui:define name="content">
     	<div class="row">
-    		<h1>Welcome to Football Manager</h1>
+    		<h1>Welcome to Football Manager <span id="firstname"><h:outputLabel value="#{loginBean.firstname}" /></span></h1>
     	</div>
     	<div class="row">
     		

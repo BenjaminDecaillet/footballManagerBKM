@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 
@@ -140,6 +141,36 @@ public class FootballBean implements Football{
 		// TODO Auto-generated method stub
 		return (Account) em.createQuery("FROM Account c WHERE c.owner=:player").setParameter("player", player).getSingleResult();
 	}
+	
+	public Person login(String firstname,String lastname) {
+		President pres = null;
+		Trainer train=null;
+		try {
+			pres = (President) em.createQuery("FROM President p WHERE p.firstname=:firstname AND p.lastname=:lastname")
+					.setParameter("firstname", firstname)
+					.setParameter("lastname", lastname)
+					.getSingleResult();	
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+        
+        if(pres!= null)
+        	return (Person) pres;
+        else
+        	try {
+        		train = (Trainer) em.createQuery("FROM Trainer p WHERE p.firstname=:firstname AND p.lastname=:lastname")
+        				.setParameter("firstname", firstname)
+        				.setParameter("lastname", lastname)
+        				.getSingleResult();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+        	
+        if(train!= null)
+        	return train;
+        
+        return null;
+	}	
 
 	@Override
 	public void populate() {
@@ -152,7 +183,7 @@ public class FootballBean implements Football{
 
 		President p3 = new President();
 		p3.setFirstname("Benjamin");
-		p3.setLastname("Décaillet");
+		p3.setLastname("Decaillet");
 		p3.setNationality("Swiss");
 		em.persist(p3);
 		
@@ -196,7 +227,7 @@ public class FootballBean implements Football{
 	}
 	
 	
-	/*
+	/**
 	 * 
 	 * PLAYER's methods
 	 * 
@@ -220,7 +251,7 @@ public class FootballBean implements Football{
 		em.remove(em.contains(player) ? player : em.merge(player));
 	}
 	
-	/*
+	/**
 	 * 
 	 * TRAINER's methods
 	 * 
@@ -256,7 +287,7 @@ public class FootballBean implements Football{
 		em.remove(em.contains(trainer) ? trainer : em.merge(trainer));
 	}
 
-	/*
+	/**
 	 * 
 	 * PRESIDENT's methods
 	 * 
@@ -290,4 +321,6 @@ public class FootballBean implements Football{
 		// TODO Auto-generated method stub
 		em.remove(em.contains(president) ? president : em.merge(president));
 	}
+	
+	
 }

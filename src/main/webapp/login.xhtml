@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+		rel="stylesheet" />
+
+	<!-- Compiled and minified CSS -->
+	<!-- 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css" /> -->
+
+	<!--  style css -->
+	<h:outputStylesheet library="css" name="materialize.css" />
+	<h:outputStylesheet library="css" name="style.css" />
+
+	<title><ui:insert name="title">Football Manager</ui:insert></title>
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!--   -->
+</h:head>
+
+<h:body>
+<div class="container">
+	<h:form id="loginForm">
+		<div class="row">
+			<h1>Login</h1>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<h:inputText value="#{loginBean.firstname}" styleClass="validate"
+					id="firstname" a:placeholder="First name" a:required="true"></h:inputText>
+				<label for="firstname" class="active">First Name</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<h:inputText value="#{loginBean.lastname}" styleClass="validate"
+					id="lastname" a:placeholder="Last name" a:required="true"></h:inputText>
+				<label for="lastname" class="active">Last Name</label>
+			</div>
+		</div>
+		<div class="row">
+			<h:commandButton value="Login"
+				action="#{loginBean.validateLoginCredentials}"
+				styleClass="btn waves-effect waves-light">
+				<f:param name="id" value="#{loginBean.id}" />
+			</h:commandButton>
+		</div>
+		<div class="errorMsg">
+			<h:message for="loginName" />
+		</div>
+	</h:form>
+</div>
+	<!-- Compiled and minified JavaScript -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+
+	<script>
+			document.addEventListener('DOMContentLoaded', function() {
+			    var tooltips = document.querySelectorAll('.tooltipped');
+			    var instancesTooltips = M.Tooltip.init(tooltips, {});
+			    
+			    /*var selects = document.querySelectorAll('select');
+			    var instancesSelects = M.FormSelect.init(selects, {});*/
+			    
+			    var modals = document.querySelectorAll('.modal');
+			    var instancesModals = M.Modal.init(modals, {});
+			    
+			    var datePickers = document.querySelectorAll('.datepicker');
+			    var instancesDatePickers = M.Datepicker.init(datePickers, {'container':'body', 'format':'dd.mm.yyyy'});
+			  });
+		</script>
+</h:body>
+</html>

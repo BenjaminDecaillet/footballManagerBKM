@@ -57,6 +57,8 @@ public interface Football {
 	//Transfer method
 	void transfer(Account compteSrc, Account compteDest, int montant) throws Exception;
 	
+	//Login method
+	Person login(String firstname,String lastname);
 	
 	//Persist new objects in DB
 	void newPlayer(Player newPlayerObj);
