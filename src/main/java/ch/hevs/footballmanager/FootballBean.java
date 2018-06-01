@@ -99,6 +99,12 @@ public class FootballBean implements Football{
 		// TODO Auto-generated method stub
 		return (Trainer) em.createQuery("FROM Trainer e WHERE e.id=:id").setParameter("id", id).getSingleResult();
 	}
+	
+	@Override
+	public List<Trainer> getTrainersWithoutJob() {
+		// TODO Auto-generated method stub
+		return (List<Trainer>) em.createQuery("FROM Trainer e WHERE e.contract.beginningDate IS NULL AND e.contract.endDate IS NULL").getResultList();
+	}
 
 	@Override
 	public President getPresidentById(long id) {
@@ -257,33 +263,19 @@ public class FootballBean implements Football{
 	 * 
 	 */
 	@Override
-	public Trainer setPropertiesForCreationOrUpdateTrainer(PersonBean newOrUpdatedTrainerObj) {
+	public void newTrainer(Trainer newTrainerObj) {
 		// TODO Auto-generated method stub
-		Trainer trainer = new Trainer();
-		
-		trainer.setFirstname(newOrUpdatedTrainerObj.getFirstname());
-		trainer.setLastname(newOrUpdatedTrainerObj.getLastname());
-		trainer.setNationality(newOrUpdatedTrainerObj.getNationality());
-		trainer.setContract(newOrUpdatedTrainerObj.getContract());
-		
-		return trainer;
+		em.persist(newTrainerObj);
 	}
 	
 	@Override
-	public void newTrainer(PersonBean newTrainerObj) {
+	public void updateTrainer(Trainer updatedTrainerObj) {
 		// TODO Auto-generated method stub
-		em.persist(setPropertiesForCreationOrUpdateTrainer(newTrainerObj));
-	}
-	
-	@Override
-	public void updateTrainer(PersonBean updatedTrainerObj) {
-		// TODO Auto-generated method stub
-		em.merge(setPropertiesForCreationOrUpdateTrainer(updatedTrainerObj));
+		em.merge(updatedTrainerObj);
 	}
 	
 	@Override
 	public void removeTrainer(Trainer trainer) {
-		// TODO Auto-generated method stub
 		em.remove(em.contains(trainer) ? trainer : em.merge(trainer));
 	}
 
@@ -292,28 +284,17 @@ public class FootballBean implements Football{
 	 * PRESIDENT's methods
 	 * 
 	 */	
-	@Override
-	public President setPropertiesForCreationOrUpdatePresident(PersonBean newOrUpdatedPresidentObj) {
-		// TODO Auto-generated method stub
-		President president = new President();
-		
-		president.setFirstname(newOrUpdatedPresidentObj.getFirstname());
-		president.setLastname(newOrUpdatedPresidentObj.getLastname());
-		president.setNationality(newOrUpdatedPresidentObj.getNationality());
-		
-		return president;
-	}
 	
 	@Override
 	public void newPresident(PersonBean newPresidentObj) {
 		// TODO Auto-generated method stub
-		em.persist(setPropertiesForCreationOrUpdatePresident(newPresidentObj));	
+		em.persist(newPresidentObj);	
 	}
 
 	@Override
 	public void updatePresident(PersonBean updatedPresidentObj) {
 		// TODO Auto-generated method stub
-		em.merge(setPropertiesForCreationOrUpdatePresident(updatedPresidentObj));
+		em.merge(updatedPresidentObj);
 	}
 
 	@Override
@@ -321,6 +302,25 @@ public class FootballBean implements Football{
 		// TODO Auto-generated method stub
 		em.remove(em.contains(president) ? president : em.merge(president));
 	}
-	
-	
+
+	/*
+	 * 
+	 * Club methods
+	 * 
+	 */
+	@Override
+	public void newClub(Club newClubObj) {
+		em.merge(newClubObj);
+	}
+
+	@Override
+	public void updateClub(Club updatedClubObj) {
+		em.merge(updatedClubObj);
+	}
+
+	@Override
+	public void removeClub(Club club) {
+		em.remove(em.contains(club) ? club : em.merge(club));		
+	}	
 }
+

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<f:metadata>
+	<f:viewParam name="id" value="#{personBean.id}" required="true" />
+	<f:event listener="#{personBean.getTrainerFromDb}" type="preRenderView" />
+</f:metadata>
+
+
+<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+	<ui:define name="content">
+		<h:form>
+			<div class="row">
+				<h1>Edit trainer details</h1>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<h:inputText value="#{personBean.trainer.firstname}"
+						styleClass="validate" id="firstname" a:placeholder="First name" a:required="true"></h:inputText>
+					<label for="firstname" class="active">First Name</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<h:inputText value="#{personBean.trainer.lastname}" styleClass="validate"
+						id="lastname" a:placeholder="Last name" a:required="true"></h:inputText>
+					<label for="lastname" class="active">Last Name</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<h:inputText value="#{personBean.trainer.nationality}" styleClass="validate"
+						id="nationality" a:placeholder="Nationality" a:required="true"></h:inputText>
+					<label for="nationality" class="active">Nationality</label>
+				</div>
+			</div>					
+			<h3>Account</h3>
+			<div class="row">
+				<div class="input-field col s6">
+					<h:inputText value="#{personBean.trainer.account.saldo}" styleClass="validate"
+						id="saldo" a:placeholder="saldo"></h:inputText>
+					<label for="saldo" class="active">Saldo</label>
+				</div>
+			</div>
+			<div class="row">
+				<h:commandButton value="Update Trainer"
+					action="#{personBean.updateTrainer(personBean.trainer)}"
+					styleClass="btn waves-effect waves-light" />
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

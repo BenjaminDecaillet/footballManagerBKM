@@ -23,16 +23,10 @@ public class PersonBean {
 	//Interface
 	private Football foot;
 	
-	//Properties of all types of person (Player, Trainer and President)
+	//Properties of all types of person
 	private long id;
 	private Player player = new Player();
-	private String firstname;
-	private String lastname;
-	private String nationality;
-	private Boolean titular;
-	private Characteristics characteristics = new Characteristics();
-	private Contract contract = new Contract();
-	private Club club;
+	private Trainer trainer = new Trainer();
 	
 	@PostConstruct
 	public void initialize() throws NamingException {
@@ -45,6 +39,10 @@ public class PersonBean {
 		this.player = foot.getPlayerById(id);
 	}
 	
+	public void getTrainerFromDb(){
+		this.trainer = foot.getTrainerById(id);
+	}
+	
 	/*
 	 * CRUD METHODS
 	 */
@@ -53,7 +51,7 @@ public class PersonBean {
 	public void createPlayer(Player newPlayer){
 		foot.newPlayer(newPlayer);
 	}
-	public void createTrainer(PersonBean newTrainer){
+	public void createTrainer(Trainer newTrainer){
 		foot.newTrainer(newTrainer);
 	}
 	public void createPresident(PersonBean newPresident){
@@ -64,7 +62,7 @@ public class PersonBean {
 	public void updatePlayer(Player updatedPlayer){
 		foot.updatePlayer(updatedPlayer);
 	}
-	public void updateTrainer(PersonBean updatedTrainer){
+	public void updateTrainer(Trainer updatedTrainer){
 		foot.updateTrainer(updatedTrainer);
 	}
 	public void updatePresident(PersonBean updatedPresident){
@@ -87,50 +85,7 @@ public class PersonBean {
 	 * 
 	 * GETTERS & SETTERS
 	 * 
-	 */
-	public String getFirstname() {
-		return firstname;
-	}
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-	public String getLastname() {
-		return lastname;
-	}
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-	public String getNationality() {
-		return nationality;
-	}
-	public void setNationality(String nationality) {
-		this.nationality = nationality;
-	}
-	public Boolean getTitular() {
-		return titular;
-	}
-	public void setTitular(Boolean titular) {
-		this.titular = titular;
-	}
-	public Characteristics getCharacteristics() {
-		return characteristics;
-	}
-	public void setCharacteristics(Characteristics characteristics) {
-		this.characteristics = characteristics;
-	}
-	public Contract getContract() {
-		return contract;
-	}
-	public void setContract(Contract contract) {
-		this.contract = contract;
-	}
-	public Club getClub() {
-		return club;
-	}
-	public void setClub(Club club) {
-		this.club = club;
-	}
-
+	 */	
 	public long getId() {
 		return id;
 	}
@@ -146,4 +101,14 @@ public class PersonBean {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
+
+	public Trainer getTrainer() {
+		return trainer;
+	}
+
+	public void setTrainer(Trainer trainer) {
+		this.trainer = trainer;
+	}
+	
+	
 }

@@ -19,7 +19,7 @@ public class Person {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private long id;
+	protected long id;
 	@Column(name="prénom")
 	private String firstname;
 	@Column(name="nom")
