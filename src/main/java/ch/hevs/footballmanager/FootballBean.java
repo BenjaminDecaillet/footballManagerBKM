@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -23,6 +24,7 @@ import ch.hevs.businessobject.Trainer;
 import ch.hevs.managedbeans.PersonBean;
 
 @Stateless
+@RolesAllowed(value = { "president", "trainer" })
 public class FootballBean implements Football{
 	
 	@PersistenceContext(name = "FootPU")
