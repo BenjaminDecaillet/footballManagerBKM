@@ -95,4 +95,10 @@ public class Player extends Person{
 		this.club = club;
 	}
 
+	@Override
+	public boolean equals(Object object) {
+		return (object instanceof Player) && (((Long)id) != null) 
+	             ? ((Long)id).equals(((Player) object).id) 
+	             : (object == this);
+	}
 }

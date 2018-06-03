@@ -8,6 +8,7 @@ import ch.hevs.businessobject.Player;
 import ch.hevs.businessobject.President;
 import ch.hevs.businessobject.Trainer;
 import ch.hevs.managedbeans.PersonBean;
+import exception.TransferException;
 
 import java.util.List;
 import javax.ejb.Local;
@@ -56,7 +57,7 @@ public interface Football {
 	President getPresidentById(long id);
 	
 	//Transfer method
-	void transfer(Account compteSrc, Account compteDest, int montant) throws Exception;
+	void transfer(Player player, Club clubDst, int montant) throws TransferException;
 
 	//Login method
 	Person login(String firstname,String lastname);
