@@ -3,6 +3,9 @@ package ch.hevs.businessobject;
 import javax.persistence.Entity;
 import javax.persistence.PostPersist;
 import javax.persistence.Table;
+
+import exception.TransferException;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -76,8 +79,12 @@ public class Account {
 	 * Debit an account of specified amount
 	 * @param amount int amount to debit
 	 */
-	public void debit(int amount) {
+	public void debit(int amount) throws TransferException {		
 		long newAmount = getSaldo() - amount;
+		
+		if(newAmount < 0)
+			throw new TransferException("not enough money");
+		
 		setSaldo(newAmount);
 	}
 

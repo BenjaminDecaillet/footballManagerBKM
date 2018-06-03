@@ -15,6 +15,7 @@ import ch.hevs.businessobject.Player;
 import ch.hevs.businessobject.President;
 import ch.hevs.businessobject.Trainer;
 import ch.hevs.footballmanager.Football;
+import exception.TransferException;
 
 
 /**
@@ -27,10 +28,16 @@ public class TransferBean {
 	private List<String> playerNames;
 	private Person sourcePerson;
 	private Club sourceClub;
+	
 	private Person destinationPerson;
 	private String transactionResult;
 	private int transactionAmount;
 	private Football foot;
+	
+	private Long clubId;
+	private Long playerId;
+	private Club destinationClub;
+	private Player player;
 
 	@PostConstruct
 	public void initialize() throws NamingException {
@@ -107,26 +114,35 @@ public class TransferBean {
 	/**
 	 * Performs a transfer between two account
 	 * @return String representing the outcome used by the navigation handler to determine what page to display next
+	 * @throws TransferException, Exception 
 	 */
-	public String performTransfer() {
-
-		try {
-			Account compteSrc;
-				if(sourceClub != null)
-					compteSrc = foot.getAccountById(sourceClub.getAccountClub().getId());
-				else
-					compteSrc = foot.getAccountByPlayerId(sourcePerson);
-				
-				Account compteDest = foot.getAccountByPlayerId(destinationPerson);
-
-				// Transfer
-				foot.transfer(compteSrc, compteDest, transactionAmount);
-				this.transactionResult="Success!";
-		} catch (Exception e) {
+	public String performTransfer() throws TransferException, Exception {
+		try {				
+			// Transfer
+			foot.transfer(player, destinationClub, transactionAmount);
+			this.transactionResult="Success!";
+		} catch(TransferException  e){
+			this.transactionResult = "Not enough money";
+		} catch(Exception e){
 			e.printStackTrace();
 		}
 		
-		return "showTransferResult";
+		return "transfer";
 	}
 
+	public Club getDestinationClub() {
+		return destinationClub;
+	}
+
+	public void setDestinationClub(Club destinationClub) {
+		this.destinationClub = destinationClub;
+	}
+	
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
 }

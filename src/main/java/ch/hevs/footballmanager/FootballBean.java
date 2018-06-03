@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
@@ -21,6 +23,7 @@ import ch.hevs.businessobject.Player;
 import ch.hevs.businessobject.President;
 import ch.hevs.businessobject.Trainer;
 import ch.hevs.managedbeans.PersonBean;
+import exception.TransferException;
 
 @Stateless
 public class FootballBean implements Football{
@@ -184,14 +187,27 @@ public class FootballBean implements Football{
 		p2.setFirstname("Kevin");
 		p2.setLastname("Berret");
 		p2.setNationality("Swiss");
-		p2.setContract(new Contract(LocalDate.of(2010, 01, 01), LocalDate.of(2018, 12, 01), 500000));
+		p2.setContract(new Contract(LocalDate.of(2010, 01, 01), LocalDate.of(2018, 12, 01), 550));
 		em.persist(p2);
+		
+		Trainer p5 = new Trainer();
+		p5.setFirstname("Maurizio");
+		p5.setLastname("Jaccobacci");
+		p5.setNationality("Swiss");
+		p5.setContract(new Contract(LocalDate.of(2010, 01, 01), LocalDate.of(2018, 12, 01), 500));
+		em.persist(p5);
 
 		President p3 = new President();
 		p3.setFirstname("Benjamin");
 		p3.setLastname("Decaillet");
 		p3.setNationality("Swiss");
 		em.persist(p3);
+		
+		President p4 = new President();
+		p4.setFirstname("Christian");
+		p4.setLastname("Constantin");
+		p4.setNationality("Swiss");
+		em.persist(p4);
 		
 		League l1 = new League();
 		l1.setName("Professional");
@@ -202,11 +218,21 @@ public class FootballBean implements Football{
 		club1.setNationality("Swiss");
 		club1.setPresident(p3);
 		club1.setTrainer(p2);
-		club1.setAccountClub(new Account(30000000, club1));
+		club1.setAccountClub(new Account(5000, club1));
 		club1.setLeague(l1);
 		em.persist(club1);
 		
+		Club club2 = new Club();
+		club2.setName("FC Sion");
+		club2.setNationality("Swiss");
+		club2.setPresident(p4);
+		club2.setTrainer(p5);
+		club2.setAccountClub(new Account(1000, club2));
+		club2.setLeague(l1);
+		em.persist(club2);
+		
 		l1.addClub(club1);
+		l1.addClub(club2);
 		em.persist(l1);
 
 		Player p1 = new Player();
@@ -217,21 +243,9 @@ public class FootballBean implements Football{
 		p1.setContract(new Contract(LocalDate.of(2018, 01, 01), LocalDate.of(2019, 03, 31), 100000));
 		p1.setCharacteristics(new Characteristics(18, 11, 5));
 		p1.setClub(club1);
-		p1.setAccount(new Account(7777777,p1));
+		p1.setAccount(new Account(10,p1));
 		em.persist(p1);
 	}
-	
-	@Override
-	public void transfer(Account srcAccount, Account destAccount, int amount) {
-		// TODO Auto-generated method stub
-		
-		//Meilleure solution
-		Account srcRealAccount = em.merge(srcAccount);
-		Account destRealAccount = em.merge(destAccount);
-		srcRealAccount.debit(amount);
-		destRealAccount.credit(amount);
-	}
-	
 	
 	/**
 	 * 
@@ -321,6 +335,16 @@ public class FootballBean implements Football{
 	@Override
 	public void removeClub(Club club) {
 		em.remove(em.contains(club) ? club : em.merge(club));		
-	}	
-}
+	}
 
+	@Override
+	@TransactionAttribute(value = TransactionAttributeType.REQUIRED)
+	public void transfer(Player playerSrc, Club clubDst, int montant) throws TransferException {
+		Player player = em.merge(playerSrc);
+		Club dst = em.merge(clubDst);
+		
+		player.getClub().getAccountClub().credit(montant);
+		dst.getAccountClub().debit(montant);
+		player.setClub(dst);
+	}
+}
