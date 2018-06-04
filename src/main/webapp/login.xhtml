@@ -29,14 +29,25 @@
 
 <h:body>
 <div class="container">
-	<h:form id="loginForm">
 		<div class="row">
 			<h1>Login</h1>
 		</div>
+		<!-- <form action="j_security_check" method="POST">
+			<h:outputLabel for="j_username">Username</h:outputLabel>
+			<div class="input-field col s6">
+				<h:inputText id="j_username" />
+			</div>
+			<h:outputLabel for="j_password">Password</h:outputLabel>
+			<div class="input-field col s6">
+				<h:inputSecret id="j_password" />
+			</div>
+		</form> -->
+
+		<!-- 			<h:form id="loginForm">
 		<div class="row">
 			<div class="input-field col s6">
 				<h:inputText value="#{loginBean.firstname}" styleClass="validate"
-					id="firstname" a:placeholder="First name" a:required="true"></h:inputText>
+					id="firstname" a:placeholder="User name" a:required="true"></h:inputText>
 				<label for="firstname" class="active">First Name</label>
 			</div>
 		</div>
@@ -57,7 +68,7 @@
 		<div class="errorMsg">
 			<h:message for="loginName" />
 		</div>
-	</h:form>
+	</h:form> -->
 </div>
 	<!-- Compiled and minified JavaScript -->
 	<script
