@@ -12,38 +12,67 @@
     	<div class="row">
 			<h1>Transfer</h1>
 		</div>
-		<h:messages style = "color:red;margin:8px;" />
-		<h:outputLabel value="Transfer result:"></h:outputLabel><h:outputLabel value=" #{transferBean.transactionResult}"></h:outputLabel>
-		<h:form>		
-			<div class="row">
-				<div class="input-field col s6">
-					<!--  https://stackoverflow.com/a/6850681 -->
-					<!--  https://stackoverflow.com/a/9069660 -->
-					<h:selectOneMenu id="playerSelect" value="#{transferBean.player}" converter="playerConverter" styleClass="browser-default">
-						<f:selectItems value="#{footballBean.players}" var="player" itemValue="#{player}" itemLabel="#{player.firstname} #{player.lastname}"/>
-					</h:selectOneMenu>
+		<h:panelGroup layout="block" styleClass="alert #{transferBean.error ? 'alert-danger' : 'alert-success'}" rendered="#{transferBean.transactionResult != null}">
+			#{transferBean.transactionResult}
+		</h:panelGroup>
+		<h:panelGroup layout="block" rendered="#{transferBean.transactionResult == null}">
+			<h:form>		
+				<div class="row">
+					<div class="input-field col s6">
+						<!--  https://stackoverflow.com/a/6850681 -->
+						<!--  https://stackoverflow.com/a/9069660 -->
+						<h:selectOneMenu id="playerSelect" value="#{transferBean.player}" converter="playerConverter" styleClass="browser-default" a:required="required">
+							<f:selectItem itemLabel="Please select a player." itemValue="#{null}"
+	            				noSelectionOption="true" />
+							<f:selectItems value="#{footballBean.players}" var="player" itemValue="#{player}" itemLabel="#{player.firstname} #{player.lastname}"/>
+							<f:ajax listener="#{transferBean.changeClubs}" render="clubSelect" />
+						</h:selectOneMenu>
+					</div>
+					<div class="input-field col s6">
+						<!--  https://stackoverflow.com/a/6850681 -->
+						<!--  https://stackoverflow.com/a/9069660 -->
+						<h:selectOneMenu id="clubSelect" value="#{transferBean.destinationClub}" converter="clubConverter" styleClass="browser-default" a:required="required">
+							<f:selectItems value="#{transferBean.clubs}" var="club" itemValue="#{club}" itemLabel="#{club.name}"/>
+						</h:selectOneMenu>
+					</div>
 				</div>
-				<div class="input-field col s6">
-					<!--  https://stackoverflow.com/a/6850681 -->
-					<!--  https://stackoverflow.com/a/9069660 -->
-					<h:selectOneMenu id="clubSelect" value="#{transferBean.destinationClub}" converter="clubConverter" styleClass="browser-default">
-						<f:selectItems value="#{footballBean.clubs}" var="club" itemValue="#{club}" itemLabel="#{club.name}"/>
-					</h:selectOneMenu>
+				<div class="row">
+					<div class="input-field col s6">
+						<h:inputText value="#{transferBean.transactionAmount}"
+									id="amount" a:placeholder="Amount" a:required="required" a:pattern="[1-9][0-9]{0,7}" />
+								<label for="amount" class="active">Transaction amount</label>
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s6">
-					<h:inputText value="#{transferBean.transactionAmount}"
-								id="amount" a:placeholder="Amount" />
-							<label for="amount" class="active">Transaction amount</label>
+				<h6>New contract</h6>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{transferBean.newContract.beginningDate}" styleClass="datepicker"
+								id="beginningDate" a:placeholder="Beginning date" converter="localDateTimeConverter" a:required="required" />
+							<label for="beginningDate" class="active">Beginning date</label>
+						</div>
+						<div class="input-field col s6">
+							<h:inputText value="#{transferBean.newContract.endDate}" styleClass="datepicker"
+								id="endDate" a:placeholder="End date" converter="localDateTimeConverter" a:required="required" />
+							<label for="endDate" class="active">End date</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{transferBean.newContract.salary}" styleClass="validate"
+								id="salary" a:placeholder="Salary" a:required="required" a:pattern="[1-9][0-9]{0,7}"></h:inputText>
+							<label for="salary" class="active">Salary</label>
+						</div>
+					</div>
+				<div class="row">
+					<h:commandButton value="Transfer"
+						action="#{transferBean.performTransfer}"
+						styleClass="btn waves-effect waves-light" />
 				</div>
-			</div>
-			<div class="row">
-				<h:commandButton value="Transfer"
-					action="#{transferBean.performTransfer}"
-					styleClass="btn waves-effect waves-light" />
-			</div>
-    	</h:form>
+	    	</h:form>
+    	</h:panelGroup>
+    	<h:panelGroup layout="block" rendered="#{transferBean.transactionResult != null}">
+    		<h:outputLink value="transfer.xhtml" >Perform another transfer</h:outputLink>
+    	</h:panelGroup>
     </ui:define>
 </ui:composition>
 </html>

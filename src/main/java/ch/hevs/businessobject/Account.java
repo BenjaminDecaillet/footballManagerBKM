@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.PostPersist;
 import javax.persistence.Table;
 
-import exception.TransferException;
+import ch.hevs.exception.TransferException;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -83,7 +83,7 @@ public class Account {
 		long newAmount = getSaldo() - amount;
 		
 		if(newAmount < 0)
-			throw new TransferException("not enough money");
+			throw new TransferException("Not enough money to perform this transfer!");
 		
 		setSaldo(newAmount);
 	}

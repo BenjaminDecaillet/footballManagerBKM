@@ -22,8 +22,8 @@ import ch.hevs.businessobject.Person;
 import ch.hevs.businessobject.Player;
 import ch.hevs.businessobject.President;
 import ch.hevs.businessobject.Trainer;
+import ch.hevs.exception.TransferException;
 import ch.hevs.managedbeans.PersonBean;
-import exception.TransferException;
 
 @Stateless
 public class FootballBean implements Football{
@@ -339,12 +339,18 @@ public class FootballBean implements Football{
 
 	@Override
 	@TransactionAttribute(value = TransactionAttributeType.REQUIRED)
-	public void transfer(Player playerSrc, Club clubDst, int montant) throws TransferException {
+	public void transfer(Player playerSrc, Club clubDst, int montant, Contract newContract) throws TransferException {
 		Player player = em.merge(playerSrc);
 		Club dst = em.merge(clubDst);
 		
 		player.getClub().getAccountClub().credit(montant);
 		dst.getAccountClub().debit(montant);
 		player.setClub(dst);
+		player.setContract(newContract);
+	}
+
+	@Override
+	public List<Club> getOtherClubsThanCurent(Player player) {
+		return (List<Club>) em.createQuery("FROM Club cl WHERE cl.id!=:id").setParameter("id", player.getClub().getId()).getResultList();
 	}
 }

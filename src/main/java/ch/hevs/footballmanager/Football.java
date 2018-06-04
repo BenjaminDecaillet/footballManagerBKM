@@ -2,13 +2,14 @@ package ch.hevs.footballmanager;
 
 import ch.hevs.businessobject.Account;
 import ch.hevs.businessobject.Club;
+import ch.hevs.businessobject.Contract;
 import ch.hevs.businessobject.League;
 import ch.hevs.businessobject.Person;
 import ch.hevs.businessobject.Player;
 import ch.hevs.businessobject.President;
 import ch.hevs.businessobject.Trainer;
+import ch.hevs.exception.TransferException;
 import ch.hevs.managedbeans.PersonBean;
-import exception.TransferException;
 
 import java.util.List;
 import javax.ejb.Local;
@@ -40,6 +41,7 @@ public interface Football {
 	Club getClubById(long id);
 	Club getClubByName(String name);
 	List<Player> getTitularPlayersFromClub(Club club);
+	List<Club> getOtherClubsThanCurent(Player player);
 	
 	//Gets spécifiques aux persons
 	List<Person> getPersonsByLastname(String lastname);
@@ -57,7 +59,7 @@ public interface Football {
 	President getPresidentById(long id);
 	
 	//Transfer method
-	void transfer(Player player, Club clubDst, int montant) throws TransferException;
+	void transfer(Player player, Club clubDst, int montant, Contract newContract) throws TransferException;
 
 	//Login method
 	Person login(String firstname,String lastname);
