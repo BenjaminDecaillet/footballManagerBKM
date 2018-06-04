@@ -24,13 +24,13 @@ public class Player extends Person{
 	private Contract contract;
 	@ManyToOne (cascade={CascadeType.MERGE, CascadeType.PERSIST})
 	private Club club;
-
-
+	
 	public Player() {
 		contract = new Contract();
 		characteristics = new Characteristics();
 		setAccount(new Account());
 	}
+	
 	/**
 	 * Create a player with the specified value for titular
 	 * @param titular boolean 
@@ -46,6 +46,7 @@ public class Player extends Person{
 	public Boolean getTitular() {
 		return titular;
 	}
+	
 	/**
 	 * Sets if a player is titular 
 	 * @param titular boolean
@@ -53,6 +54,7 @@ public class Player extends Person{
 	public void setTitular(Boolean titular) {
 		this.titular = titular;
 	}
+	
 	/**
 	 * Gets the characteristics of a player
 	 * @return characteristics Characteristics object representing the Characteristics of a player
@@ -60,6 +62,7 @@ public class Player extends Person{
 	public Characteristics getCharacteristics() {
 		return characteristics;
 	}
+	
 	/**
 	 * Set the characteristics of a player
 	 * @param characteristics Characteristics object representing characteristics of a player
@@ -67,12 +70,14 @@ public class Player extends Person{
 	public void setCharacteristics(Characteristics characteristics) {
 		this.characteristics = characteristics;
 	}
+	
 	/**
 	 * @return the contract
 	 */
 	public Contract getContract() {
 		return contract;
 	}
+	
 	/**
 	 * @param contract the contract to set
 	 */
@@ -87,6 +92,7 @@ public class Player extends Person{
 	public Club getClub() {
 		return club;
 	}
+	
 	/**
 	 * Set the club of a player
 	 * @param club the club object representing the club of a player

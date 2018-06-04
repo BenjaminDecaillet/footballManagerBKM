@@ -108,17 +108,28 @@ public class Account {
 		this.saldo = saldo;
 		this.owner = owner;
 	}
+	
 	public Account(long saldo, Club clubAccount) {
 		this.saldo = saldo;
 		this.clubAccount = clubAccount;
 	}
 
+	/**
+	 * Get the club's account
+	 * @return the club's account
+	 */
 	public Club getClubAccount() {
 		return clubAccount;
 	}
+	
+	/**
+	 * Set the club's account
+	 * @param clubAccount the club's account
+	 */
 	public void setClubAccount(Club clubAccount) {
 		this.clubAccount = clubAccount;
 	}
+	
 	@PostPersist
 	public void acknowledgePersist() {
 		System.out.println("account persisted!!!");

@@ -43,28 +43,60 @@
 			<h:form>
 				<div class="modal-content">
 					<h4>Create a player</h4>
+					<h6>Personal informations</h6>
 					<div class="row">
 						<div class="input-field col s6">
 							<h:inputText value="#{personBean.player.firstname}"
-								styleClass="validate" id="firstname" a:placeholder="First name" a:required="true"></h:inputText>
+								styleClass="validate" id="firstname" a:placeholder="First name" a:required="required"></h:inputText>
 							<label for="firstname" class="active">First Name</label>
 						</div>
 					</div>
 					<div class="row">
 						<div class="input-field col s6">
 							<h:inputText value="#{personBean.player.lastname}" styleClass="validate"
-								id="lastname" a:placeholder="Last name" a:required="true"></h:inputText>
+								id="lastname" a:placeholder="Last name" a:required="required"></h:inputText>
 							<label for="lastname" class="active">Last Name</label>
 						</div>
 					</div>
 					<div class="row">
 						<div class="input-field col s6">
 							<h:inputText value="#{personBean.player.nationality}" styleClass="validate"
-								id="nationality" a:placeholder="Nationality" a:required="true"></h:inputText>
+								id="nationality" a:placeholder="Nationality" a:required="required"></h:inputText>
 							<label for="nationality" class="active">Nationality</label>
+						</div>
+					</div>								
+					<h6>Player's characteristics</h6>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.player.characteristics.power}" styleClass="validate"
+								id="power" a:placeholder="Power" a:required="required"></h:inputText>
+							<label for="power" class="active">Power</label>
 						</div>
 					</div>
 					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.player.characteristics.endurance}" styleClass="validate"
+								id="endurance" a:placeholder="Endurance" a:required="required"></h:inputText>
+							<label for="endurance" class="active">Endurance</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.player.characteristics.speed}" styleClass="validate"
+								id="speed" a:placeholder="Speed" a:required="required"></h:inputText>
+							<label for="speed" class="active">Speed</label>
+						</div>
+					</div>
+					<h6>Player's club</h6>
+					<div class="row">
+						<div class="input-field col s6">
+							<!--  https://stackoverflow.com/a/6850681 -->
+							<!--  https://stackoverflow.com/a/9069660 -->
+							<h:selectOneMenu id="clubSelect" value="#{personBean.player.club}" converter="clubConverter" styleClass="browser-default" a:required="required">
+								<f:selectItem itemLabel="Please select a club" itemValue="#{null}" noSelectionOption="true" />
+								<f:selectItems value="#{footballBean.clubs}" var="club" itemValue="#{club}" itemLabel="#{club.name}"/>
+							</h:selectOneMenu>
+						</div>
 						<div class="input-field col s6">
 							<label>
 								<h:selectBooleanCheckbox value="#{personBean.player.titular}"/>
@@ -72,64 +104,33 @@
 							</label>
 						</div>
 					</div>
-					<div class="row">
-						<div class="input-field col s6">
-							<!--  https://stackoverflow.com/a/6850681 -->
-							<!--  https://stackoverflow.com/a/9069660 -->
-							<h:selectOneMenu id="clubSelect" value="#{personBean.player.club}" converter="clubConverter" styleClass="browser-default">
-								<f:selectItems value="#{footballBean.clubs}" var="club" itemValue="#{club}" itemLabel="#{club.name}"/>
-							</h:selectOneMenu>
-						</div>
-					</div>
-					<h3>Characteristics</h3>
-					<div class="row">
-						<div class="input-field col s6">
-							<h:inputText value="#{personBean.player.characteristics.power}" styleClass="validate"
-								id="power" a:placeholder="Power" a:required="true"></h:inputText>
-							<label for="power" class="active">Power</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s6">
-							<h:inputText value="#{personBean.player.characteristics.endurance}" styleClass="validate"
-								id="endurance" a:placeholder="Endurance" a:required="true"></h:inputText>
-							<label for="endurance" class="active">Endurance</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s6">
-							<h:inputText value="#{personBean.player.characteristics.speed}" styleClass="validate"
-								id="speed" a:placeholder="Speed" a:required="true"></h:inputText>
-							<label for="speed" class="active">Speed</label>
-						</div>
-					</div>
-					<h3>Contract</h3>
+					<h6>Player's contract</h6>
 					<div class="row">
 						<div class="input-field col s6">
 							<h:inputText value="#{personBean.player.contract.beginningDate}" styleClass="datepicker"
-								id="beginningDate" a:placeholder="Beginning date" converter="localDateTimeConverter" />
+								id="beginningDate" a:placeholder="Beginning date" converter="localDateTimeConverter" a:required="required" />
 							<label for="beginningDate" class="active">Beginning date</label>
 						</div>
 					</div>
 					<div class="row">
 						<div class="input-field col s6">
 							<h:inputText value="#{personBean.player.contract.endDate}" styleClass="datepicker"
-								id="endDate" a:placeholder="End date" converter="localDateTimeConverter" />
+								id="endDate" a:placeholder="End date" converter="localDateTimeConverter" a:required="required" />
 							<label for="endDate" class="active">End date</label>
 						</div>
 					</div>
 					<div class="row">
 						<div class="input-field col s6">
 							<h:inputText value="#{personBean.player.contract.salary}" styleClass="validate"
-								id="salary" a:placeholder="Salary"></h:inputText>
+								id="salary" a:placeholder="Salary" a:required="required" a:pattern="[1-9][0-9]{0,7}"></h:inputText>
 							<label for="salary" class="active">Salary</label>
 						</div>
 					</div>
-					<h3>Account</h3>
+					<h6>Player's account</h6>
 					<div class="row">
 						<div class="input-field col s6">
 							<h:inputText value="#{personBean.player.account.saldo}" styleClass="validate"
-								id="saldo" a:placeholder="saldo"></h:inputText>
+								id="saldo" a:placeholder="saldo" a:required="required" a:pattern="[1-9][0-9]{0,7}"></h:inputText>
 							<label for="saldo" class="active">Saldo</label>
 						</div>
 					</div>

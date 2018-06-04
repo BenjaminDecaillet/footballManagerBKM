@@ -78,8 +78,7 @@ public class PersonBean {
 	}
 	public void deletePresident(President deletedPresident){
 		foot.removePresident(deletedPresident);
-	}
-	
+	}	
 	
 	/*
 	 * 
@@ -108,7 +107,5 @@ public class PersonBean {
 
 	public void setTrainer(Trainer trainer) {
 		this.trainer = trainer;
-	}
-	
-	
+	}	
 }

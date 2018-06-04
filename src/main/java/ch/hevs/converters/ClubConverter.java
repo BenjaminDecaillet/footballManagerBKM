@@ -1,4 +1,4 @@
-package ch.hevs.footballmanager;
+package ch.hevs.converters;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -10,10 +10,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import ch.hevs.businessobject.Club;
-import ch.hevs.businessobject.Player;
+import ch.hevs.footballmanager.Football;
 
-@FacesConverter("playerConverter")
-public class PlayerConverter implements Converter {
+@FacesConverter("clubConverter")
+public class ClubConverter implements Converter {
 	
 	
 	private Football foot;	
@@ -28,10 +28,10 @@ public class PlayerConverter implements Converter {
 			// use JNDI to inject reference to bank EJB
 			InitialContext ctx = new InitialContext();
 			foot = (Football) ctx.lookup("java:global/FootballManagerBKM-0.0.1-SNAPSHOT/FootballBean!ch.hevs.footballmanager.Football");
-			Player player= foot.getPlayerById(Long.valueOf(submittedValue)) ; 
-            return player;
+			Club club = foot.getClubById(Long.valueOf(submittedValue)) ; 
+            return club;
         } catch (NumberFormatException | NamingException e) {
-            throw new ConverterException(new FacesMessage(String.format("%s is not a valid Player ID", submittedValue)), e);
+            throw new ConverterException(new FacesMessage(String.format("%s is not a valid Club ID", submittedValue)), e);
         }
 	}
 
@@ -41,10 +41,10 @@ public class PlayerConverter implements Converter {
             return "";
         }
 
-        if (modelValue instanceof Player) {
-            return String.valueOf(((Player) modelValue).getId());
+        if (modelValue instanceof Club) {
+            return String.valueOf(((Club) modelValue).getId());
         } else {
-            throw new ConverterException(new FacesMessage(String.format("%s is not a valid Player", modelValue)));
+            throw new ConverterException(new FacesMessage(String.format("%s is not a valid Club", modelValue)));
         }
 	}
 }

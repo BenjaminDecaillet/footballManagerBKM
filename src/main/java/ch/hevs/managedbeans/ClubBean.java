@@ -1,13 +1,10 @@
 package ch.hevs.managedbeans;
 
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-
 import ch.hevs.businessobject.Club;
 import ch.hevs.footballmanager.Football;
 
@@ -29,10 +26,17 @@ public class ClubBean {
 		foot = (Football) ctx.lookup("java:global/FootballManagerBKM-0.0.1-SNAPSHOT/FootballBean!ch.hevs.footballmanager.Football");
 	}
 	
+	/**
+	 * set's the club in the bean's scope by using its id
+	 */
 	public void getClubFromDb(){
 		this.club = foot.getClubById(id);
 	}
 	
+	/**
+	 * Get the club
+	 * @return the club
+	 */
 	public Club getClub(){		
 		return this.club;
 	}
@@ -49,9 +53,7 @@ public class ClubBean {
 	 */
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	
+	}	
 
 	/**
 	 * @param club the club to set

@@ -1,8 +1,6 @@
 package ch.hevs.managedbeans;
 
-
 import java.util.ArrayList;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.naming.InitialContext;
@@ -19,13 +17,13 @@ import ch.hevs.footballmanager.Football;
  */
 @ManagedBean
 public class TransferBean {
-	private String transactionResult;
 	private int transactionAmount;
+	private boolean error;
+	private String transactionResult;	
 	private Football foot;	
 	private Club destinationClub;
 	private Player player;
-	private Contract newContract;
-	private boolean error;
+	private Contract newContract;	
 	private ArrayList<Club> clubs;
 
 	@PostConstruct
@@ -64,6 +62,9 @@ public class TransferBean {
 		this.transactionAmount = transactionAmount;
 	}
 
+	/**
+	 * Populate the database with initial data
+	 */
 	public void populate(){
 		foot.populate();
 	}
@@ -85,6 +86,9 @@ public class TransferBean {
 		}
 	}
 
+	/*
+	 * GETTERS AND SETTERS
+	 */
 	public Club getDestinationClub() {
 		return destinationClub;
 	}
@@ -125,6 +129,9 @@ public class TransferBean {
 		this.clubs = clubs;
 	}
 
+	/**
+	 * Update the clubs list according to the selected player (i.e. gets all clubs except the player's one
+	 */
 	public void changeClubs(){
 		clubs = (ArrayList<Club>) foot.getOtherClubsThanCurent(player);
 	}

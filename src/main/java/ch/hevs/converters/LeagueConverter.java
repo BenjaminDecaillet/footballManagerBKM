@@ -1,4 +1,4 @@
-package ch.hevs.footballmanager;
+package ch.hevs.converters;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -11,6 +11,7 @@ import javax.naming.NamingException;
 
 import ch.hevs.businessobject.Club;
 import ch.hevs.businessobject.League;
+import ch.hevs.footballmanager.Football;
 
 @FacesConverter("leagueConverter")
 public class LeagueConverter implements Converter {

@@ -3,17 +3,10 @@ package ch.hevs.managedbeans;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-
-import ch.hevs.businessobject.Characteristics;
-import ch.hevs.businessobject.Club;
-import ch.hevs.businessobject.Contract;
 import ch.hevs.businessobject.Player;
-import ch.hevs.businessobject.President;
-import ch.hevs.businessobject.Trainer;
 import ch.hevs.footballmanager.Football;
 
 @ManagedBean

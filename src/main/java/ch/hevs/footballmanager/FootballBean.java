@@ -1,19 +1,13 @@
 package ch.hevs.footballmanager;
 
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
-
 import ch.hevs.businessobject.Account;
 import ch.hevs.businessobject.Characteristics;
 import ch.hevs.businessobject.Club;
@@ -34,122 +28,107 @@ public class FootballBean implements Football{
 	private EntityManager em;
 
 	@Override
-	public League getLeagueById(long id) {
-		// TODO Auto-generated method stub
+	public League getLeagueById(long id) {		
 		return (League) em.createQuery("FROM League l WHERE l.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
-	public League getLeagueByName(String name) {
-		// TODO Auto-generated method stub
+	public League getLeagueByName(String name) {		
 		return (League) em.createQuery("FROM League l WHERE l.name=:name").setParameter("name", name).getSingleResult();
 	}
 
 	@Override
-	public League getLeagueByNationality(String nationality) {
-		// TODO Auto-generated method stub
+	public League getLeagueByNationality(String nationality) {		
 		return (League) em.createQuery("FROM League l WHERE l.nationality=:nationality").setParameter("nationality", nationality).getSingleResult();
 	}
 
 	@Override
-	public Account getAccountById(long id) {
-		// TODO Auto-generated method stub
+	public Account getAccountById(long id) {		
 		return (Account) em.createQuery("FROM Account c WHERE c.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
-	public Club getClubById(long id) {
-		// TODO Auto-generated method stub
+	public Club getClubById(long id) {		
 		return (Club) em.createQuery("FROM Club cl WHERE cl.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
-	public Club getClubByName(String name) {
-		// TODO Auto-generated method stub
+	public Club getClubByName(String name) {		
 		return (Club) em.createQuery("FROM Club cl WHERE cl.name=:name").setParameter("name", name).getSingleResult();
+	}
+	
+	@Override
+	public List<Club> getOtherClubsThanCurent(Player player) {
+		return (List<Club>) em.createQuery("FROM Club cl WHERE cl.id!=:id").setParameter("id", player.getClub().getId()).getResultList();
 	}
 
 	@Override
-	public List<Player> getTitularPlayersFromClub(Club club) {
-		// TODO Auto-generated method stub
+	public List<Player> getTitularPlayersFromClub(Club club) {		
 		return (List<Player>) em.createQuery("SELECT cl.players FROM Club cl WHERE cl.id=:id").setParameter("id", club.getId()).getResultList();
 	}
 
 	@Override
-	public List<Person> getPersonsByLastname(String lastname) {
-		// TODO Auto-generated method stub
+	public List<Person> getPersonsByLastname(String lastname) {		
 		return (List<Person>) em.createQuery("FROM Person p WHERE p.lastname=:lastname").setParameter("lastname", lastname).getResultList();
 	}
 
 	@Override
-	public List<Person> getPersonsByFirstname(String firstname) {
-		// TODO Auto-generated method stub
+	public List<Person> getPersonsByFirstname(String firstname) {		
 		return (List<Person>) em.createQuery("FROM Person p WHERE p.firstname=:firstname").setParameter("firstname", firstname).getResultList();
 	}
 
 	@Override
-	public List<Person> getPersonsByNationality(String nationality) {
-		// TODO Auto-generated method stub
+	public List<Person> getPersonsByNationality(String nationality) {		
 		return (List<Person>) em.createQuery("FROM Person p WHERE p.nationality=:nationality").setParameter("nationality", nationality).getResultList();
 	}
 
 	@Override
-	public Player getPlayerById(long id) {
-		// TODO Auto-generated method stub
+	public Player getPlayerById(long id) {		
 		return (Player) em.createQuery("FROM Player j WHERE j.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
-	public Trainer getTrainerById(long id) {
-		// TODO Auto-generated method stub
+	public Trainer getTrainerById(long id) {		
 		return (Trainer) em.createQuery("FROM Trainer e WHERE e.id=:id").setParameter("id", id).getSingleResult();
 	}
 	
 	@Override
-	public List<Trainer> getTrainersWithoutJob() {
-		// TODO Auto-generated method stub
+	public List<Trainer> getTrainersWithoutJob() {		
 		return (List<Trainer>) em.createQuery("FROM Trainer e WHERE e.contract.beginningDate IS NULL AND e.contract.endDate IS NULL").getResultList();
 	}
 
 	@Override
-	public President getPresidentById(long id) {
-		// TODO Auto-generated method stub
+	public President getPresidentById(long id) {		
 		return (President) em.createQuery("FROM President p WHERE p.id=:id").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
-	public List<Player> getPlayers() {
-		// TODO Auto-generated method stub
+	public List<Player> getPlayers() {		
 		return (List<Player>) em.createQuery("FROM Player").getResultList();
 	}
 
 	@Override
-	public List<Account> getAccounts() {
-		// TODO Auto-generated method stub
+	public List<Account> getAccounts() {		
 		return (List<Account>) em.createQuery("FROM Account").getResultList();
 	}
 
 	@Override
-	public List<Club> getClubs() {
-		// TODO Auto-generated method stub
+	public List<Club> getClubs() {		
 		return (List<Club>) em.createQuery("FROM Club").getResultList();
 	}
 
 	@Override
-	public List<League> getLeagues() {
-		// TODO Auto-generated method stub
+	public List<League> getLeagues() {		
 		return (List<League>) em.createQuery("FROM League").getResultList();
 	}
 
 	@Override
-	public List<Trainer> getTrainers() {
-		// TODO Auto-generated method stub
+	public List<Trainer> getTrainers() {		
 		return (List<Trainer>) em.createQuery("FROM Trainer").getResultList();
 	}
 
 	@Override
-	public Account getAccountByPlayerId(Person player) {
-		// TODO Auto-generated method stub
+	public Account getAccountByPlayerId(Person player) {		
 		return (Account) em.createQuery("FROM Account c WHERE c.owner=:player").setParameter("player", player).getSingleResult();
 	}
 	
@@ -249,6 +228,18 @@ public class FootballBean implements Football{
 		em.persist(p1);
 	}
 	
+	@Override
+	@TransactionAttribute(value = TransactionAttributeType.REQUIRED)
+	public void transfer(Player playerSrc, Club clubDst, int montant, Contract newContract) throws TransferException {
+		Player player = em.merge(playerSrc);
+		Club dst = em.merge(clubDst);
+		
+		player.getClub().getAccountClub().credit(montant);
+		dst.getAccountClub().debit(montant);
+		player.setClub(dst);
+		player.setContract(newContract);
+	}
+	
 	/**
 	 * 
 	 * PLAYER's methods
@@ -256,20 +247,17 @@ public class FootballBean implements Football{
 	 */
 	
 	@Override
-	public void newPlayer(Player newPlayerObj){
-		// TODO Auto-generated method stub	
+	public void newPlayer(Player newPlayerObj){			
 		em.merge(newPlayerObj);
 	}
 	
 	@Override
-	public void updatePlayer(Player updatedPlayerObj) {
-		// TODO Auto-generated method stub
+	public void updatePlayer(Player updatedPlayerObj) {		
 		em.merge(updatedPlayerObj);
 	}
 	
 	@Override
-	public void removePlayer(Player player) {
-		// TODO Auto-generated method stub
+	public void removePlayer(Player player) {		
 		em.remove(em.contains(player) ? player : em.merge(player));
 	}
 	
@@ -279,14 +267,12 @@ public class FootballBean implements Football{
 	 * 
 	 */
 	@Override
-	public void newTrainer(Trainer newTrainerObj) {
-		// TODO Auto-generated method stub
+	public void newTrainer(Trainer newTrainerObj) {		
 		em.persist(newTrainerObj);
 	}
 	
 	@Override
-	public void updateTrainer(Trainer updatedTrainerObj) {
-		// TODO Auto-generated method stub
+	public void updateTrainer(Trainer updatedTrainerObj) {		
 		em.merge(updatedTrainerObj);
 	}
 	
@@ -302,26 +288,23 @@ public class FootballBean implements Football{
 	 */	
 	
 	@Override
-	public void newPresident(PersonBean newPresidentObj) {
-		// TODO Auto-generated method stub
+	public void newPresident(PersonBean newPresidentObj) {		
 		em.persist(newPresidentObj);	
 	}
 
 	@Override
-	public void updatePresident(PersonBean updatedPresidentObj) {
-		// TODO Auto-generated method stub
+	public void updatePresident(PersonBean updatedPresidentObj) {		
 		em.merge(updatedPresidentObj);
 	}
 
 	@Override
-	public void removePresident(President president) {
-		// TODO Auto-generated method stub
+	public void removePresident(President president) {		
 		em.remove(em.contains(president) ? president : em.merge(president));
 	}
 
-	/*
+	/**
 	 * 
-	 * Club methods
+	 * CLUB's methods
 	 * 
 	 */
 	@Override
@@ -337,22 +320,5 @@ public class FootballBean implements Football{
 	@Override
 	public void removeClub(Club club) {
 		em.remove(em.contains(club) ? club : em.merge(club));		
-	}
-
-	@Override
-	@TransactionAttribute(value = TransactionAttributeType.REQUIRED)
-	public void transfer(Player playerSrc, Club clubDst, int montant, Contract newContract) throws TransferException {
-		Player player = em.merge(playerSrc);
-		Club dst = em.merge(clubDst);
-		
-		player.getClub().getAccountClub().credit(montant);
-		dst.getAccountClub().debit(montant);
-		player.setClub(dst);
-		player.setContract(newContract);
-	}
-
-	@Override
-	public List<Club> getOtherClubsThanCurent(Player player) {
-		return (List<Club>) em.createQuery("FROM Club cl WHERE cl.id!=:id").setParameter("id", player.getClub().getId()).getResultList();
-	}
+	}	
 }
