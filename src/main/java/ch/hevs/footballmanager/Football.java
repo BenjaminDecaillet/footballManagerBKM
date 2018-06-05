@@ -61,8 +61,6 @@ public interface Football {
 	//Transfer method
 	void transfer(Player player, Club clubDst, int montant, Contract newContract) throws TransferException;
 
-	//Login method
-	Person login(String firstname,String lastname);
 
 	//Persist new objects in DB
 	void newPlayer(Player newPlayerObj);

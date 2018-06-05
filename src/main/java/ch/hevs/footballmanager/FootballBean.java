@@ -131,36 +131,6 @@ public class FootballBean implements Football{
 	public Account getAccountByPlayerId(Person player) {		
 		return (Account) em.createQuery("FROM Account c WHERE c.owner=:player").setParameter("player", player).getSingleResult();
 	}
-	
-	public Person login(String firstname,String lastname) {
-		President pres = null;
-		Trainer train=null;
-		try {
-			pres = (President) em.createQuery("FROM President p WHERE p.firstname=:firstname AND p.lastname=:lastname")
-					.setParameter("firstname", firstname)
-					.setParameter("lastname", lastname)
-					.getSingleResult();	
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-        
-        if(pres!= null)
-        	return (Person) pres;
-        else
-        	try {
-        		train = (Trainer) em.createQuery("FROM Trainer p WHERE p.firstname=:firstname AND p.lastname=:lastname")
-        				.setParameter("firstname", firstname)
-        				.setParameter("lastname", lastname)
-        				.getSingleResult();
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-        	
-        if(train!= null)
-        	return train;
-        
-        return null;
-	}	
 
 	@Override
 	public void populate() {
@@ -230,6 +200,7 @@ public class FootballBean implements Football{
 	
 	@Override
 	@TransactionAttribute(value = TransactionAttributeType.REQUIRED)
+	@RolesAllowed("trainer")
 	public void transfer(Player playerSrc, Club clubDst, int montant, Contract newContract) throws TransferException {
 		Player player = em.merge(playerSrc);
 		Club dst = em.merge(clubDst);
