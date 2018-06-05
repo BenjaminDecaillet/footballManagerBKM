@@ -27,13 +27,6 @@ public class ClubBean {
 	}
 	
 	/**
-	 * set's the club in the bean's scope by using its id
-	 */
-	public void getClubFromDb(){
-		this.club = foot.getClubById(id);
-	}
-	
-	/**
 	 * Get the club
 	 * @return the club
 	 */

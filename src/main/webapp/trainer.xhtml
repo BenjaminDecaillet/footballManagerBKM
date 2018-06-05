@@ -9,52 +9,56 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <f:metadata>
-	<f:viewParam name="id" value="#{personBean.id}" required="true" />
-	<f:event listener="#{personBean.getTrainerFromDb}" type="preRenderView" />
+	<f:viewParam name="id" value="#{personBean.trainer}" required="true" converter="trainerConverter" converterMessage="Unknown trainer." requiredMessage="Bad request. Please use a link from within the system." />
 </f:metadata>
-
 
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
 	<ui:define name="content">
-		<h:form>
-			<div class="row">
-				<h1>Edit trainer details</h1>
-			</div>
-			<div class="row">
-				<div class="input-field col s6">
-					<h:inputText value="#{personBean.trainer.firstname}"
-						styleClass="validate" id="firstname" a:placeholder="First name" a:required="true"></h:inputText>
-					<label for="firstname" class="active">First Name</label>
+		<h:messages styleClass="alert alert-danger" />
+		<h:panelGroup rendered="#{personBean.trainer != null and personBean.trainer.firstname != null}">
+			<h:form>
+				<div class="row">
+					<h1>Edit trainer details</h1>
 				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s6">
-					<h:inputText value="#{personBean.trainer.lastname}" styleClass="validate"
-						id="lastname" a:placeholder="Last name" a:required="true"></h:inputText>
-					<label for="lastname" class="active">Last Name</label>
+				<div class="row">
+					<div class="input-field col s6">
+						<h:inputText value="#{personBean.trainer.firstname}"
+							styleClass="validate" id="firstname" a:placeholder="First name" a:required="true"></h:inputText>
+						<label for="firstname" class="active">First Name</label>
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s6">
-					<h:inputText value="#{personBean.trainer.nationality}" styleClass="validate"
-						id="nationality" a:placeholder="Nationality" a:required="true"></h:inputText>
-					<label for="nationality" class="active">Nationality</label>
+				<div class="row">
+					<div class="input-field col s6">
+						<h:inputText value="#{personBean.trainer.lastname}" styleClass="validate"
+							id="lastname" a:placeholder="Last name" a:required="true"></h:inputText>
+						<label for="lastname" class="active">Last Name</label>
+					</div>
 				</div>
-			</div>					
-			<h3>Account</h3>
-			<div class="row">
-				<div class="input-field col s6">
-					<h:inputText value="#{personBean.trainer.account.saldo}" styleClass="validate"
-						id="saldo" a:placeholder="saldo"></h:inputText>
-					<label for="saldo" class="active">Saldo</label>
+				<div class="row">
+					<div class="input-field col s6">
+						<h:inputText value="#{personBean.trainer.nationality}" styleClass="validate"
+							id="nationality" a:placeholder="Nationality" a:required="true"></h:inputText>
+						<label for="nationality" class="active">Nationality</label>
+					</div>
+				</div>					
+				<h3>Account</h3>
+				<div class="row">
+					<div class="input-field col s6">
+						<h:inputText value="#{personBean.trainer.account.saldo}" styleClass="validate"
+							id="saldo" a:placeholder="saldo"></h:inputText>
+						<label for="saldo" class="active">Saldo</label>
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<h:commandButton value="Update Trainer"
-					action="#{personBean.updateTrainer(personBean.trainer)}"
-					styleClass="btn waves-effect waves-light" />
-			</div>
-		</h:form>
+				<div class="row">
+					<h:commandButton value="Update Trainer"
+						action="#{personBean.updateTrainer(personBean.trainer)}"
+						styleClass="btn waves-effect waves-light" />
+				</div>
+			</h:form>
+		</h:panelGroup>
+		<h:panelGroup rendered="#{personBean.trainer == null or personBean.trainer.firstname == null}">
+			<h:outputLink value="trainers.xhtml" >Return to trainers list</h:outputLink>
+		</h:panelGroup>
 	</ui:define>
 </ui:composition>
 </html>

@@ -35,14 +35,6 @@ public class PersonBean {
 		foot = (Football) ctx.lookup("java:global/FootballManagerBKM-0.0.1-SNAPSHOT/FootballBean!ch.hevs.footballmanager.Football");
 	}
 	
-	public void getPerson(){		
-		this.player = foot.getPlayerById(id);
-	}
-	
-	public void getTrainerFromDb(){
-		this.trainer = foot.getTrainerById(id);
-	}
-	
 	/*
 	 * CRUD METHODS
 	 */

@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import ch.hevs.businessobject.Account;
 import ch.hevs.businessobject.Characteristics;
@@ -48,8 +49,12 @@ public class FootballBean implements Football{
 	}
 
 	@Override
-	public Club getClubById(long id) {		
-		return (Club) em.createQuery("FROM Club cl WHERE cl.id=:id").setParameter("id", id).getSingleResult();
+	public Club getClubById(long id) {
+		try{
+			return (Club) em.createQuery("FROM Club cl WHERE cl.id=:id").setParameter("id", id).getSingleResult();
+		}catch(NoResultException e) {
+	        return null;
+	    }
 	}
 
 	@Override
@@ -83,13 +88,21 @@ public class FootballBean implements Football{
 	}
 
 	@Override
-	public Player getPlayerById(long id) {		
-		return (Player) em.createQuery("FROM Player j WHERE j.id=:id").setParameter("id", id).getSingleResult();
+	public Player getPlayerById(long id) {
+		try{
+			return (Player) em.createQuery("FROM Player j WHERE j.id=:id").setParameter("id", id).getSingleResult();
+		}catch(NoResultException e) {
+	        return null;
+	    }
 	}
 
 	@Override
 	public Trainer getTrainerById(long id) {		
-		return (Trainer) em.createQuery("FROM Trainer e WHERE e.id=:id").setParameter("id", id).getSingleResult();
+		try{
+			return (Trainer) em.createQuery("FROM Trainer e WHERE e.id=:id").setParameter("id", id).getSingleResult();
+		}catch(NoResultException e) {
+	        return null;
+	    }
 	}
 	
 	@Override

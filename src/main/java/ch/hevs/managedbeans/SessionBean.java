@@ -1,5 +1,6 @@
 package ch.hevs.managedbeans;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
@@ -23,19 +24,16 @@ public class SessionBean implements Serializable{
 	private static final long serialVersionUID = 8000710510234249415L;
 	
 	public SessionBean() {
-		// TODO Auto-generated constructor stub
 	}
 	
     /**
-     * Logs the current user out by invalidating the session.
-     * @return &quot;logout&quot; which is used by the {@literal faces-config.xml}
-     * to redirect back to the {@literal index.xhtml} page.
+     * Logs the current user out by invalidating the session. redirect him to index page
+     * @throws IOException 
      */
-    public String logout() {
+    public void logout() throws IOException {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         externalContext.invalidateSession();
-        
-        return "logout";
+        externalContext.redirect("index.xhtml");
     }
 }

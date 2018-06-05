@@ -9,120 +9,124 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <f:metadata>
-	<f:viewParam name="id" value="#{personBean.id}" required="true" />
-	<f:event listener="#{personBean.getPerson}" type="preRenderView" />
+	<f:viewParam name="id" value="#{personBean.player}" required="true" converter="playerConverter" converterMessage="Unknown player." requiredMessage="Bad request. Please use a link from within the system." />
 </f:metadata>
-
 
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
 	<ui:define name="content">
-		<h:form>
-			<div class="row">
-				<h1>Edit player details</h1>
-			</div>
-			<div class="row">
-				<h6>Personal informations</h6>
+		<h:messages styleClass="alert alert-danger"/>
+		<h:panelGroup rendered="#{personBean.player != null and personBean.player.firstname != null}">
+			<h:form>
 				<div class="row">
-					<div class="input-field col s6">
-						<h:inputText value="#{personBean.player.firstname}"
-							styleClass="validate" id="firstname" a:placeholder="First name"
-							a:required="required"></h:inputText>
-						<label for="firstname" class="active">First Name</label>
+					<h1>Edit player details</h1>
+				</div>
+				<div class="row">
+					<h6>Personal informations</h6>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.player.firstname}"
+								styleClass="validate" id="firstname" a:placeholder="First name"
+								a:required="required"></h:inputText>
+							<label for="firstname" class="active">First Name</label>
+						</div>
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.player.lastname}"
+								styleClass="validate" id="lastname" a:placeholder="Last name"
+								a:required="required"></h:inputText>
+							<label for="lastname" class="active">Last Name</label>
+						</div>
 					</div>
-					<div class="input-field col s6">
-						<h:inputText value="#{personBean.player.lastname}"
-							styleClass="validate" id="lastname" a:placeholder="Last name"
-							a:required="required"></h:inputText>
-						<label for="lastname" class="active">Last Name</label>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.player.nationality}" styleClass="validate"
+								id="nationality" a:placeholder="Nationality" a:required="required"></h:inputText>
+							<label for="nationality" class="active">Nationality</label>
+						</div>
+						<div class="input-field col s6">
+							<label>
+								<h:selectBooleanCheckbox value="#{personBean.player.titular}"/>
+								<span>Titular</span>
+							</label>
+						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="input-field col s6">
-						<h:inputText value="#{personBean.player.nationality}" styleClass="validate"
-							id="nationality" a:placeholder="Nationality" a:required="required"></h:inputText>
-						<label for="nationality" class="active">Nationality</label>
+					<h6>Contract details</h6>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.player.contract.beginningDate}" styleClass="datepicker"
+								id="beginningDate" a:placeholder="Beginning date" converter="localDateTimeConverter" a:required="required" />
+							<label for="beginningDate" class="active">Beginning date</label>
+						</div>
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.player.contract.endDate}" styleClass="datepicker"
+								id="endDate" a:placeholder="End date" converter="localDateTimeConverter" a:required="required" />
+							<label for="endDate" class="active">End date</label>
+						</div>
 					</div>
-					<div class="input-field col s6">
-						<label>
-							<h:selectBooleanCheckbox value="#{personBean.player.titular}"/>
-							<span>Titular</span>
-						</label>
+					<div class="row">
+						<div class="input-field col s6">
+							<!--  https://stackoverflow.com/a/6850681 -->
+							<!--  https://stackoverflow.com/a/9069660 -->
+							<h:selectOneMenu id="clubSelect" value="#{personBean.player.club}" converter="clubConverter" styleClass="browser-default" a:required="required">
+								<f:selectItem itemLabel="Please select a club" itemValue="#{null}" noSelectionOption="true" />
+								<f:selectItems value="#{footballBean.clubs}" var="club" itemValue="#{club}" itemLabel="#{club.name}"/>
+							</h:selectOneMenu>
+						</div>
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.player.contract.salary}" styleClass="validate"
+								id="salary" a:placeholder="Salary" a:required="required" a:pattern="[1-9][0-9]{0,7}"></h:inputText>
+							<label for="salary" class="active">Salary</label>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<h6>Contract details</h6>
 				<div class="row">
-					<div class="input-field col s6">
-						<h:inputText value="#{personBean.player.contract.beginningDate}" styleClass="datepicker"
-							id="beginningDate" a:placeholder="Beginning date" converter="localDateTimeConverter" a:required="required" />
-						<label for="beginningDate" class="active">Beginning date</label>
-					</div>
-					<div class="input-field col s6">
-						<h:inputText value="#{personBean.player.contract.endDate}" styleClass="datepicker"
-							id="endDate" a:placeholder="End date" converter="localDateTimeConverter" a:required="required" />
-						<label for="endDate" class="active">End date</label>
-					</div>
+					<h6>Player's characteristics</h6>
+					<table class="striped">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Power</td>
+								<td>
+									<h:inputText value="#{personBean.player.characteristics.power}"
+										styleClass="validate" id="power" a:placeholder="Power"
+										a:required="required" />
+								</td>
+							</tr>
+							<tr>
+								<td>Speed</td>
+								<td>
+									<h:inputText value="#{personBean.player.characteristics.speed}"
+										styleClass="validate" id="speed" a:placeholder="Speed"
+										a:required="required" />
+								</td>
+							</tr>
+							<tr>
+								<td>Endurance</td>
+								<td>
+									<h:inputText value="#{personBean.player.characteristics.endurance}"
+										styleClass="validate" id="endurance" a:placeholder="Endurance"
+										a:required="required" />
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 				<div class="row">
-					<div class="input-field col s6">
-						<!--  https://stackoverflow.com/a/6850681 -->
-						<!--  https://stackoverflow.com/a/9069660 -->
-						<h:selectOneMenu id="clubSelect" value="#{personBean.player.club}" converter="clubConverter" styleClass="browser-default" a:required="required">
-							<f:selectItem itemLabel="Please select a club" itemValue="#{null}" noSelectionOption="true" />
-							<f:selectItems value="#{footballBean.clubs}" var="club" itemValue="#{club}" itemLabel="#{club.name}"/>
-						</h:selectOneMenu>
-					</div>
-					<div class="input-field col s6">
-						<h:inputText value="#{personBean.player.contract.salary}" styleClass="validate"
-							id="salary" a:placeholder="Salary" a:required="required" a:pattern="[1-9][0-9]{0,7}"></h:inputText>
-						<label for="salary" class="active">Salary</label>
-					</div>
+					<h:commandButton value="Update player"
+						action="#{personBean.updatePlayer(personBean.player)}"
+						styleClass="btn waves-effect waves-light" />
 				</div>
-			</div>
-			<div class="row">
-				<h6>Player's characteristics</h6>
-				<table class="striped">
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th>Value</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Power</td>
-							<td>
-								<h:inputText value="#{personBean.player.characteristics.power}"
-									styleClass="validate" id="power" a:placeholder="Power"
-									a:required="required" />
-							</td>
-						</tr>
-						<tr>
-							<td>Speed</td>
-							<td>
-								<h:inputText value="#{personBean.player.characteristics.speed}"
-									styleClass="validate" id="speed" a:placeholder="Speed"
-									a:required="required" />
-							</td>
-						</tr>
-						<tr>
-							<td>Endurance</td>
-							<td>
-								<h:inputText value="#{personBean.player.characteristics.endurance}"
-									styleClass="validate" id="endurance" a:placeholder="Endurance"
-									a:required="required" />
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="row">
-				<h:commandButton value="Update player"
-					action="#{personBean.updatePlayer(personBean.player)}"
-					styleClass="btn waves-effect waves-light" />
-			</div>
-		</h:form>
+			</h:form>
+		</h:panelGroup>
+		<h:panelGroup rendered="#{personBean.player == null or personBean.player.firstname == null}">
+			<h:outputLink value="players.xhtml" >Return to players list</h:outputLink>
+		</h:panelGroup>
 	</ui:define>
 </ui:composition>
 </html>
