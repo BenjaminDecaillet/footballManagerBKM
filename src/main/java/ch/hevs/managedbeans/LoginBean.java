@@ -1,9 +1,12 @@
 package ch.hevs.managedbeans;
 
+import java.io.IOException;
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -19,6 +22,15 @@ import ch.hevs.footballmanager.Football;
 @ManagedBean
 @ViewScoped
 public class LoginBean {
+	
+	public String logout() throws IOException {
+
+	    FacesContext facesContext = FacesContext.getCurrentInstance();
+	    ExternalContext externalContext = facesContext.getExternalContext();
+	    externalContext.invalidateSession();
+
+	    return "logout";
+	}
 	
 	//Interface
 	private Football foot;

@@ -5,8 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
 	<!--Import Google Icon Font-->
@@ -39,7 +38,7 @@
 			</blockquote>
 		</div>
 		<div class="row">
-			<h:link outcome="login" value="Go back to login page" ></h:link>
+			<h:outputLink value="index.xhtml" >Go back to login page</h:outputLink>
 		</div>
 	</h:form>
 </div>

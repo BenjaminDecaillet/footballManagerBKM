@@ -46,7 +46,6 @@
 		<display-name>login.xhtml</display-name>
 		<from-view-id>/login.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>#{loginBean.validateLoginCredentials}</from-outcome>
 			<to-view-id>/index.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
@@ -64,5 +63,12 @@
 			<to-view-id>/transfer.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-
+	<navigation-rule>
+	    <from-view-id>/*</from-view-id>
+	    <navigation-case>
+	        <from-outcome>logout</from-outcome>
+	        <to-view-id>/index.xhtml</to-view-id>
+	        <redirect/>
+	    </navigation-case>
+	</navigation-rule>
 </faces-config>

@@ -29,10 +29,10 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>/faces/*</url-pattern>
+    <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
-    <welcome-file>index.xhtml</welcome-file>
+    <welcome-file>login.xhtml</welcome-file>
   </welcome-file-list>
   <env-entry>
     <env-entry-name>jsf/ClientSideSecretKey</env-entry-name>
@@ -42,10 +42,19 @@
   <display-name>FootballManager-BKM</display-name>
 
 	<security-constraint>
+	    <web-resource-collection>
+      		<web-resource-name>Public Resources</web-resource-name>
+    		<url-pattern>/javax.faces.resource/*</url-pattern>
+     		<url-pattern>/resources/*</url-pattern>
+    	</web-resource-collection>		
+	</security-constraint>
+	
+	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>Secure Content</web-resource-name>
 			<url-pattern>/*</url-pattern>
 		</web-resource-collection>
+		
 		<auth-constraint>
 			<role-name>trainer</role-name>
 			<role-name>player</role-name>
@@ -53,7 +62,7 @@
 		</auth-constraint>
 	</security-constraint>
 	
-<!-- 	<login-config>
+ 	<login-config>
 	    <auth-method>FORM</auth-method>
 	    <realm-name>file</realm-name>
 	    <form-login-config>
@@ -61,11 +70,11 @@
 	        <form-error-page>/error.xhtml</form-error-page>
 	    </form-login-config>
 	</login-config>
- -->
-	<login-config>
+ 
+	<!-- <login-config>
 		<auth-method>BASIC</auth-method>
 		<realm-name>Restricted Access!</realm-name>
-	</login-config>
+	</login-config>-->
 	
 	<security-role>
 		<description>trainer</description>
