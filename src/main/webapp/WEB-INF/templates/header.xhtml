@@ -12,10 +12,10 @@
 					<li><h:outputLink value="players.xhtml">Players</h:outputLink></li>
 					<li><h:outputLink value="trainers.xhtml">Trainers</h:outputLink></li>
 					<li><h:outputLink value="clubs.xhtml">Clubs</h:outputLink></li>
-					<li><h:outputLink value="transfer.xhtml" >Transfers</h:outputLink></li>
+					<li><h:outputLink value="transfer.xhtml" rendered="#{request.isUserInRole('trainer')}">Transfers</h:outputLink></li>
 					<li>
 						<h:form>
-							<h:commandLink value="Populate DB" action="#{transferBean.populate}"/>
+							<h:commandLink value="Populate DB" action="#{transferBean.populate}" rendered="#{request.isUserInRole('trainer') || request.isUserInRole('president')}"/>
 						</h:form>
 					</li>
 					<li>
