@@ -185,6 +185,7 @@ public class FootballBean implements Football{
 		club1.setAccountClub(new Account(5000, club1));
 		club1.setLeague(l1);
 		em.persist(club1);
+
 		
 		Club club2 = new Club();
 		club2.setName("FC Sion");

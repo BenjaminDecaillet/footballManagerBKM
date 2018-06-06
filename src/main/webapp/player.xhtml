@@ -66,14 +66,6 @@
 					</div>
 					<div class="row">
 						<div class="input-field col s6">
-							<!--  https://stackoverflow.com/a/6850681 -->
-							<!--  https://stackoverflow.com/a/9069660 -->
-							<h:selectOneMenu id="clubSelect" value="#{personBean.player.club}" converter="clubConverter" styleClass="browser-default" a:required="required">
-								<f:selectItem itemLabel="Please select a club" itemValue="#{null}" noSelectionOption="true" />
-								<f:selectItems value="#{footballBean.clubs}" var="club" itemValue="#{club}" itemLabel="#{club.name}"/>
-							</h:selectOneMenu>
-						</div>
-						<div class="input-field col s6">
 							<h:inputText value="#{personBean.player.contract.salary}" styleClass="validate"
 								id="salary" a:placeholder="Salary" a:required="required" a:pattern="[1-9][0-9]{0,7}"></h:inputText>
 							<label for="salary" class="active">Salary</label>
