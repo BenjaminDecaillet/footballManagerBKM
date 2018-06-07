@@ -40,7 +40,36 @@
 							id="nationality" a:placeholder="Nationality" a:required="true"></h:inputText>
 						<label for="nationality" class="active">Nationality</label>
 					</div>
-				</div>					
+				</div>
+				<div class="row">
+					<h6>Contract details</h6>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.trainer.contract.beginningDate}" styleClass="datepicker"
+								id="beginningDate" a:placeholder="Beginning date" converter="localDateTimeConverter" a:required="required" />
+							<label for="beginningDate" class="active">Beginning date</label>
+						</div>
+						<div class="input-field col s6">
+							<h:inputText value="#{personBean.trainer.contract.endDate}" styleClass="datepicker"
+								id="endDate" a:placeholder="End date" converter="localDateTimeConverter" a:required="required" />
+							<label for="endDate" class="active">End date</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<h:outputText value="#{personBean.trainer.contract.salary}" styleClass="validate"
+								id="salary" a:placeholder="Salary" a:required="required" a:pattern="[1-9][0-9]{0,7}"></h:outputText>
+							<label for="salary" class="active">Salary</label>
+						</div>
+					</div>
+				</div>
+					<h3>Club</h3>
+					<div class="row">
+							<div class="input-field col s6">
+								<h:outputText value="#{personBean.trainer.club.name}"
+								id="clubTrainer" a:placeholder="club"></h:outputText>
+							</div>
+						</div>						
 				<h3>Account</h3>
 				<div class="row">
 					<div class="input-field col s6">

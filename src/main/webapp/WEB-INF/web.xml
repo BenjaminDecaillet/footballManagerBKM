@@ -97,4 +97,8 @@
 		<description>player</description>
 		<role-name>player</role-name>
 	</security-role>
+	<error-page>
+		<exception-type>javax.ejb.EJBAccessException</exception-type>
+		<location>/exception.xhtml</location>
+	</error-page>
 </web-app>

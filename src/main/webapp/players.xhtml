@@ -19,6 +19,7 @@
 					<div class="col s3">
 						#{player.firstname} #{player.lastname} - #{player.club.name}
 					</div>
+					<h:panelGroup rendered="#{request.isUserInRole('trainer') || request.isUserInRole('president')}">
 					<div class="col s9">
 						<h:form>
 							<h:link outcome="player" value="Edit" >
@@ -27,10 +28,11 @@
 							- <h:commandLink value="Delete" action="#{personBean.deletePlayer(player)}" />							
 						</h:form>
 					</div>
+					</h:panelGroup>
 				</div>
 			</ui:repeat>
 		</div>		
-
+<h:panelGroup rendered="#{request.isUserInRole('trainer') || request.isUserInRole('president')}">
 		<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">		
 			<!-- Modal Trigger -->
 			<a
@@ -143,6 +145,7 @@
 				</div>
 			</h:form>
 		</div>
+		</h:panelGroup>
 	</ui:define>
 </ui:composition>
 </html>

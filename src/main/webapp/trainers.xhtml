@@ -17,70 +17,105 @@
 			<ui:repeat value="#{footballBean.trainers}" var="trainer">
 				<div class="row">
 					<div class="col s3">
-						#{trainer.firstname} #{trainer.lastname}
+						#{trainer.firstname} #{trainer.lastname} - #{trainer.club.name} (#{trainer.club.nationality})
 					</div>
-					<div class="col s9">
-						<h:form>
-							<h:link outcome="trainer" value="Edit" >
-								<f:param name="id" value="#{trainer.id}" />
-							</h:link>
-							- <h:commandLink value="Delete" action="#{personBean.deleteTrainer(trainer)}" />							
-						</h:form>
-					</div>
+					<h:panelGroup rendered="#{request.isUserInRole('trainer') || request.isUserInRole('president')}">
+						<div class="col s9">
+							<h:form>
+								<h:link outcome="trainer" value="Edit" >
+									<f:param name="id" value="#{trainer.id}" />
+								</h:link>
+								- <h:commandLink value="Delete" action="#{personBean.deleteTrainer(trainer)}" />							
+							</h:form>
+						</div>
+					</h:panelGroup>
 				</div>
 			</ui:repeat>
 		</div>		
 
-		<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">		
-			<!-- Modal Trigger -->
-			<a
-				class="btn-floating btn-large waves-effect waves-light btn modal-trigger tooltipped"
-				data-position="top" data-tooltip="Create a trainer"
-				href="#modalTrainerCreate"><i class='material-icons'>add</i></a>
-		</div>
-		<!-- Modal Structure -->
-		<div id="modalTrainerCreate" class="modal modal-fixed-footer">
-			<h:form>
-				<div class="modal-content">
-					<h4>Create a trainer</h4>
-					<div class="row">
+		<h:panelGroup rendered="#{request.isUserInRole('trainer') || request.isUserInRole('president')}">
+			<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">		
+				<!-- Modal Trigger -->
+				<a
+					class="btn-floating btn-large waves-effect waves-light btn modal-trigger tooltipped"
+					data-position="top" data-tooltip="Create a trainer"
+					href="#modalTrainerCreate"><i class='material-icons'>add</i></a>
+			</div>
+			<!-- Modal Structure -->
+			<div id="modalTrainerCreate" class="modal modal-fixed-footer">
+				<h:form>
+					<div class="modal-content">
+						<h4>Create a trainer</h4>
+						<div class="row">
+							<div class="input-field col s6">
+								<h:inputText value="#{personBean.trainer.firstname}"
+									styleClass="validate" id="firstname" a:placeholder="First name" a:required="true"></h:inputText>
+								<label for="firstname" class="active">First Name</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<h:inputText value="#{personBean.trainer.lastname}" styleClass="validate"
+									id="lastname" a:placeholder="Last name" a:required="true"></h:inputText>
+								<label for="lastname" class="active">Last Name</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<h:inputText value="#{personBean.trainer.nationality}" styleClass="validate"
+									id="nationality" a:placeholder="Nationality" a:required="true"></h:inputText>
+								<label for="nationality" class="active">Nationality</label>
+							</div>
+						</div>
+						<h3>Trainer's contract</h3>
+						<div class="row">
+							<div class="input-field col s6">
+								<h:inputText value="#{personBean.trainer.contract.beginningDate}" styleClass="datepicker"
+									id="trainerContractBeginningDate" a:placeholder="Beginning date" converter="localDateTimeConverter" />
+								<label for="trainerContractBeginningDate" class="active">Beginning date</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<h:inputText value="#{personBean.trainer.contract.endDate}" styleClass="datepicker"
+									id="trainerContractEndDate" a:placeholder="End date" converter="localDateTimeConverter" />
+								<label for="trainerContractEndDate" class="active">End date</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<h:inputText value="#{personBean.trainer.contract.salary}" styleClass="validate"
+									id="trainerSalary" a:placeholder="Salary"></h:inputText>
+								<label for="trainerSalary" class="active">Salary</label>
+							</div>
+						</div>
+						<h3>Club</h3>
 						<div class="input-field col s6">
-							<h:inputText value="#{personBean.trainer.firstname}"
-								styleClass="validate" id="firstname" a:placeholder="First name" a:required="true"></h:inputText>
-							<label for="firstname" class="active">First Name</label>
+								<!--  https://stackoverflow.com/a/6850681 -->
+								<!--  https://stackoverflow.com/a/9069660 -->
+								<h:selectOneMenu id="clubSelect" value="#{personBean.trainer.club}" converter="clubConverter" styleClass="browser-default">
+									<f:selectItem itemLabel="Please select a club" itemValue="#{null}" noSelectionOption="true" />
+									<f:selectItems value="#{footballBean.clubsWithoutTrainer}" var="club" itemValue="#{club}" itemLabel="#{club.name}"/>
+								</h:selectOneMenu>
+							</div>								
+						<h3>Account</h3>
+						<div class="row">
+							<div class="input-field col s6">
+								<h:inputText value="#{personBean.trainer.account.saldo}" styleClass="validate"
+									id="saldo" a:placeholder="saldo"></h:inputText>
+								<label for="saldo" class="active">Saldo</label>
+							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="input-field col s6">
-							<h:inputText value="#{personBean.trainer.lastname}" styleClass="validate"
-								id="lastname" a:placeholder="Last name" a:required="true"></h:inputText>
-							<label for="lastname" class="active">Last Name</label>
-						</div>
+					<div class="modal-footer">
+						<a href="#!" class="modal-close waves-effect waves-green btn-flat">Quit</a>
+						<h:commandButton value="Create trainer"
+							action="#{personBean.createTrainer(personBean.trainer)}"
+							styleClass="btn waves-effect waves-light" />
 					</div>
-					<div class="row">
-						<div class="input-field col s6">
-							<h:inputText value="#{personBean.trainer.nationality}" styleClass="validate"
-								id="nationality" a:placeholder="Nationality" a:required="true"></h:inputText>
-							<label for="nationality" class="active">Nationality</label>
-						</div>
-					</div>					
-					<h3>Account</h3>
-					<div class="row">
-						<div class="input-field col s6">
-							<h:inputText value="#{personBean.trainer.account.saldo}" styleClass="validate"
-								id="saldo" a:placeholder="saldo"></h:inputText>
-							<label for="saldo" class="active">Saldo</label>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<a href="#!" class="modal-close waves-effect waves-green btn-flat">Quit</a>
-					<h:commandButton value="Create trainer"
-						action="#{personBean.createTrainer(personBean.trainer)}"
-						styleClass="btn waves-effect waves-light" />
-				</div>
-			</h:form>
-		</div>
+				</h:form>
+			</div>
+		</h:panelGroup>
 	</ui:define>
 </ui:composition>
 </html>

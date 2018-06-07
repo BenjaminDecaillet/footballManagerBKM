@@ -1,6 +1,7 @@
 package ch.hevs.businessobject;
 
 import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 

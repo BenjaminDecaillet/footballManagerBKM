@@ -34,10 +34,10 @@ public class Club {
 	@JoinColumn(name = "account_fk", nullable = false)
 	private Account accountClub;
 	@OneToOne(cascade = CascadeType.ALL)
-	private Person trainer;
+	private Trainer trainer;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "president_fk", nullable = false)
-	private Person president;
+	private President president;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="club")
 	private List<Player> players;
 	
@@ -127,28 +127,28 @@ public class Club {
 	/**
 	 * @return the trainer
 	 */
-	public Person getTrainer() {
+	public Trainer getTrainer() {
 		return trainer;
 	}
 
 	/**
 	 * @param trainer the trainer to set
 	 */
-	public void setTrainer(Person trainer) {
+	public void setTrainer(Trainer trainer) {
 		this.trainer = trainer;
 	}
 
 	/**
 	 * @return the president
 	 */
-	public Person getPresident() {
+	public President getPresident() {
 		return president;
 	}
 
 	/**
 	 * @param president the president to set
 	 */
-	public void setPresident(Person president) {
+	public void setPresident(President president) {
 		this.president = president;
 	}
 

@@ -109,6 +109,12 @@ public class FootballBean implements Football{
 	public List<Trainer> getTrainersWithoutJob() {		
 		return (List<Trainer>) em.createQuery("FROM Trainer e WHERE e.contract.beginningDate IS NULL AND e.contract.endDate IS NULL").getResultList();
 	}
+	
+	@Override
+	public List<Club> getClubsWithoutTrainer() {
+		// TODO Auto-generated method stub
+		return (List<Club>) em.createQuery("FROM Club cl WHERE cl.trainer.id IS NULL").getResultList();
+	}	
 
 	@Override
 	public President getPresidentById(long id) {		
@@ -147,20 +153,6 @@ public class FootballBean implements Football{
 
 	@Override
 	public void populate() {
-		Trainer p2 = new Trainer();
-		p2.setFirstname("Kevin");
-		p2.setLastname("Berret");
-		p2.setNationality("Swiss");
-		p2.setContract(new Contract(LocalDate.of(2010, 01, 01), LocalDate.of(2018, 12, 01), 550));
-		em.persist(p2);
-		
-		Trainer p5 = new Trainer();
-		p5.setFirstname("Maurizio");
-		p5.setLastname("Jaccobacci");
-		p5.setNationality("Swiss");
-		p5.setContract(new Contract(LocalDate.of(2010, 01, 01), LocalDate.of(2018, 12, 01), 500));
-		em.persist(p5);
-
 		President p3 = new President();
 		p3.setFirstname("Benjamin");
 		p3.setLastname("Decaillet");
@@ -177,15 +169,29 @@ public class FootballBean implements Football{
 		l1.setName("Professional");
 		l1.setNationality("Swiss");
 		
+		Trainer p2 = new Trainer();
+		p2.setFirstname("Kevin");
+		p2.setLastname("Berret");
+		p2.setNationality("Swiss");
+		p2.setContract(new Contract(LocalDate.of(2010, 01, 01), LocalDate.of(2018, 12, 01), 550));
+		p2.setAccount(new Account(500, p2));		
+		
 		Club club1 = new Club();
 		club1.setName("FC Bâle");
 		club1.setNationality("Swiss");
 		club1.setPresident(p3);
-		club1.setTrainer(p2);
 		club1.setAccountClub(new Account(5000, club1));
-		club1.setLeague(l1);
+		club1.setLeague(l1);		
+		club1.setTrainer(p2);
+		p2.setClub(club1);
 		em.persist(club1);
-
+		
+		Trainer p5 = new Trainer();
+		p5.setFirstname("Maurizio");
+		p5.setLastname("Jaccobacci");
+		p5.setNationality("Swiss");
+		p5.setContract(new Contract(LocalDate.of(2010, 01, 01), LocalDate.of(2018, 12, 01), 500));
+		p5.setAccount(new Account(600, p5));
 		
 		Club club2 = new Club();
 		club2.setName("FC Sion");
@@ -194,7 +200,9 @@ public class FootballBean implements Football{
 		club2.setTrainer(p5);
 		club2.setAccountClub(new Account(1000, club2));
 		club2.setLeague(l1);
+		p5.setClub(club2);
 		em.persist(club2);
+		
 		
 		l1.addClub(club1);
 		l1.addClub(club2);
@@ -209,7 +217,7 @@ public class FootballBean implements Football{
 		p1.setCharacteristics(new Characteristics(18, 11, 5));
 		p1.setClub(club1);
 		p1.setAccount(new Account(10,p1));
-		em.persist(p1);
+		em.persist(p1);		
 	}
 	
 	@Override
@@ -252,12 +260,19 @@ public class FootballBean implements Football{
 	 * 
 	 */
 	@Override
-	public void newTrainer(Trainer newTrainerObj) {		
-		em.persist(newTrainerObj);
+	public void newTrainer(Trainer newTrainerObj) {	
+		if(newTrainerObj.getClub() == null){
+			newTrainerObj.getContract().setBeginningDate(null);
+			newTrainerObj.getContract().setEndDate(null);
+		}
+		else
+			newTrainerObj.getClub().setTrainer(newTrainerObj);
+			
+		em.merge(newTrainerObj);
 	}
 	
 	@Override
-	public void updateTrainer(Trainer updatedTrainerObj) {		
+	public void updateTrainer(Trainer updatedTrainerObj) {	
 		em.merge(updatedTrainerObj);
 	}
 	
@@ -294,16 +309,37 @@ public class FootballBean implements Football{
 	 */
 	@Override
 	public void newClub(Club newClubObj) {
+		if(newClubObj.getTrainer() == null){
+			newClubObj.setTrainer(null);
+		}else
+			newClubObj.getTrainer().setClub(newClubObj);
 		em.merge(newClubObj);
 	}
 
 	@Override
 	public void updateClub(Club updatedClubObj) {
+		
+		if(updatedClubObj.getTrainer() == null)
+			updatedClubObj.setTrainer(null);
+		else
+			updatedClubObj.getTrainer().setClub(updatedClubObj);
+		
+		try{
+			Trainer tOld = (Trainer) em.createQuery("FROM Trainer t WHERE t.club.id=:idClub AND t.id!=:idTrainer").setParameter("idClub", updatedClubObj.getId()).setParameter("idTrainer", updatedClubObj.getTrainer().getId()).getSingleResult();
+			tOld.setClub(null);
+			tOld.getContract().setBeginningDate(null);
+			tOld.getContract().setEndDate(null);
+		}catch(NoResultException e) {
+	        e.printStackTrace();
+	    }
+		
 		em.merge(updatedClubObj);
 	}
 
 	@Override
 	public void removeClub(Club club) {
 		em.remove(em.contains(club) ? club : em.merge(club));		
-	}	
+	}
+
+	
 }

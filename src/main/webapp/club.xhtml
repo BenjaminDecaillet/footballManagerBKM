@@ -68,43 +68,13 @@
 						</div>
 					</div>
 					<h3>Trainer</h3>
-					<div class="row">
-						<div class="input-field col s6">
-							<h:selectOneMenu id="trainerSelect" value="#{clubBean.club.trainer}" converter="trainerConverter" styleClass="browser-default">
-								<f:selectItems value="#{footballBean.trainers}" var="trainer" itemValue="#{trainer}" itemLabel="#{trainer.firstname} #{trainer.lastname}"/>
-							</h:selectOneMenu>
+						<div class="row">
+							<div class="input-field col s6">
+								<h:selectOneMenu id="trainerSelect" value="#{clubBean.club.trainer}" converter="trainerConverter" styleClass="browser-default">
+									<f:selectItems value="#{footballBean.trainersWithoutJob}" var="trainer" itemValue="#{trainer}" itemLabel="#{trainer.firstname} #{trainer.lastname}"/>
+								</h:selectOneMenu>
+							</div>
 						</div>
-					</div>
-					<h4>Trainer's contract</h4>
-					<div class="row">
-						<div class="input-field col s6">
-							<h:inputText value="#{clubBean.club.trainer.contract.beginningDate}" styleClass="datepicker"
-								id="trainerContractBeginningDate" a:placeholder="Beginning date" converter="localDateTimeConverter" />
-							<label for="trainerContractBeginningDate" class="active">Beginning date</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s6">
-							<h:inputText value="#{clubBean.club.trainer.contract.endDate}" styleClass="datepicker"
-								id="trainerContractEndDate" a:placeholder="End date" converter="localDateTimeConverter" />
-							<label for="trainerContractEndDate" class="active">End date</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s6">
-							<h:inputText value="#{clubBean.club.trainer.contract.salary}" styleClass="validate"
-								id="trainerSalary" a:placeholder="Salary"></h:inputText>
-							<label for="trainerSalary" class="active">Salary</label>
-						</div>
-					</div>
-					<h3>Club's account</h3>
-					<div class="row">
-						<div class="input-field col s6">
-							<h:inputText value="#{clubBean.club.accountClub.saldo}" styleClass="validate"
-								id="clubSaldo" a:placeholder="saldo"></h:inputText>
-							<label for="clubSaldo" class="active">Saldo</label>
-						</div>
-					</div>
 				</div>
 				<div class="row">
 					<h:commandButton value="Update club"

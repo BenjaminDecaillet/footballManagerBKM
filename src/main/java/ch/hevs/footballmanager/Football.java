@@ -54,6 +54,7 @@ public interface Football {
 	//Get spécifique aux trainers
 	Trainer getTrainerById(long id);
 	List<Trainer> getTrainersWithoutJob();
+	List<Club> getClubsWithoutTrainer();
 
 	//Get spécifique aux presidents
 	President getPresidentById(long id);
