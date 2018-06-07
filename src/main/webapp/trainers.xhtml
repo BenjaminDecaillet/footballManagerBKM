@@ -17,7 +17,8 @@
 			<ui:repeat value="#{footballBean.trainers}" var="trainer">
 				<div class="row">
 					<div class="col s3">
-						#{trainer.firstname} #{trainer.lastname} - #{trainer.club.name} (#{trainer.club.nationality})
+						<h:outputText value="#{trainer.firstname} #{trainer.lastname} - #{trainer.club.name} (#{trainer.club.nationality})"
+						style="#{not empty trainer.contract.beginningDate ? 'color:black;':'color:red;'}"></h:outputText>
 					</div>
 					<h:panelGroup rendered="#{request.isUserInRole('trainer') || request.isUserInRole('president')}">
 						<div class="col s9">
@@ -65,28 +66,6 @@
 								<h:inputText value="#{personBean.trainer.nationality}" styleClass="validate"
 									id="nationality" a:placeholder="Nationality" a:required="true"></h:inputText>
 								<label for="nationality" class="active">Nationality</label>
-							</div>
-						</div>
-						<h3>Trainer's contract</h3>
-						<div class="row">
-							<div class="input-field col s6">
-								<h:inputText value="#{personBean.trainer.contract.beginningDate}" styleClass="datepicker"
-									id="trainerContractBeginningDate" a:placeholder="Beginning date" converter="localDateTimeConverter" />
-								<label for="trainerContractBeginningDate" class="active">Beginning date</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s6">
-								<h:inputText value="#{personBean.trainer.contract.endDate}" styleClass="datepicker"
-									id="trainerContractEndDate" a:placeholder="End date" converter="localDateTimeConverter" />
-								<label for="trainerContractEndDate" class="active">End date</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s6">
-								<h:inputText value="#{personBean.trainer.contract.salary}" styleClass="validate"
-									id="trainerSalary" a:placeholder="Salary"></h:inputText>
-								<label for="trainerSalary" class="active">Salary</label>
 							</div>
 						</div>
 						<h3>Club</h3>

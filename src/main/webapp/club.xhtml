@@ -71,9 +71,13 @@
 						<div class="row">
 							<div class="input-field col s6">
 								<h:selectOneMenu id="trainerSelect" value="#{clubBean.club.trainer}" converter="trainerConverter" styleClass="browser-default">
-									<f:selectItems value="#{footballBean.trainersWithoutJob}" var="trainer" itemValue="#{trainer}" itemLabel="#{trainer.firstname} #{trainer.lastname}"/>
+									<f:selectItem itemValue="#{clubBean.club.trainer}" itemLabel="Your current trainer : #{clubBean.club.trainer.firstname} #{clubBean.club.trainer.lastname}"></f:selectItem>
+									<f:selectItems value="#{footballBean.trainersWithoutJob}" var="trainer" itemValue="#{trainer}" itemLabel="Trainer available : #{trainer.firstname} #{trainer.lastname}"/>
 								</h:selectOneMenu>
 							</div>
+						</div>
+						<div class="row">
+							If you select a new trainer, do not forget to update his contract details !
 						</div>
 				</div>
 				<div class="row">

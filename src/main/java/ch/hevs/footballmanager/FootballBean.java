@@ -157,13 +157,11 @@ public class FootballBean implements Football{
 		p3.setFirstname("Benjamin");
 		p3.setLastname("Decaillet");
 		p3.setNationality("Swiss");
-		em.persist(p3);
 		
 		President p4 = new President();
 		p4.setFirstname("Christian");
 		p4.setLastname("Constantin");
 		p4.setNationality("Swiss");
-		em.persist(p4);
 		
 		League l1 = new League();
 		l1.setName("Professional");
@@ -180,6 +178,7 @@ public class FootballBean implements Football{
 		club1.setName("FC Bâle");
 		club1.setNationality("Swiss");
 		club1.setPresident(p3);
+		p3.setClub(club1);
 		club1.setAccountClub(new Account(5000, club1));
 		club1.setLeague(l1);		
 		club1.setTrainer(p2);
@@ -197,6 +196,7 @@ public class FootballBean implements Football{
 		club2.setName("FC Sion");
 		club2.setNationality("Swiss");
 		club2.setPresident(p4);
+		p4.setClub(club2);
 		club2.setTrainer(p5);
 		club2.setAccountClub(new Account(1000, club2));
 		club2.setLeague(l1);
@@ -264,6 +264,7 @@ public class FootballBean implements Football{
 		if(newTrainerObj.getClub() == null){
 			newTrainerObj.getContract().setBeginningDate(null);
 			newTrainerObj.getContract().setEndDate(null);
+			newTrainerObj.getContract().setSalary(0);
 		}
 		else
 			newTrainerObj.getClub().setTrainer(newTrainerObj);
@@ -313,25 +314,31 @@ public class FootballBean implements Football{
 			newClubObj.setTrainer(null);
 		}else
 			newClubObj.getTrainer().setClub(newClubObj);
+		
+		newClubObj.getPresident().setClub(newClubObj);
+		
 		em.merge(newClubObj);
 	}
 
 	@Override
 	public void updateClub(Club updatedClubObj) {
 		
-		if(updatedClubObj.getTrainer() == null)
+		if(updatedClubObj.getTrainer() == null){
 			updatedClubObj.setTrainer(null);
-		else
+		}
+		else{
 			updatedClubObj.getTrainer().setClub(updatedClubObj);
 		
-		try{
-			Trainer tOld = (Trainer) em.createQuery("FROM Trainer t WHERE t.club.id=:idClub AND t.id!=:idTrainer").setParameter("idClub", updatedClubObj.getId()).setParameter("idTrainer", updatedClubObj.getTrainer().getId()).getSingleResult();
-			tOld.setClub(null);
-			tOld.getContract().setBeginningDate(null);
-			tOld.getContract().setEndDate(null);
-		}catch(NoResultException e) {
-	        e.printStackTrace();
-	    }
+			try{
+				Trainer tOld = (Trainer) em.createQuery("FROM Trainer t WHERE t.club.id=:idClub AND t.id!=:idTrainer").setParameter("idClub", updatedClubObj.getId()).setParameter("idTrainer", updatedClubObj.getTrainer().getId()).getSingleResult();
+				tOld.setClub(null);
+				tOld.getContract().setBeginningDate(null);
+				tOld.getContract().setEndDate(null);
+				tOld.getContract().setSalary(0);
+			}catch(NoResultException e) {
+		        e.printStackTrace();
+		    }
+		}
 		
 		em.merge(updatedClubObj);
 	}
