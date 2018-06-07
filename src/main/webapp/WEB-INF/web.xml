@@ -101,4 +101,16 @@
 		<exception-type>javax.ejb.EJBAccessException</exception-type>
 		<location>/exception.xhtml</location>
 	</error-page>
+	<error-page>
+	    <error-code>403</error-code>
+	    <location>/403.xhtml</location>
+	</error-page>
+	<error-page>
+	    <error-code>404</error-code>
+	    <location>/404.xhtml</location>
+	</error-page>
+		<error-page>
+	    <error-code>500</error-code>
+	    <location>/500.xhtml</location>
+	</error-page>
 </web-app>
